@@ -51,9 +51,15 @@
 
 - (void)setInterFaceWithModel:(WKWeatherDayInfo *)model
 {
-    _weekTitleLabel.text = [NSString stringWithFormat:@"%星期%@",model.week];
+//    _weekTitleLabel.text = [NSString stringWithFormat:@"星期%@",model.week];
+    _weekTitleLabel.text = model.day[WKWeatherType_Text];
     _dayTemperatureLabel.text = [NSString stringWithFormat:@"%@",model.day[WKWeatherTemperature]] ;
-    _nightTemperatureLabel.text = [NSString stringWithFormat:@"%@",model.day[WKWeatherTemperature]] ;
+    _nightTemperatureLabel.text = [NSString stringWithFormat:@"%@",model.night[WKWeatherTemperature]] ;
+    
+    NSMutableString * imageName = [NSMutableString stringWithFormat:@"weather_code_day_%@",model.day[WKWeatherType_Number]];
+    
+    
+    _weatherIV.image = [UIImage imageNamed:imageName];
 }
 
 

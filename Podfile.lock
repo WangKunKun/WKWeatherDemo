@@ -14,20 +14,20 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AMapFoundation (1.1.0)
-  - AMapLocation (2.0.0):
-    - AMapFoundation (~> 1.0)
+  - AMapLocation (1.0.1)
+  - Masonry (1.0.1)
   - MJExtension (3.0.10)
 
 DEPENDENCIES:
   - AFNetworking
-  - AMapLocation
+  - AMapLocation (~> 1.0.1)
+  - Masonry
   - MJExtension
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AMapFoundation: 15db20567e6512422a086a01b42a88b145bc2500
-  AMapLocation: 40141a31e7c584e59d590079eb8e565a90ecdf4d
+  AMapLocation: d33782bd102563aae1824cb4fae8b4495376f016
+  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
 
 COCOAPODS: 0.39.0

@@ -1,4 +1,5 @@
 platform:ios, '8.0'
 pod 'AFNetworking'
-pod 'AMapLocation'
+pod 'AMapLocation','~> 1.0.1'
 pod 'MJExtension'
+pod 'Masonry'

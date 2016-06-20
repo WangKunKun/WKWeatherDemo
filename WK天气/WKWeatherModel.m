@@ -22,6 +22,8 @@
              };
 }
 
+
+
 @end
 
 @implementation WKWeatherPmInfo
@@ -39,6 +41,8 @@
              @"pmLevel":@"pm25.level"
              };
 }
+
+
 
 @end
 
@@ -77,10 +81,60 @@
              @"coldIndex":@"ganmao",
              @"airConIndex":@"kongtiao",
              @"polluteIndex":@"wuran",
-             @"dustIndex":@"ziwaixian",
+             @"rayIndex":@"ziwaixian",
              @"dustIndex":@"xiche",
              @"sportIndex":@"yundong",
              };
+}
+
+- (NSString *)description
+{
+    NSMutableString * str = [NSMutableString string];
+    
+    [str appendString:@"\n穿衣指数\n\t"];
+    for (NSString * temp in _dressIndex) {
+        [str appendString:temp];
+        [str appendString:@" "];
+
+    }
+    [str appendString:@"\n感冒指数\n\t"];
+    for (NSString * temp in _coldIndex) {
+        [str appendString:temp];
+        [str appendString:@" "];
+        
+    }
+    
+    [str appendString:@"\n空调指数\n\t"];
+    for (NSString * temp in _airConIndex) {
+        [str appendString:temp];
+        [str appendString:@" "];
+    }
+    
+    [str appendString:@"\n污染指数\n\t"];
+    for (NSString * temp in _polluteIndex) {
+        [str appendString:temp];
+        [str appendString:@" "];
+    }
+    
+    [str appendString:@"\n紫外线指数\n\t"];
+    for (NSString * temp in _rayIndex) {
+        [str appendString:temp];
+        [str appendString:@" "];
+    }
+    
+    [str appendString:@"\n洗车指数\n\t"];
+    for (NSString * temp in _dustIndex) {
+        [str appendString:temp];
+        [str appendString:@" "];
+    }
+    
+    [str appendString:@"\n运动指数\n\t"];
+    for (NSString * temp in _sportIndex) {
+        [str appendString:temp];
+        [str appendString:@" "];
+    }
+    
+    return str;
 }
 
 @end
@@ -113,6 +167,8 @@
             [arrM addObject:day];
         }
     }
+    NSLog(@"%@",model.indexInfo);
+    
     model.weatherDayInfos = [arrM copy];
     return model;
 }

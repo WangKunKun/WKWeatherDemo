@@ -23,6 +23,7 @@
 		18E0520E1D154FD900D12DED /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0520D1D154FD900D12DED /* UIViewExt.m */; };
 		18E052121D16247B00D12DED /* WKWeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E052101D16247B00D12DED /* WKWeatherCell.m */; };
 		18E052131D16247B00D12DED /* WKWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E052111D16247B00D12DED /* WKWeatherCell.xib */; };
+		4373B5D81D178E8800BE6009 /* WKUesrInfomation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		18E0520F1D16247B00D12DED /* WKWeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWeatherCell.h; sourceTree = "<group>"; };
 		18E052101D16247B00D12DED /* WKWeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWeatherCell.m; sourceTree = "<group>"; };
 		18E052111D16247B00D12DED /* WKWeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKWeatherCell.xib; sourceTree = "<group>"; };
+		4373B5D61D178E8800BE6009 /* WKUesrInfomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUesrInfomation.h; sourceTree = "<group>"; };
+		4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUesrInfomation.m; sourceTree = "<group>"; };
 		8EBE3C7D899E2F93186C9F14 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA550F750B0E33263F8E474C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F1863BEA34405BB032D75D28 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 				180868A81D1510C2001DC5E6 /* WKWeatherModel.m */,
 				180868AA1D1533DE001DC5E6 /* WKMapManager.h */,
 				180868AB1D1533DE001DC5E6 /* WKMapManager.m */,
+				4373B5D61D178E8800BE6009 /* WKUesrInfomation.h */,
+				4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */,
 				18D376C51D1505900060C35B /* AppDelegate.h */,
 				18D376C61D1505900060C35B /* AppDelegate.m */,
 				18D376C81D1505900060C35B /* ViewController.h */,
@@ -387,6 +392,7 @@
 				18D376C71D1505900060C35B /* AppDelegate.m in Sources */,
 				18D376F71D15082D0060C35B /* WKWeatherManager.m in Sources */,
 				180868AC1D1533DE001DC5E6 /* WKMapManager.m in Sources */,
+				4373B5D81D178E8800BE6009 /* WKUesrInfomation.m in Sources */,
 				18D376C41D1505900060C35B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

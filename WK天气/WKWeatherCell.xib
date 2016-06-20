@@ -11,11 +11,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="34.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather_code_day_2" translatesAutoresizingMaskIntoConstraints="NO" id="mob-4J-bgf">
-                        <rect key="frame" x="145" y="2.5" width="30" height="30"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="weather_code_day_2" translatesAutoresizingMaskIntoConstraints="NO" id="mob-4J-bgf">
+                        <rect key="frame" x="145" y="3" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="0SP-k4-OET"/>
                             <constraint firstAttribute="width" constant="30" id="ra8-p8-nIH"/>

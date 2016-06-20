@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 @interface WKMapManager : NSObject
+
++ (WKMapManager *)shardMapManager;
 
 @end

@@ -13,8 +13,8 @@
 
 @property (nonatomic, strong) NSArray * dressIndex;//穿衣指数
 @property (nonatomic, strong) NSArray * coldIndex;//感冒指数
-@property (nonatomic, strong) NSArray * airConIndex;//感冒指数
-@property (nonatomic, strong) NSArray * polluteIndex;//感冒指数
+@property (nonatomic, strong) NSArray * airConIndex;//空调指数
+@property (nonatomic, strong) NSArray * polluteIndex;//污染指数
 @property (nonatomic, strong) NSArray * dustIndex;//洗车指数
 @property (nonatomic, strong) NSArray * sportIndex;//运动指数
 @property (nonatomic, strong) NSArray * rayIndex;//紫外线指数
@@ -70,8 +70,8 @@ typedef enum : NSUInteger {
 
 @interface WKWeatherDayInfo : NSObject
 
-@property (nonatomic, strong) NSString * presentDate;
-@property (nonatomic, strong) NSString * presentChineseData;
+@property (nonatomic, strong) NSString * presentDate;//阳历
+@property (nonatomic, strong) NSString * presentChineseData;//阴历
 @property (nonatomic, strong) NSString * week;
 
 //天气类型 数字，天气类型 文字，温度 数字，风向 文字，风种 文字，开始时间 时间

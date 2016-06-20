@@ -6,8 +6,7 @@
 //  Copyright © 2015年 AutoNavi. All rights reserved.
 //
 
-#import <AMapLocationKit/AMapLocationVersion.h>
+#import "AMapLocationServices.h"
 
-#import <AMapLocationKit/AMapLocationManager.h>
-#import <AMapLocationKit/AMapLocationCommonObj.h>
-#import <AMapLocationKit/AMapLocationRegionObj.h>
+#import "AMapLocationManager.h"
+#import "AMapLocationCommonObj.h"

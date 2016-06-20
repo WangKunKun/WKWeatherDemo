@@ -20,7 +20,14 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="topCityNameLabel" destination="WIN-Uf-VRV" id="iKC-EI-hiC"/>
+                        <outlet property="topDateLabel" destination="sXF-gx-kBb" id="kHA-t7-Plm"/>
+                        <outlet property="topDayTemperatureLabel" destination="oxV-R9-oFw" id="hQO-dL-N7E"/>
+                        <outlet property="topNightTemperatureLabel" destination="fPt-yC-1qN" id="Uq5-9Q-NHn"/>
+                        <outlet property="topTemperatureLabel" destination="htG-RJ-mfC" id="cgw-oY-uYI"/>
                         <outlet property="topView" destination="80e-Sw-ogo" id="VEm-rG-VyP"/>
+                        <outlet property="topWeatherLabel" destination="Hsg-BH-6b0" id="35L-8z-kn9"/>
+                        <outlet property="topWeekLabel" destination="Cxy-v9-BUT" id="SeO-SV-AfQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -47,21 +54,12 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htG-RJ-mfC">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htG-RJ-mfC">
                             <rect key="frame" x="0.0" y="98" width="375" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="JYq-gp-XLi"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="75"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="局部多云" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hsg-BH-6b0">
-                            <rect key="frame" x="0.0" y="75" width="375" height="18"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="18" id="BTd-sX-9fQ"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="75"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -69,7 +67,16 @@
                             <rect key="frame" x="65" y="259" width="28" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="CKg-6M-Hf6"/>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="gRM-ym-Hia"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="gRM-ym-Hia"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="局部多云" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hsg-BH-6b0">
+                            <rect key="frame" x="0.0" y="75" width="375" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="BTd-sX-9fQ"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

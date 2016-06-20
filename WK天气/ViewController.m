@@ -12,7 +12,7 @@
 #import "UIViewExt.h"
 #import "WKWeatherCell.h"
 #import "WKWeatherModel.h"
-
+#import <Masonry/Masonry.h>
 
 static NSString * reuseID = @"WKWeatherCell";
 
@@ -31,10 +31,23 @@ static NSString * reuseID = @"WKWeatherCell";
 @interface ViewController ()<WKTimerHolderDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) CAGradientLayer *colorLayer;
-@property (strong, nonatomic) IBOutlet UIView *topView;
+
 
 @property (nonatomic, strong) WKWeatherModel * model;
 @property (nonatomic, strong) UITableView * tableView;
+
+@property (nonatomic, strong) NSString * todayWeatherInfo;
+
+@property (strong, nonatomic) IBOutlet UIView *topView;
+//TopView的控件
+@property (weak, nonatomic) IBOutlet UILabel *topTemperatureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *topWeekLabel;
+@property (weak, nonatomic) IBOutlet UILabel *topWeatherLabel;
+@property (weak, nonatomic) IBOutlet UILabel *topDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *topDayTemperatureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *topNightTemperatureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *topCityNameLabel;
+
 @end
 
 @implementation ViewController
@@ -44,6 +57,7 @@ static NSString * reuseID = @"WKWeatherCell";
     // Do any additional setup after loading the view, typically from a nib.
     [self setGradient];
     
+
     
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
@@ -64,10 +78,28 @@ static NSString * reuseID = @"WKWeatherCell";
     
     
     [WKWeatherManager getWeatherWithCityName:@"成都" block:^(NSDictionary * dict){
-        _model = [WKWeatherModel createWeatherModelWithDict:dict[@"data"]];
-        [_tableView reloadData];
-        
+        self.model = [WKWeatherModel createWeatherModelWithDict:dict[@"data"]];
     }];
+}
+
+
+- (void)setModel:(WKWeatherModel *)model
+{
+    _model = model;
+
+    _todayWeatherInfo = [NSString stringWithFormat:@"空气质量:  %@\n健康小贴士: %@",_model.pmInfo.pmQuality,_model.pmInfo.pmDes];
+    
+    [_tableView reloadData];
+    _topDateLabel.text = [NSString stringWithFormat:@"国历%@ 农历%@",_model.weatherDayInfos[0].presentDate,_model.weatherDayInfos[0].presentChineseData] ;
+    _topWeekLabel.text =  [NSString stringWithFormat:@"星期%lu",(unsigned long)_model.realtimeInfo.week];
+    _topWeatherLabel.text = _model.realtimeInfo.weatherInfo;
+    _topTemperatureLabel.text = [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
+    _topDayTemperatureLabel.text = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].day[WKWeatherTemperature]];
+    _topNightTemperatureLabel.text = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].night[WKWeatherTemperature]];
+    _topCityNameLabel.text = _model.realtimeInfo.cityName;
+    
+//    _tableView.heightS = _topView.heightS + [self tableView:_tableView heightForHeaderInSection:0]+ [self tableView:_tableView heightForFooterInSection:0] + _model.weatherDayInfos.count * 30 ;
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -96,17 +128,26 @@ static NSString * reuseID = @"WKWeatherCell";
     return 30;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    NSString * info = _todayWeatherInfo;
+    return [self countSizeWithText:info font:[UIFont systemFontOfSize:15]].height + 10;
+}
+
+
+
+
+
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
     UIView * topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
     topLine.backgroundColor = [UIColor colorWithWhite:0.905 alpha:1.000];
     
-
-    
     UILabel * label = [[UILabel alloc] init];
     label.numberOfLines = 0;
-    NSString * info = @"今天：现在局部多云。最高气温32度。今晚大部多云，最低气温23度。";
+    NSString * info =_todayWeatherInfo;
     CGSize labelsize = [self countSizeWithText:info font:[UIFont systemFontOfSize:15]];
     label.sizeS = labelsize;
     label.font = [UIFont systemFontOfSize:15];
@@ -126,15 +167,90 @@ static NSString * reuseID = @"WKWeatherCell";
     return view;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0)
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    
-    NSString * info = @"今天：现在局部多云。最高气温32度。今晚大部多云，最低气温23度。";
-    return [self countSizeWithText:info font:[UIFont systemFontOfSize:15]].height + 10;
-    
+    return 225;
 }
 
 
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 225)];
+    CGFloat startY = 10;
+    CGFloat height = 15;
+    
+    
+    //指数信息添加
+    
+    
+    NSArray * arr = @[@"日出",@"日落",@"风向",@"风速",@"穿衣",@"感冒",@"空调",@"污染",@"洗车",@"运动",@"紫外线"];
+    NSMutableArray * content = [NSMutableArray array];
+    if (_model.indexInfo) {
+        [content addObject:_model.weatherDayInfos[0].day[WKWeatherTime]];
+        [content addObject:_model.weatherDayInfos[0].night[WKWeatherTime]];
+        
+        [content addObject:_model.realtimeInfo.windDirect];
+        [content addObject:_model.realtimeInfo.windSpeed];
+
+        
+        [content addObject:_model.indexInfo.dressIndex[0]];
+        [content addObject:_model.indexInfo.coldIndex[0]];
+        [content addObject:_model.indexInfo.airConIndex[0]];
+        [content addObject:_model.indexInfo.polluteIndex[0]];
+        [content addObject:_model.indexInfo.dustIndex[0]];
+        [content addObject:_model.indexInfo.sportIndex[0]];
+        [content addObject:_model.indexInfo.rayIndex[0]];
+
+    }
+    
+    for (NSUInteger i = 0; i < arr.count; i ++) {
+        UILabel * label = [self createIndexLabel];
+        [view addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(view);
+            make.width.lessThanOrEqualTo(@20);
+            make.height.equalTo(@(height));
+            make.top.equalTo(view).with.offset(startY);
+        }];
+        label.text = @": ";
+        
+        UILabel * titleLabel = [self createIndexLabel];
+        [view addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(label.mas_left);
+            make.width.lessThanOrEqualTo(@50);
+            make.height.equalTo(@(height));
+            make.top.equalTo(label);
+        }];
+        titleLabel.text = arr[i];
+        
+        UILabel * contentLabel = [self createIndexLabel];
+        [view addSubview:contentLabel];
+        [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(label.mas_right);
+            make.width.lessThanOrEqualTo(@200);
+            make.height.equalTo(@(height));
+            make.top.equalTo(label);
+        }];
+        if (content.count  > i) {
+            contentLabel.text = content[i];
+        }
+        startY += 15 + 5;
+    }
+    
+    
+    return view;
+}
+
+- (UILabel *)createIndexLabel
+{
+    UILabel * label = [[UILabel alloc] init];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont systemFontOfSize:13];
+    label.textAlignment = NSTextAlignmentCenter;
+    return label;
+}
 
 - (CGSize)countSizeWithText:(NSString *)text font:(UIFont *)font
 {
@@ -227,7 +343,7 @@ static NSString * reuseID = @"WKWeatherCell";
 
 - (void)setGradient
 {
-    CAGradientLayer *_colorLayer = [CAGradientLayer layer];
+    _colorLayer = [CAGradientLayer layer];
     _colorLayer.frame    = self.view.frame;
     [self.view.layer addSublayer:_colorLayer];
     // 颜色分配
