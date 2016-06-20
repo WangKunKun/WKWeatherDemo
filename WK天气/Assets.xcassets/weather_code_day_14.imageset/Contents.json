@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "weather_code_day_14.png",
+      "filename" : "weather_code_day_9.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "weather_code_day_14@2x.png",
+      "filename" : "weather_code_day_9@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "weather_code_day_14@3x.png",
+      "filename" : "weather_code_day_9@3x.png",
       "scale" : "3x"
     }
   ],

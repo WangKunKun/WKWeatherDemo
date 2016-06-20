@@ -10,4 +10,9 @@
 
 @interface WKUesrInfomation : NSObject
 
+
+@property (nonatomic, strong) NSArray * citys;
+
++ (WKUesrInfomation *)shardUsrInfomation;
+
 @end

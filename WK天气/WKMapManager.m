@@ -18,7 +18,7 @@
 
 - (void)initGDMap
 {
-    [AMapLocationServices sharedServices].apiKey = @"a7f62ce823dc9b759130c5c18c73b858";
+    [AMapLocationServices sharedServices].apiKey = @"2b2f504535c6feae63cc83578be7aa8b";
     _locatiobManager = [[AMapLocationManager alloc] init];
     _locatiobManager.pausesLocationUpdatesAutomatically = NO;//不会被系统暂停
     _locatiobManager.allowsBackgroundLocationUpdates = YES;//启动后台定位
@@ -37,12 +37,13 @@
     return WKMapmanager;
 }
 
-- (void)startLocation
+- (void)startLocationWithBlock:(LocationBlock)block;
 {
 
     [_locatiobManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
-        if(!error){
-            regeocode.city;
+        if (block) {
+            NSString * cityName = !error ? regeocode.city : @"成都";
+            block(cityName);
         }
     }];
 }

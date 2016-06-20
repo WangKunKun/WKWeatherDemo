@@ -13,6 +13,7 @@
 #import "WKWeatherCell.h"
 #import "WKWeatherModel.h"
 #import <Masonry/Masonry.h>
+#import "WKMapManager.h"
 
 static NSString * reuseID = @"WKWeatherCell";
 
@@ -50,6 +51,8 @@ static NSString * reuseID = @"WKWeatherCell";
 
 @end
 
+
+//TODO : 省市区 通讯录模式选择。  下方做一个列表 可以点击
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -57,10 +60,10 @@ static NSString * reuseID = @"WKWeatherCell";
     // Do any additional setup after loading the view, typically from a nib.
     [self setGradient];
     
+    
 
     
-    
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 30) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.dataSource = self;
@@ -76,10 +79,36 @@ static NSString * reuseID = @"WKWeatherCell";
     _topView.originS = CGPointMake(0, -_topView.heightS);
     _topView.backgroundColor = [UIColor clearColor];
     
-    
-    [WKWeatherManager getWeatherWithCityName:@"成都" block:^(NSDictionary * dict){
-        self.model = [WKWeatherModel createWeatherModelWithDict:dict[@"data"]];
+    [[WKMapManager shardMapManager] startLocationWithBlock:^(NSString *name) {
+        [WKWeatherManager getWeatherWithCityName:name block:^(NSDictionary * dict){
+            self.model = [WKWeatherModel createWeatherModelWithDict:dict[@"data"]];
+        }];
     }];
+    
+    UIView * bottom = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 30, SCREEN_WIDTH, 30)];
+    UIView * topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
+    topLine.backgroundColor = [UIColor colorWithWhite:0.905 alpha:1.000];
+    [bottom addSubview:topLine];
+    
+    [self.view addSubview:bottom];
+    
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [bottom addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bottom);
+        make.bottom.equalTo(bottom);
+        make.right.equalTo(bottom);
+        make.width.equalTo(@60);
+    }];
+    [btn setTitle:@"列表" forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)btnClick
+{
+//进入选择页面
+    NSLog(@"进入选择页面");
 }
 
 
@@ -97,8 +126,6 @@ static NSString * reuseID = @"WKWeatherCell";
     _topDayTemperatureLabel.text = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].day[WKWeatherTemperature]];
     _topNightTemperatureLabel.text = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].night[WKWeatherTemperature]];
     _topCityNameLabel.text = _model.realtimeInfo.cityName;
-    
-//    _tableView.heightS = _topView.heightS + [self tableView:_tableView heightForHeaderInSection:0]+ [self tableView:_tableView heightForFooterInSection:0] + _model.weatherDayInfos.count * 30 ;
 
 }
 
@@ -135,10 +162,6 @@ static NSString * reuseID = @"WKWeatherCell";
 }
 
 
-
-
-
-
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
@@ -165,21 +188,24 @@ static NSString * reuseID = @"WKWeatherCell";
     [view addSubview:topLine];
     [view addSubview:bottomLine];
     return view;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 225;
+    return 250;
 }
 
 
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 225)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 250)];
     CGFloat startY = 10;
     CGFloat height = 15;
-    
+    UIView * topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
+    topLine.backgroundColor = [UIColor colorWithWhite:0.905 alpha:1.000];
+    [view addSubview:topLine];
     
     //指数信息添加
     
@@ -237,12 +263,16 @@ static NSString * reuseID = @"WKWeatherCell";
             contentLabel.text = content[i];
         }
         startY += 15 + 5;
+        
+        if (i == 1 || i == 3) {
+            startY += 10;
+        }
     }
     
     
     return view;
 }
-
+//快捷创建同类型Label
 - (UILabel *)createIndexLabel
 {
     UILabel * label = [[UILabel alloc] init];
@@ -252,6 +282,7 @@ static NSString * reuseID = @"WKWeatherCell";
     return label;
 }
 
+//计算数字占据宽度 高度
 - (CGSize)countSizeWithText:(NSString *)text font:(UIFont *)font
 {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];

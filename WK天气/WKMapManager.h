@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 
+typedef void(^LocationBlock)(NSString * name);
+
 @interface WKMapManager : NSObject
 
 + (WKMapManager *)shardMapManager;
-
+- (void)startLocationWithBlock:(LocationBlock)block;
 @end
