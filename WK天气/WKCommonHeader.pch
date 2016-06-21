@@ -1,0 +1,30 @@
+//
+//  WKCommonHeader.pch
+//  WK天气
+//
+//  Created by qitian on 16/6/21.
+//  Copyright © 2016年 王琨. All rights reserved.
+//
+
+#ifndef WKCommonHeader_pch
+#define WKCommonHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "UIViewExt.h"
+#import <Masonry/Masonry.h>
+#import <AFNetworking/AFNetworking.h>
+
+//宽高
+#define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
+#define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+//颜色
+#define RGB(_R,_G,_B,_A) [UIColor colorWithRed:_R/255.0f green:_G/255.0f blue:_B/255.0f alpha:_A]
+
+//16进制的颜色配置
+#define UIColorFromRGB(rgbValue)    [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define   DEGREES(degrees)  ((M_PI * (degrees))/ 180.f)
+
+#endif /* WKCommonHeader_pch */

@@ -9,24 +9,13 @@
 #import "ViewController.h"
 #import "WKWeatherManager.h"
 #import "WKTimerHolder.h"
-#import "UIViewExt.h"
 #import "WKWeatherCell.h"
 #import "WKWeatherModel.h"
-#import <Masonry/Masonry.h>
 #import "WKMapManager.h"
 
 static NSString * reuseID = @"WKWeatherCell";
 
-//宽高
-#define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
-#define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
-//颜色
-#define RGB(_R,_G,_B,_A) [UIColor colorWithRed:_R/255.0f green:_G/255.0f blue:_B/255.0f alpha:_A]
 
-//16进制的颜色配置
-#define UIColorFromRGB(rgbValue)    [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
-#define   DEGREES(degrees)  ((M_PI * (degrees))/ 180.f)
 
 
 @interface ViewController ()<WKTimerHolderDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -72,8 +61,10 @@ static NSString * reuseID = @"WKWeatherCell";
     [_tableView addSubview:_topView];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    //xib cell 注册方法 
     [_tableView registerNib:[UINib nibWithNibName:@"WKWeatherCell" bundle:nil] forCellReuseIdentifier:reuseID];
-    
+    //手写cell 注册方法
+    [_tableView registerClass:[WKWeatherCell class] forCellReuseIdentifier:reuseID];
     
     _topView.widthS = SCREEN_WIDTH;
     _topView.originS = CGPointMake(0, -_topView.heightS);

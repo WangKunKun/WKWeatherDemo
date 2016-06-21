@@ -10,7 +10,6 @@
 
 
 #import "WKWeatherManager.h"
-#import <AFNetworking/AFNetworking.h>
 #import "WKWeatherModel.h"
 
 
