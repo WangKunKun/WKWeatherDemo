@@ -100,12 +100,12 @@ static NSString * reuseID = @"WKWeatherCell";
 
 - (void)showAlertVCWithCityName:(NSString *)cityName
 {
-    if (cityName.length <= 0 ) {
+    if (cityName.length <= 0 || [cityName isEqualToString:_cityName]) {
         NSLog(@"出问题了");
         return;
     }
     
-    NSString * msg = [NSString stringWithFormat:@"检测到您现在位于【%@】,您需要显示当前城市天气么？",cityName];
+    NSString * msg = [NSString stringWithFormat:@"检测到您现在位于【%@】,是否切换至该城市？",cityName];
     
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * ensureAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -128,9 +128,7 @@ static NSString * reuseID = @"WKWeatherCell";
 
 - (void)setCityName:(NSString *)cityName
 {
-    if ([cityName isEqualToString:_cityName]) {
-        return;
-    }
+
     
     _cityName = cityName;
     [WKWeatherManager getWeatherWithCityName:cityName block:^(NSDictionary * dict){

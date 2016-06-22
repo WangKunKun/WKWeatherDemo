@@ -228,10 +228,13 @@ static NSUInteger presentRow = 0;
 
 
 
+#pragma mark 白色状态栏
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
-
-
-
+#pragma mark WKNavViewDelegate methods
 - (void)leftBtnClick:(UIButton *)btn model:(WKNavViewModel)model
 {
     [self dismissViewControllerAnimated:YES completion:nil];
