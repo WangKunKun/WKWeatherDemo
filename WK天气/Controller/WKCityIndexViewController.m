@@ -12,6 +12,9 @@
 #import "UIPickerView+WKHideSelectedLine.h"
 #import "WKEffectLabel.h"
 
+static NSUInteger presentRow = 0;
+
+
 @interface WKCityIndexViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -71,7 +74,7 @@
     _pickerView.showsSelectionIndicator = NO;
     [self.view addSubview:_pickerView];
     
-    [_tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+//    [_tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -81,23 +84,87 @@
     }
 }
 
+//
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+//{
+//    CGPoint point ;
+//    [change[@"new"] getValue:&point];
+//    for (NSUInteger i = 0 ; i < _sectionRects.count; i ++) {
+//        
+//        NSString * str = _sectionRects[i];
+//        CGRect temp = CGRectFromString(str);
+//        if(CGRectContainsPoint(temp, point))
+//        {
+//            [_pickerView selectRow:i inComponent:0 animated:YES];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [self pickerViewAnimChangeWithRow:i];
+//            });
+//            break;
+//        }
+//    }
+//    
+//}
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    CGPoint point ;
-    [change[@"new"] getValue:&point];
+//- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+//{
+//
+//    
+//}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSLog(@"%@",NSStringFromSelector(_cmd));
     for (NSUInteger i = 0 ; i < _sectionRects.count; i ++) {
         
         NSString * str = _sectionRects[i];
         CGRect temp = CGRectFromString(str);
-        if(CGRectContainsPoint(temp, point))
+        if(CGRectContainsPoint(temp, scrollView.contentOffset))
         {
             [_pickerView selectRow:i inComponent:0 animated:YES];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self pickerViewAnimChangeWithRow:i];
+            });
             break;
         }
     }
-    
 }
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    if (decelerate) {
+        return;
+    }
+    else
+    {
+        NSLog(@"%@",NSStringFromSelector(_cmd));
+
+    }
+    
+    for (NSUInteger i = 0 ; i < _sectionRects.count; i ++) {
+        
+        NSString * str = _sectionRects[i];
+        CGRect temp = CGRectFromString(str);
+        if(CGRectContainsPoint(temp, scrollView.contentOffset))
+        {
+            [_pickerView selectRow:i inComponent:0 animated:YES];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self pickerViewAnimChangeWithRow:i];
+            });
+            break;
+        }
+    }
+}
+
+- (void)pickerViewAnimChangeWithRow:(NSUInteger)row
+{
+    //去掉之前选中上的动画
+    [(WKEffectLabel *)[_pickerView viewForRow:presentRow forComponent:0] stopAnim];
+    
+    WKEffectLabel * label = (WKEffectLabel *)[_pickerView viewForRow:row forComponent:0];
+    [label startAnim];
+    
+    presentRow = row;
+}
+
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -116,12 +183,21 @@
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    WKEffectLabel * label = [[WKEffectLabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.widthS, 18)];
-    label.textColor = UIColorFromRGB(0x4595e5);
-    label.font = [UIFont systemFontOfSize:13];
+    WKEffectLabel * label = nil;
+    if ([view isKindOfClass:[WKEffectLabel class]]) {
+        label = (WKEffectLabel *)view;
+        
+        [label stopAnim];
+    }
+    else
+    {
+        label = [[WKEffectLabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.widthS, 18)];
+        label.textColor = UIColorFromRGB(0x4595e5);
+        label.font = [UIFont systemFontOfSize:13];
+        label.backgroundColor = [UIColor clearColor];
+        label.textAlignment = NSTextAlignmentCenter;
+    }
     label.text = _provinces[row];
-    label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = NSTextAlignmentCenter;
     [pickerView WKHiddenSelectLine];
     return label;
 }
@@ -129,14 +205,8 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     
-    static NSUInteger presentRow = 0;
-    [(WKEffectLabel *)[pickerView viewForRow:presentRow forComponent:component] stopAnim];
-    
-    
-    WKEffectLabel * label = (WKEffectLabel *)[pickerView viewForRow:row forComponent:component];
-    [label startAnim];
-    presentRow = row;
-    
+    [self pickerViewAnimChangeWithRow:row];
+    //和tableview对应
     [_tableView
      scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
      atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -208,5 +278,6 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 @end
