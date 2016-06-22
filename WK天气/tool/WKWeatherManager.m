@@ -57,12 +57,21 @@
     NSDictionary *params = @{@"cityname":cityName,@"key":APPID_WEATHER};
     _sessionTask=[_httpManager POST:@"http://op.juhe.cn/onebox/weather/query" parameters:params success:^(NSURLSessionTask*taskOperation ,id responseObject){
       
-      if (_block) {
-          _block(responseObject[@"result"]);
-      }
+        id result = responseObject[@"result"];
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            if (_block ) {
+                _block(responseObject[@"result"]);
+            }
+        }
+        else
+        {
+            NSLog(@"对不起，暂无此城市的数据~");
+        }
+        
+
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@",error.localizedDescription);
     }];
     
     

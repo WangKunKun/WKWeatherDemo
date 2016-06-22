@@ -20,6 +20,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="topChineseDateLabel" destination="8hB-6p-rKe" id="0XJ-H9-TjQ"/>
                         <outlet property="topCityNameLabel" destination="WIN-Uf-VRV" id="iKC-EI-hiC"/>
                         <outlet property="topDateLabel" destination="sXF-gx-kBb" id="kHA-t7-Plm"/>
                         <outlet property="topDayTemperatureLabel" destination="oxV-R9-oFw" id="hQO-dL-N7E"/>
@@ -64,7 +65,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXF-gx-kBb">
-                            <rect key="frame" x="65" y="259" width="28" height="18"/>
+                            <rect key="frame" x="15" y="233" width="28" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="CKg-6M-Hf6"/>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="gRM-ym-Hia"/>
@@ -102,9 +103,20 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hB-6p-rKe">
+                            <rect key="frame" x="15" y="207" width="28" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="YTx-dS-qA5"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="vhe-6e-Daf"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="8hB-6p-rKe" firstAttribute="leading" secondItem="80e-Sw-ogo" secondAttribute="leading" constant="15" id="0zJ-x9-PI0"/>
                         <constraint firstItem="Hsg-BH-6b0" firstAttribute="leading" secondItem="80e-Sw-ogo" secondAttribute="leading" id="66h-Au-5xI"/>
                         <constraint firstAttribute="trailing" secondItem="Hsg-BH-6b0" secondAttribute="trailing" id="BGd-mu-6Qn"/>
                         <constraint firstItem="WIN-Uf-VRV" firstAttribute="leading" secondItem="80e-Sw-ogo" secondAttribute="leading" id="ILh-hB-ABP"/>
@@ -116,6 +128,9 @@
                         <constraint firstAttribute="trailing" secondItem="WIN-Uf-VRV" secondAttribute="trailing" id="V9y-AK-QOb"/>
                         <constraint firstItem="htG-RJ-mfC" firstAttribute="top" secondItem="Hsg-BH-6b0" secondAttribute="bottom" constant="5" id="X8k-rk-6U0"/>
                         <constraint firstItem="Cxy-v9-BUT" firstAttribute="leading" secondItem="80e-Sw-ogo" secondAttribute="leading" constant="15" id="aue-Ul-u92"/>
+                        <constraint firstItem="sXF-gx-kBb" firstAttribute="top" secondItem="8hB-6p-rKe" secondAttribute="bottom" constant="8" id="bY7-SE-iCq"/>
+                        <constraint firstItem="Cxy-v9-BUT" firstAttribute="top" secondItem="sXF-gx-kBb" secondAttribute="bottom" constant="8" id="c9a-ho-U2i"/>
+                        <constraint firstItem="sXF-gx-kBb" firstAttribute="leading" secondItem="80e-Sw-ogo" secondAttribute="leading" constant="15" id="eQV-oi-ugT"/>
                         <constraint firstItem="sXF-gx-kBb" firstAttribute="leading" secondItem="Cxy-v9-BUT" secondAttribute="trailing" constant="5" id="jBY-iy-jBB"/>
                         <constraint firstItem="WIN-Uf-VRV" firstAttribute="top" secondItem="80e-Sw-ogo" secondAttribute="top" constant="49" id="kFI-0t-kEM"/>
                         <constraint firstAttribute="bottom" secondItem="Cxy-v9-BUT" secondAttribute="bottom" constant="3" id="l2t-8k-q3j"/>
@@ -123,6 +138,12 @@
                         <constraint firstAttribute="bottom" secondItem="fPt-yC-1qN" secondAttribute="bottom" constant="3" id="vnN-y2-NLw"/>
                         <constraint firstItem="Hsg-BH-6b0" firstAttribute="top" secondItem="WIN-Uf-VRV" secondAttribute="bottom" constant="5" id="yFJ-iM-wIn"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="PX0-AP-qVN"/>
+                            <exclude reference="jBY-iy-jBB"/>
+                        </mask>
+                    </variation>
                 </view>
             </objects>
         </scene>

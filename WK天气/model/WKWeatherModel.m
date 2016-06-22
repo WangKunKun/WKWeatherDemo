@@ -167,7 +167,7 @@
             [arrM addObject:day];
         }
     }
-    NSLog(@"%@",model.indexInfo);
+//    NSLog(@"%@",model.indexInfo);
     
     model.weatherDayInfos = [arrM copy];
     return model;

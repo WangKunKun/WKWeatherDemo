@@ -16,6 +16,11 @@
 		18D376DD1D1505900060C35B /* WK__Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376DC1D1505900060C35B /* WK__Tests.m */; };
 		18D376E81D1505900060C35B /* WK__UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376E71D1505900060C35B /* WK__UITests.m */; };
 		4373B5D81D178E8800BE6009 /* WKUesrInfomation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */; };
+		43AC309A1D1A212500C4C8CA /* ProvinecesData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43AC30991D1A212500C4C8CA /* ProvinecesData.plist */; };
+		43AC309D1D1A3CA600C4C8CA /* WKNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AC309C1D1A3CA600C4C8CA /* WKNavView.m */; };
+		43AC30AD1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AC30AC1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m */; };
+		43AC30B01D1A8C5400C4C8CA /* WKEffectLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AC30AF1D1A8C5400C4C8CA /* WKEffectLabel.m */; };
+		43AC30B31D1A985C00C4C8CA /* NSString+WKNumberToChinese.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AC30B21D1A985C00C4C8CA /* NSString+WKNumberToChinese.m */; };
 		43C2D1AE1D18D648001F2DC3 /* weather_code_day_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C2D1471D18D648001F2DC3 /* weather_code_day_0.png */; };
 		43C2D1AF1D18D648001F2DC3 /* weather_code_day_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C2D1481D18D648001F2DC3 /* weather_code_day_0@2x.png */; };
 		43C2D1B01D18D648001F2DC3 /* weather_code_day_0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C2D1491D18D648001F2DC3 /* weather_code_day_0@3x.png */; };
@@ -148,6 +153,15 @@
 		18D376E91D1505900060C35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4373B5D61D178E8800BE6009 /* WKUesrInfomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUesrInfomation.h; sourceTree = "<group>"; };
 		4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUesrInfomation.m; sourceTree = "<group>"; };
+		43AC30991D1A212500C4C8CA /* ProvinecesData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProvinecesData.plist; sourceTree = "<group>"; };
+		43AC309B1D1A3CA600C4C8CA /* WKNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKNavView.h; sourceTree = "<group>"; };
+		43AC309C1D1A3CA600C4C8CA /* WKNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKNavView.m; sourceTree = "<group>"; };
+		43AC30AB1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPickerView+WKHideSelectedLine.h"; sourceTree = "<group>"; };
+		43AC30AC1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPickerView+WKHideSelectedLine.m"; sourceTree = "<group>"; };
+		43AC30AE1D1A8C5400C4C8CA /* WKEffectLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKEffectLabel.h; sourceTree = "<group>"; };
+		43AC30AF1D1A8C5400C4C8CA /* WKEffectLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKEffectLabel.m; sourceTree = "<group>"; };
+		43AC30B11D1A985C00C4C8CA /* NSString+WKNumberToChinese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+WKNumberToChinese.h"; sourceTree = "<group>"; };
+		43AC30B21D1A985C00C4C8CA /* NSString+WKNumberToChinese.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+WKNumberToChinese.m"; sourceTree = "<group>"; };
 		43C2D1471D18D648001F2DC3 /* weather_code_day_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weather_code_day_0.png; sourceTree = "<group>"; };
 		43C2D1481D18D648001F2DC3 /* weather_code_day_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather_code_day_0@2x.png"; sourceTree = "<group>"; };
 		43C2D1491D18D648001F2DC3 /* weather_code_day_0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather_code_day_0@3x.png"; sourceTree = "<group>"; };
@@ -309,6 +323,7 @@
 		18D376C11D1505900060C35B /* WK天气 */ = {
 			isa = PBXGroup;
 			children = (
+				43AC30981D1A212500C4C8CA /* File */,
 				43C2D20C1D18D656001F2DC3 /* Controller */,
 				43C2D1461D18D648001F2DC3 /* images */,
 				43C2D19E1D18D648001F2DC3 /* model */,
@@ -361,6 +376,14 @@
 				EA550F750B0E33263F8E474C /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		43AC30981D1A212500C4C8CA /* File */ = {
+			isa = PBXGroup;
+			children = (
+				43AC30991D1A212500C4C8CA /* ProvinecesData.plist */,
+			);
+			path = File;
 			sourceTree = "<group>";
 		};
 		43C2D1461D18D648001F2DC3 /* images */ = {
@@ -477,6 +500,10 @@
 				43C2D1A71D18D648001F2DC3 /* WKTimerHolder.m */,
 				43C2D1A81D18D648001F2DC3 /* WKWeatherManager.h */,
 				43C2D1A91D18D648001F2DC3 /* WKWeatherManager.m */,
+				43AC30AB1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.h */,
+				43AC30AC1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m */,
+				43AC30B11D1A985C00C4C8CA /* NSString+WKNumberToChinese.h */,
+				43AC30B21D1A985C00C4C8CA /* NSString+WKNumberToChinese.m */,
 			);
 			path = tool;
 			sourceTree = "<group>";
@@ -484,9 +511,13 @@
 		43C2D1AA1D18D648001F2DC3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				43AC309B1D1A3CA600C4C8CA /* WKNavView.h */,
+				43AC309C1D1A3CA600C4C8CA /* WKNavView.m */,
 				43C2D1AB1D18D648001F2DC3 /* WKWeatherCell.h */,
 				43C2D1AC1D18D648001F2DC3 /* WKWeatherCell.m */,
 				43C2D1AD1D18D648001F2DC3 /* WKWeatherCell.xib */,
+				43AC30AE1D1A8C5400C4C8CA /* WKEffectLabel.h */,
+				43AC30AF1D1A8C5400C4C8CA /* WKEffectLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -679,6 +710,7 @@
 				43C2D1F51D18D648001F2DC3 /* weather_code_night_4@3x.png in Resources */,
 				43C2D1CA1D18D648001F2DC3 /* weather_code_day_3@2x.png in Resources */,
 				43C2D1C91D18D648001F2DC3 /* weather_code_day_3.png in Resources */,
+				43AC309A1D1A212500C4C8CA /* ProvinecesData.plist in Resources */,
 				43C2D1FF1D18D648001F2DC3 /* weather_code_night_8.png in Resources */,
 				43C2D1B21D18D648001F2DC3 /* weather_code_day_10.png in Resources */,
 				43C2D1D41D18D648001F2DC3 /* weather_code_day_6@3x.png in Resources */,
@@ -784,6 +816,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43AC309D1D1A3CA600C4C8CA /* WKNavView.m in Sources */,
+				43AC30B31D1A985C00C4C8CA /* NSString+WKNumberToChinese.m in Sources */,
+				43AC30AD1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m in Sources */,
 				18D376C71D1505900060C35B /* AppDelegate.m in Sources */,
 				4373B5D81D178E8800BE6009 /* WKUesrInfomation.m in Sources */,
 				43C2D2091D18D648001F2DC3 /* WKWeatherManager.m in Sources */,
@@ -793,6 +828,7 @@
 				43C2D2081D18D648001F2DC3 /* WKTimerHolder.m in Sources */,
 				43C2D2061D18D648001F2DC3 /* UIViewExt.m in Sources */,
 				43C2D2051D18D648001F2DC3 /* WKWeatherModel.m in Sources */,
+				43AC30B01D1A8C5400C4C8CA /* WKEffectLabel.m in Sources */,
 				43C2D2071D18D648001F2DC3 /* WKMapManager.m in Sources */,
 				18D376C41D1505900060C35B /* main.m in Sources */,
 			);
