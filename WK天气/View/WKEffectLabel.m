@@ -9,7 +9,7 @@
 #import "WKEffectLabel.h"
 
 static NSString * animKey = @"WKEffect";
-
+static CGFloat layerWidth = 45;
 @interface WKEffectLabel ()
 
 @property (nonatomic, strong) CAGradientLayer * colorLayer;
@@ -34,7 +34,7 @@ static NSString * animKey = @"WKEffect";
     _colorLayer = [CAGradientLayer layer];
     _colorLayer.backgroundColor = [UIColor blueColor].CGColor;
     //这里设置大小就好了
-    _colorLayer.bounds    = CGRectMake(0, 0, 40, self.heightS);
+    _colorLayer.bounds    = CGRectMake(0, 0, layerWidth, self.heightS);
     _colorLayer.position = CGPointMake(self.center.x, self.center.y);
     [self.layer addSublayer:_colorLayer];
     
@@ -53,7 +53,7 @@ static NSString * animKey = @"WKEffect";
     
     //画圆角矩形 它不需要 设置位置和 大小 他是被mask的
     CAShapeLayer * rr = [CAShapeLayer layer];
-    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 40, self.heightS) cornerRadius:5];
+    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, layerWidth, self.heightS) cornerRadius:5];
     rr.path = path.CGPath;
     
     rr.lineWidth = 3;

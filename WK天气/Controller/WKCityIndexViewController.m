@@ -23,7 +23,6 @@ static NSUInteger presentRow = 0;
 @property (nonatomic, strong) NSArray * provinces;
 @property (nonatomic, strong) NSArray<NSArray *> * citys;
 
-@property (nonatomic, strong) NSMutableArray<NSString *> * sectionRects;
 
 @end
 
@@ -33,8 +32,9 @@ static NSUInteger presentRow = 0;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _sectionRects = [NSMutableArray array];
     
+    
+    //获得 省市数据
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ProvinecesData" ofType:@"plist"];
     NSArray * arearArray=[NSArray arrayWithContentsOfFile:plistPath];
     NSMutableArray * provinceArray = [NSMutableArray array];
@@ -54,6 +54,7 @@ static NSUInteger presentRow = 0;
     _provinces = [provinceArray copy];
     _citys = [cityArray copy];
     
+    //初始化tableview
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
@@ -73,99 +74,16 @@ static NSUInteger presentRow = 0;
     _pickerView.delegate = self;
     _pickerView.showsSelectionIndicator = NO;
     [self.view addSubview:_pickerView];
-    
-//    [_tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    for (NSUInteger i = 0; i < _provinces.count; i ++) {
-         [_sectionRects addObject:NSStringFromCGRect([_tableView rectForSection:i])];
-    }
+    [self pickerViewAnimChangeWithRow:0];
 }
 
-//
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-//{
-//    CGPoint point ;
-//    [change[@"new"] getValue:&point];
-//    for (NSUInteger i = 0 ; i < _sectionRects.count; i ++) {
-//        
-//        NSString * str = _sectionRects[i];
-//        CGRect temp = CGRectFromString(str);
-//        if(CGRectContainsPoint(temp, point))
-//        {
-//            [_pickerView selectRow:i inComponent:0 animated:YES];
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                [self pickerViewAnimChangeWithRow:i];
-//            });
-//            break;
-//        }
-//    }
-//    
-//}
-
-//- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-//{
-//
-//    
-//}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-    for (NSUInteger i = 0 ; i < _sectionRects.count; i ++) {
-        
-        NSString * str = _sectionRects[i];
-        CGRect temp = CGRectFromString(str);
-        if(CGRectContainsPoint(temp, scrollView.contentOffset))
-        {
-            [_pickerView selectRow:i inComponent:0 animated:YES];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self pickerViewAnimChangeWithRow:i];
-            });
-            break;
-        }
-    }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
-    if (decelerate) {
-        return;
-    }
-    else
-    {
-        NSLog(@"%@",NSStringFromSelector(_cmd));
-
-    }
-    
-    for (NSUInteger i = 0 ; i < _sectionRects.count; i ++) {
-        
-        NSString * str = _sectionRects[i];
-        CGRect temp = CGRectFromString(str);
-        if(CGRectContainsPoint(temp, scrollView.contentOffset))
-        {
-            [_pickerView selectRow:i inComponent:0 animated:YES];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self pickerViewAnimChangeWithRow:i];
-            });
-            break;
-        }
-    }
-}
-
-- (void)pickerViewAnimChangeWithRow:(NSUInteger)row
-{
-    //去掉之前选中上的动画
-    [(WKEffectLabel *)[_pickerView viewForRow:presentRow forComponent:0] stopAnim];
-    
-    WKEffectLabel * label = (WKEffectLabel *)[_pickerView viewForRow:row forComponent:0];
-    [label startAnim];
-    
-    presentRow = row;
-}
-
-
+#pragma mark UIPickerViewDelegate methods
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
@@ -198,6 +116,7 @@ static NSUInteger presentRow = 0;
         label.textAlignment = NSTextAlignmentCenter;
     }
     label.text = _provinces[row];
+    //隐藏pickerview的选择线
     [pickerView WKHiddenSelectLine];
     return label;
 }
@@ -206,15 +125,51 @@ static NSUInteger presentRow = 0;
 {
     
     [self pickerViewAnimChangeWithRow:row];
-    //和tableview对应
+    //和tableview对应 让tableware滚动到 指定行
     [_tableView
      scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
      atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
+#pragma mark 自定义pickview方法
+- (void)pickerViewAnimChangeWithRow:(NSUInteger)row
+{
+    //去掉之前选中上的动画
+    [(WKEffectLabel *)[_pickerView viewForRow:presentRow forComponent:0] stopAnim];
+    
+    WKEffectLabel * label = (WKEffectLabel *)[_pickerView viewForRow:row forComponent:0];
+    [label startAnim];
+    
+    presentRow = row;
+}
 
+#pragma mark UIScrollViewDelegate methods
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    
+    //偏移量可以+一个10 这样可以杜绝一些 不太好的情况
+    CGPoint offset = CGPointMake(_tableView.contentOffset.x, _tableView.contentOffset.y + 8);
+    
+    
+    NSIndexPath * indexPath = [_tableView indexPathForRowAtPoint:offset];
+    [_pickerView selectRow:indexPath.section inComponent:0 animated:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self pickerViewAnimChangeWithRow:indexPath.section];
+    });
 
+}
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    //减速会调用上一个方法
+    if (decelerate) {
+        return;
+    }
+    
+    [self scrollViewDidEndDecelerating:scrollView];
+    
+}
+#pragma mark UITableViewDataSource methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return _provinces.count;
@@ -234,6 +189,15 @@ static NSUInteger presentRow = 0;
     cell.textLabel.text = _citys[indexPath.section][indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     return cell;
+}
+
+#pragma  mark UITableViewDelegate methods
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ViewController * vc = (ViewController *)self.presentingViewController;
+    
+    vc.cityName = _citys[indexPath.section][indexPath.row];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -266,13 +230,7 @@ static NSUInteger presentRow = 0;
 
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ViewController * vc = (ViewController *)self.presentingViewController;
-    
-    vc.cityName = _citys[indexPath.section][indexPath.row];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 - (void)leftBtnClick:(UIButton *)btn model:(WKNavViewModel)model
 {

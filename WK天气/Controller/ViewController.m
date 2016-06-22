@@ -93,7 +93,7 @@ static NSString * reuseID = @"WKWeatherCell";
         make.right.equalTo(bottom);
         make.width.equalTo(@60);
     }];
-    [btn setTitle:@"列表" forState:UIControlStateNormal];
+    [btn setTitle:@"切换城市" forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -105,14 +105,14 @@ static NSString * reuseID = @"WKWeatherCell";
         return;
     }
     
-    NSString * msg = [NSString stringWithFormat:@"检测到您现在位于%@",cityName];
+    NSString * msg = [NSString stringWithFormat:@"检测到您现在位于【%@】,您需要显示当前城市天气么？",cityName];
     
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction * ensureAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         self.cityName = cityName;
     }];
     
-    UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@"不用" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
        
     }];
     
