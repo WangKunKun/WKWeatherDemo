@@ -1,155 +1,77 @@
 //
-//  ViewController.m
+//  WKWeatherView.m
 //  WK天气
 //
-//  Created by apple on 16/6/18.
+//  Created by qitian on 16/6/23.
 //  Copyright © 2016年 王琨. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "WKWeatherManager.h"
-#import "WKTimerHolder.h"
+#import "WKWeatherView.h"
+#import "WKTopView.h"
 #import "WKWeatherCell.h"
-#import "WKWeatherModel.h"
-#import "WKMapManager.h"
-#import "WKCityIndexViewController.h"
 #import "NSString+WKNumberToChinese.h"
 
 static NSString * reuseID = @"WKWeatherCell";
 
+@interface WKWeatherView ()<UITableViewDelegate,UITableViewDataSource>
 
+@property (nonatomic, strong) WKTopView * topView;
 
-
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
-
-@property (nonatomic, strong) CAGradientLayer *colorLayer;
-
-
-@property (nonatomic, strong) WKWeatherModel * model;
 @property (nonatomic, strong) UITableView * tableView;
 
 @property (nonatomic, strong) NSString * todayWeatherInfo;
 
-@property (strong, nonatomic) IBOutlet UIView *topView;
-//TopView的控件
-@property (weak, nonatomic) IBOutlet UILabel *topTemperatureLabel;
-@property (weak, nonatomic) IBOutlet UILabel *topWeekLabel;
-@property (weak, nonatomic) IBOutlet UILabel *topWeatherLabel;
-@property (weak, nonatomic) IBOutlet UILabel *topDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *topChineseDateLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *topDayTemperatureLabel;
-@property (weak, nonatomic) IBOutlet UILabel *topNightTemperatureLabel;
-@property (weak, nonatomic) IBOutlet UILabel *topCityNameLabel;
+
+
 
 @end
 
+@implementation WKWeatherView
 
-//TODO : 省市区 通讯录模式选择。  下方做一个列表 可以点击
-@implementation ViewController
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    [self setGradient];
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setInterFace];
+    }
+    return self;
+}
+
+- (void)setInterFace
+{
+    _topView = [WKTopView viewFromNIB];
+    _topView.originS = CGPointMake(0, 0);
+    [self addSubview:_topView];
+    self.delegate = self;
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH , SCREEN_HEIGHT - 30 - 20) style:UITableViewStyleGrouped];
-    [self.view addSubview:_tableView];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _topView.bottomS, self.widthS , self.heightS-_topView.heightS) style:UITableViewStylePlain];
+    [self addSubview:_tableView];
+    
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    _tableView.contentInset = UIEdgeInsetsMake(_topView.heightS, 0, 0, 0);
-    [_tableView addSubview:_topView];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    //xib cell 注册方法 
+    //xib cell 注册方法
     [_tableView registerNib:[UINib nibWithNibName:@"WKWeatherCell" bundle:nil] forCellReuseIdentifier:reuseID];
     
-    self.cityName = @"成都";
-    
-    _topView.widthS = SCREEN_WIDTH;
-    _topView.originS = CGPointMake(0, -_topView.heightS);
-    _topView.backgroundColor = [UIColor clearColor];
-    
-    [[WKMapManager shardMapManager] startLocationWithBlock:^(NSString *name) {
-        [self showAlertVCWithCityName:name];
-    }];
-    
-    
-
-    
-    UIView * bottom = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 30, SCREEN_WIDTH, 30)];
-    UIView * topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
-    topLine.backgroundColor = [UIColor colorWithWhite:0.905 alpha:1.000];
-    [bottom addSubview:topLine];
-    
-    [self.view addSubview:bottom];
-    
-    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [bottom addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bottom);
-        make.bottom.equalTo(bottom);
-        make.right.equalTo(bottom);
-        make.width.equalTo(@60);
-    }];
-    [btn setTitle:@"切换城市" forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)showAlertVCWithCityName:(NSString *)cityName
-{
-    if (cityName.length <= 0 || [cityName isEqualToString:_cityName]) {
-        NSLog(@"出问题了");
-        return;
-    }
-    
-    NSString * msg = [NSString stringWithFormat:@"检测到您现在位于【%@】,是否切换至该城市？",cityName];
-    
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * ensureAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        self.cityName = cityName;
-    }];
-    
-    UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@"不用" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-       
-    }];
-    
-    [alert addAction:ensureAction];
-    [alert addAction:cancleAction];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-
-- (void)setCityName:(NSString *)cityName
-{
-
-    
-    _cityName = cityName;
-    [WKWeatherManager getWeatherWithCityName:cityName block:^(NSDictionary * dict){
-        self.model = [WKWeatherModel createWeatherModelWithDict:dict[@"data"]];
-    }];
-}
-
-- (void)btnClick
-{
-//进入选择页面
-    NSLog(@"进入选择页面");
-    WKCityIndexViewController * vc = [[WKCityIndexViewController alloc] init];
-    [self presentViewController:vc animated:YES completion:nil];
     
 }
-
 
 - (void)setModel:(WKWeatherModel *)model
 {
     _model = model;
-
+    //重置初始化位置
+    self.contentOffset = CGPointMake(0, 0);
+    
     _todayWeatherInfo = [NSString stringWithFormat:@"空气质量:  %@\n健康小贴士: %@",_model.pmInfo.pmQuality,_model.pmInfo.pmDes];
     
     [_tableView reloadData];
@@ -164,21 +86,29 @@ static NSString * reuseID = @"WKWeatherCell";
         [dateStr appendString:[NSString numberToChinese:dateArr[i]]];
         [dateStr appendString:tempArr[i]];
     }
-    _topDateLabel.text = [NSString stringWithFormat:@"国 %@",dateStr];
+    _topView.date = [NSString stringWithFormat:@"国 %@",dateStr];
+    _topView.chineseDate = [NSString stringWithFormat:@"阴 %@",_model.weatherDayInfos[0].presentChineseData];
+    _topView.week =  [NSString stringWithFormat:@"星期%@",[NSString numberToChinese:@(_model.realtimeInfo.week)]];
+    
+    _topView.weather = _model.realtimeInfo.weatherInfo;
+    _topView.temperature = [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
+    _topView.dayTemperature = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].day[WKWeatherTemperature]];
+    _topView.nightTemperature = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].night[WKWeatherTemperature]];
+    _topView.cityName = _model.realtimeInfo.cityName;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _tableView.heightS = _tableView.contentSize.height;
+        
+        self.contentSize = CGSizeMake(self.widthS, _topView.heightS + _tableView.heightS);
+    });
     
     
-    _topChineseDateLabel.text = [NSString stringWithFormat:@"阴 %@",_model.weatherDayInfos[0].presentChineseData];
-    
-    
-    _topWeekLabel.text =  [NSString stringWithFormat:@"星期%@",[NSString numberToChinese:@(_model.realtimeInfo.week)]];
-    
-    _topWeatherLabel.text = _model.realtimeInfo.weatherInfo;
-    _topTemperatureLabel.text = [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
-    _topDayTemperatureLabel.text = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].day[WKWeatherTemperature]];
-    _topNightTemperatureLabel.text = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].night[WKWeatherTemperature]];
-    _topCityNameLabel.text = _model.realtimeInfo.cityName;
-
 }
+
+
+
+#pragma mark UITableViewDelegate methods
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -193,7 +123,7 @@ static NSString * reuseID = @"WKWeatherCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    WKWeatherCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WKWeatherCell"];
+    WKWeatherCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
     [cell setInterFaceWithModel:_model.weatherDayInfos[indexPath.row]];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
@@ -246,7 +176,7 @@ static NSString * reuseID = @"WKWeatherCell";
 }
 
 
-
+//tableview footer
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 250)];
@@ -267,7 +197,7 @@ static NSString * reuseID = @"WKWeatherCell";
         
         [content addObject:_model.realtimeInfo.windDirect];
         [content addObject:_model.realtimeInfo.windSpeed];
-
+        
         
         [content addObject:_model.indexInfo.dressIndex[0]];
         [content addObject:_model.indexInfo.coldIndex[0]];
@@ -276,7 +206,7 @@ static NSString * reuseID = @"WKWeatherCell";
         [content addObject:_model.indexInfo.dustIndex[0]];
         [content addObject:_model.indexInfo.sportIndex[0]];
         [content addObject:_model.indexInfo.rayIndex[0]];
-
+        
     }
     
     for (NSUInteger i = 0; i < arr.count; i ++) {
@@ -321,6 +251,7 @@ static NSString * reuseID = @"WKWeatherCell";
     
     return view;
 }
+#pragma mark 自定义方法
 //快捷创建同类型Label
 - (UILabel *)createIndexLabel
 {
@@ -340,36 +271,7 @@ static NSString * reuseID = @"WKWeatherCell";
     CGSize labelsize = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, 999) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
     
     return labelsize;
-
-}
-
-- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
-{
     
-    NSLog(@"%@",title);
-    
-    return index;
-}
-
-- (void)setGradient
-{
-    _colorLayer = [CAGradientLayer layer];
-    _colorLayer.frame    = self.view.frame;
-    [self.view.layer addSublayer:_colorLayer];
-    // 颜色分配
-    _colorLayer.colors = @[(__bridge id)UIColorFromRGB(0x4595e5).CGColor,
-                          (__bridge id)[UIColor colorWithRed:0.000 green:0.759 blue:1.000 alpha:1.000].CGColor];
-    // 颜色分割线
-    _colorLayer.locations  = @[@(0.5)];
-    // 起始点
-    _colorLayer.startPoint = CGPointMake(0, 0);
-    // 结束点
-    _colorLayer.endPoint   = CGPointMake(0, 1);
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

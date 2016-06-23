@@ -188,6 +188,8 @@ static NSUInteger presentRow = 0;
     }
     cell.textLabel.text = _citys[indexPath.section][indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:13];
+    cell.textLabel.textColor = UIColorFromRGB(0x4595e5);
+
     return cell;
 }
 
@@ -216,6 +218,8 @@ static NSUInteger presentRow = 0;
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 30)];
     label.font = [UIFont boldSystemFontOfSize:17];
     label.text = _provinces[section];
+    label.textColor = UIColorFromRGB(0x4595e5);
+
     [view addSubview:label];
     view.backgroundColor = UIColorFromRGB(0xeeeeee);
     return view;

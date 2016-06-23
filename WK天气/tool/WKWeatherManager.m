@@ -10,7 +10,6 @@
 
 
 #import "WKWeatherManager.h"
-#import "WKWeatherModel.h"
 
 
 @interface WKWeatherManager ()
@@ -20,7 +19,6 @@
 @property(nonatomic, strong) NSURLSessionTask*  sessionTask;
 
 
-@property (nonatomic, copy) WKWeatherBlock block;
 @end
 
 @implementation WKWeatherManager
@@ -28,8 +26,7 @@
 + (void)getWeatherWithCityName:(NSString *)cn block:(WKWeatherBlock)block
 {
     WKWeatherManager * wm = [self shareWKWM];
-    wm.block = block;
-    [wm getWeatherWithCityName:cn];
+    [wm getWeatherWithCityName:cn block:block];
 }
 
 + (WKWeatherManager *)shareWKWM
@@ -52,32 +49,66 @@
     _httpManager.requestSerializer.timeoutInterval=25;
 }
 
--(void)getWeatherWithCityName:(NSString* )cityName{
+-(void)getWeatherWithCityName:(NSString* )cityName block:(WKWeatherBlock)block{
     
     NSDictionary *params = @{@"cityname":cityName,@"key":APPID_WEATHER};
     _sessionTask=[_httpManager POST:@"http://op.juhe.cn/onebox/weather/query" parameters:params success:^(NSURLSessionTask*taskOperation ,id responseObject){
       
         id result = responseObject[@"result"];
         if ([result isKindOfClass:[NSDictionary class]]) {
-            if (_block ) {
-                _block(responseObject[@"result"]);
+            if (block ) {
+                WKWeatherModel * model = [WKWeatherModel createWeatherModelWithDict:responseObject[@"result"][@"data"]];
+                block(model);
             }
         }
         else
         {
-            
             NSLog(@"对不起，暂无此城市的数据~");
-            
+            if (block ) {
+                block(nil);
+            }
         }
-        
 
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error.localizedDescription);
+        if (block ) {
+            block(nil);
+        }
     }];
-    
-    
-    
 }
+
++ (void)getWeatherWithCityNames:(NSArray<NSString *> *)cns block:(WKWeathersBlock)block
+{
+    NSLog(@"数据请求中");
+    
+    WKWeatherManager * wm = [self shareWKWM];
+    dispatch_group_t queueGroup = dispatch_group_create();
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    __block NSMutableArray * models = [NSMutableArray array];
+    
+    for (NSUInteger i = 0; i < cns.count; i ++) {
+        
+       dispatch_group_async(queueGroup, dispatch_get_global_queue(0,0), ^{
+            [wm getWeatherWithCityName:cns[i] block:^(WKWeatherModel * model) {
+                if (model != nil) {
+                    [models addObject:model];
+                }
+                dispatch_semaphore_signal(semaphore);
+            }];
+       });
+
+    }
+    
+    for (NSUInteger i = 0; i < cns.count; i ++) {
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    }
+    
+    NSLog(@"数据请求完毕");
+
+    if (block) {
+        block([models copy]);
+    }
+}
+
 
 @end

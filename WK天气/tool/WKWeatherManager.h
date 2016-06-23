@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WKWeatherModel.h"
 
 typedef enum : NSUInteger {
     WKPollutionConditionExcellent = 0,
@@ -16,7 +17,8 @@ typedef enum : NSUInteger {
     WKPollutionConditionSerious
 } WKPollutionCondition;
 
-typedef void(^WKWeatherBlock)(NSDictionary *);
+typedef void(^WKWeatherBlock)(WKWeatherModel *);
+typedef void(^WKWeathersBlock)(NSArray <WKWeatherModel *>*);
 
 
 
@@ -25,5 +27,6 @@ typedef void(^WKWeatherBlock)(NSDictionary *);
 
 + (void)getWeatherWithCityName:(NSString *)cn block:(WKWeatherBlock)block;
 
++ (void)getWeatherWithCityNames:(NSArray<NSString *> *)cns block:(WKWeathersBlock)block;
 
 @end
