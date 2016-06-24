@@ -73,7 +73,6 @@ static CGFloat layerWidth = 45;
 
 - (void)startAnim
 {
-    NSLog(@"图层%@",_colorLayer);
     _colorLayer.hidden = NO;
     CABasicAnimation* fadeAnim = [CABasicAnimation animationWithKeyPath:@"locations"];
     fadeAnim.fromValue = @[@(-0.2), @(-0.1), @(0)];

@@ -7,7 +7,6 @@
 //
 
 #import "WKCityIndexViewController.h"
-#import "ViewController.h"
 #import "WKNavView.h"
 #import "UIPickerView+WKHideSelectedLine.h"
 #import "WKEffectLabel.h"
@@ -104,7 +103,6 @@ static NSUInteger presentRow = 0;
     WKEffectLabel * label = nil;
     if ([view isKindOfClass:[WKEffectLabel class]]) {
         label = (WKEffectLabel *)view;
-        
         [label stopAnim];
     }
     else
@@ -196,9 +194,7 @@ static NSUInteger presentRow = 0;
 #pragma  mark UITableViewDelegate methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ViewController * vc = (ViewController *)self.presentingViewController;
-    
-    vc.cityName = _citys[indexPath.section][indexPath.row];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -116,8 +116,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="zez-HQ-dhI"/>
                     <exclude reference="B2J-wm-fEL"/>
+                    <exclude reference="zez-HQ-dhI"/>
                 </mask>
             </variation>
             <connections>

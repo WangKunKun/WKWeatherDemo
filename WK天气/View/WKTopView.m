@@ -69,4 +69,9 @@
 {
     _nightTemperatureLabel.text = nightTemperature;
 }
+
+- (void)setTemperature:(NSString *)temperature
+{
+    _temperatureLabel.text = temperature;
+}
 @end

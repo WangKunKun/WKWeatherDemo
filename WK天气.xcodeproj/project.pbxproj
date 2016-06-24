@@ -15,6 +15,7 @@
 		18D376D21D1505900060C35B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D376D01D1505900060C35B /* LaunchScreen.storyboard */; };
 		18D376DD1D1505900060C35B /* WK__Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376DC1D1505900060C35B /* WK__Tests.m */; };
 		18D376E81D1505900060C35B /* WK__UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376E71D1505900060C35B /* WK__UITests.m */; };
+		431C326A1D1D098000BF5C73 /* WKCityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 431C32691D1D098000BF5C73 /* WKCityListVC.m */; };
 		4373B5D81D178E8800BE6009 /* WKUesrInfomation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */; };
 		43AC309A1D1A212500C4C8CA /* ProvinecesData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43AC30991D1A212500C4C8CA /* ProvinecesData.plist */; };
 		43AC309D1D1A3CA600C4C8CA /* WKNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AC309C1D1A3CA600C4C8CA /* WKNavView.m */; };
@@ -120,6 +121,12 @@
 		43C2D20A1D18D648001F2DC3 /* WKWeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C2D1AC1D18D648001F2DC3 /* WKWeatherCell.m */; };
 		43C2D20B1D18D648001F2DC3 /* WKWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C2D1AD1D18D648001F2DC3 /* WKWeatherCell.xib */; };
 		43C2D2121D18E032001F2DC3 /* WKCityIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C2D2111D18E032001F2DC3 /* WKCityIndexViewController.m */; };
+		43ECD8C61D1D252F001474F6 /* WKListCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ECD8C41D1D252F001474F6 /* WKListCityCell.m */; };
+		43ECD8C71D1D252F001474F6 /* WKListCityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43ECD8C51D1D252F001474F6 /* WKListCityCell.xib */; };
+		43ECD8C91D1D3E52001474F6 /* top-添加.png in Resources */ = {isa = PBXBuildFile; fileRef = 43ECD8C81D1D3E52001474F6 /* top-添加.png */; };
+		43ECD8CC1D1D3FD3001474F6 /* WKDegreesModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ECD8CB1D1D3FD3001474F6 /* WKDegreesModelView.m */; };
+		43ECD8CE1D1D3FDF001474F6 /* WKDegreesModelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43ECD8CD1D1D3FDF001474F6 /* WKDegreesModelView.xib */; };
+		43ECD8D11D1D45CA001474F6 /* WKNoticeCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ECD8D01D1D45CA001474F6 /* WKNoticeCenter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +161,8 @@
 		18D376E31D1505900060C35B /* WK天气UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WK天气UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D376E71D1505900060C35B /* WK__UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WK__UITests.m; sourceTree = "<group>"; };
 		18D376E91D1505900060C35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		431C32681D1D098000BF5C73 /* WKCityListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCityListVC.h; sourceTree = "<group>"; };
+		431C32691D1D098000BF5C73 /* WKCityListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCityListVC.m; sourceTree = "<group>"; };
 		4373B5D61D178E8800BE6009 /* WKUesrInfomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUesrInfomation.h; sourceTree = "<group>"; };
 		4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUesrInfomation.m; sourceTree = "<group>"; };
 		43AC30991D1A212500C4C8CA /* ProvinecesData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProvinecesData.plist; sourceTree = "<group>"; };
@@ -275,6 +284,15 @@
 		43C2D2101D18E032001F2DC3 /* WKCityIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCityIndexViewController.h; sourceTree = "<group>"; };
 		43C2D2111D18E032001F2DC3 /* WKCityIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCityIndexViewController.m; sourceTree = "<group>"; };
 		43C2D2141D18E12D001F2DC3 /* WKCommonHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCommonHeader.pch; sourceTree = "<group>"; };
+		43ECD8C31D1D252F001474F6 /* WKListCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKListCityCell.h; sourceTree = "<group>"; };
+		43ECD8C41D1D252F001474F6 /* WKListCityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKListCityCell.m; sourceTree = "<group>"; };
+		43ECD8C51D1D252F001474F6 /* WKListCityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKListCityCell.xib; sourceTree = "<group>"; };
+		43ECD8C81D1D3E52001474F6 /* top-添加.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top-添加.png"; sourceTree = "<group>"; };
+		43ECD8CA1D1D3FD3001474F6 /* WKDegreesModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKDegreesModelView.h; sourceTree = "<group>"; };
+		43ECD8CB1D1D3FD3001474F6 /* WKDegreesModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKDegreesModelView.m; sourceTree = "<group>"; };
+		43ECD8CD1D1D3FDF001474F6 /* WKDegreesModelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKDegreesModelView.xib; sourceTree = "<group>"; };
+		43ECD8CF1D1D45CA001474F6 /* WKNoticeCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKNoticeCenter.h; sourceTree = "<group>"; };
+		43ECD8D01D1D45CA001474F6 /* WKNoticeCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKNoticeCenter.m; sourceTree = "<group>"; };
 		8EBE3C7D899E2F93186C9F14 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA550F750B0E33263F8E474C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F1863BEA34405BB032D75D28 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -389,6 +407,7 @@
 		43AC30981D1A212500C4C8CA /* File */ = {
 			isa = PBXGroup;
 			children = (
+				43ECD8C81D1D3E52001474F6 /* top-添加.png */,
 				43AC30991D1A212500C4C8CA /* ProvinecesData.plist */,
 			);
 			path = File;
@@ -512,6 +531,8 @@
 				43AC30AC1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m */,
 				43AC30B11D1A985C00C4C8CA /* NSString+WKNumberToChinese.h */,
 				43AC30B21D1A985C00C4C8CA /* NSString+WKNumberToChinese.m */,
+				43ECD8CF1D1D45CA001474F6 /* WKNoticeCenter.h */,
+				43ECD8D01D1D45CA001474F6 /* WKNoticeCenter.m */,
 			);
 			path = tool;
 			sourceTree = "<group>";
@@ -531,6 +552,12 @@
 				43AD78C61D1B68CA0024E586 /* WKTopView.xib */,
 				43AD78C81D1B713E0024E586 /* WKWeatherView.h */,
 				43AD78C91D1B713E0024E586 /* WKWeatherView.m */,
+				43ECD8C31D1D252F001474F6 /* WKListCityCell.h */,
+				43ECD8C41D1D252F001474F6 /* WKListCityCell.m */,
+				43ECD8C51D1D252F001474F6 /* WKListCityCell.xib */,
+				43ECD8CA1D1D3FD3001474F6 /* WKDegreesModelView.h */,
+				43ECD8CB1D1D3FD3001474F6 /* WKDegreesModelView.m */,
+				43ECD8CD1D1D3FDF001474F6 /* WKDegreesModelView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -542,6 +569,8 @@
 				43C2D2111D18E032001F2DC3 /* WKCityIndexViewController.m */,
 				43AD78CB1D1B77940024E586 /* WKMainPageVC.h */,
 				43AD78CC1D1B77940024E586 /* WKMainPageVC.m */,
+				431C32681D1D098000BF5C73 /* WKCityListVC.h */,
+				431C32691D1D098000BF5C73 /* WKCityListVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -665,6 +694,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43ECD8C91D1D3E52001474F6 /* top-添加.png in Resources */,
 				43C2D1FA1D18D648001F2DC3 /* weather_code_night_6@2x.png in Resources */,
 				18D376D21D1505900060C35B /* LaunchScreen.storyboard in Resources */,
 				43C2D1DE1D18D648001F2DC3 /* weather_code_night_0.png in Resources */,
@@ -716,6 +746,7 @@
 				43C2D1EF1D18D648001F2DC3 /* weather_code_night_2@3x.png in Resources */,
 				43C2D1EC1D18D648001F2DC3 /* weather_code_night_1@3x.png in Resources */,
 				43C2D1D11D18D648001F2DC3 /* weather_code_day_5@3x.png in Resources */,
+				43ECD8CE1D1D3FDF001474F6 /* WKDegreesModelView.xib in Resources */,
 				43C2D1DA1D18D648001F2DC3 /* weather_code_day_8@3x.png in Resources */,
 				43C2D1ED1D18D648001F2DC3 /* weather_code_night_2.png in Resources */,
 				43C2D1B31D18D648001F2DC3 /* weather_code_day_10@2x.png in Resources */,
@@ -745,6 +776,7 @@
 				43C2D1B01D18D648001F2DC3 /* weather_code_day_0@3x.png in Resources */,
 				43C2D1FB1D18D648001F2DC3 /* weather_code_night_6@3x.png in Resources */,
 				43C2D1D51D18D648001F2DC3 /* weather_code_day_7.png in Resources */,
+				43ECD8C71D1D252F001474F6 /* WKListCityCell.xib in Resources */,
 				43C2D1E51D18D648001F2DC3 /* weather_code_night_11.png in Resources */,
 				18D376CD1D1505900060C35B /* Main.storyboard in Resources */,
 				43C2D1D71D18D648001F2DC3 /* weather_code_day_7@3x.png in Resources */,
@@ -831,20 +863,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				43AC309D1D1A3CA600C4C8CA /* WKNavView.m in Sources */,
+				431C326A1D1D098000BF5C73 /* WKCityListVC.m in Sources */,
 				43AC30B31D1A985C00C4C8CA /* NSString+WKNumberToChinese.m in Sources */,
 				43AC30AD1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m in Sources */,
 				18D376C71D1505900060C35B /* AppDelegate.m in Sources */,
 				4373B5D81D178E8800BE6009 /* WKUesrInfomation.m in Sources */,
 				43C2D2091D18D648001F2DC3 /* WKWeatherManager.m in Sources */,
 				43AD78CD1D1B77940024E586 /* WKMainPageVC.m in Sources */,
+				43ECD8CC1D1D3FD3001474F6 /* WKDegreesModelView.m in Sources */,
 				43AD78C51D1B689A0024E586 /* WKTopView.m in Sources */,
 				43C2D20A1D18D648001F2DC3 /* WKWeatherCell.m in Sources */,
 				43C2D2121D18E032001F2DC3 /* WKCityIndexViewController.m in Sources */,
 				43C2D2081D18D648001F2DC3 /* WKTimerHolder.m in Sources */,
+				43ECD8D11D1D45CA001474F6 /* WKNoticeCenter.m in Sources */,
 				43C2D2061D18D648001F2DC3 /* UIViewExt.m in Sources */,
 				43C2D2051D18D648001F2DC3 /* WKWeatherModel.m in Sources */,
 				43AC30B01D1A8C5400C4C8CA /* WKEffectLabel.m in Sources */,
 				43C2D2071D18D648001F2DC3 /* WKMapManager.m in Sources */,
+				43ECD8C61D1D252F001474F6 /* WKListCityCell.m in Sources */,
 				18D376C41D1505900060C35B /* main.m in Sources */,
 				43AD78CA1D1B713E0024E586 /* WKWeatherView.m in Sources */,
 			);

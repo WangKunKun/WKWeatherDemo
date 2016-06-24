@@ -10,7 +10,8 @@
 #import "WKWeatherView.h"
 #import "WKWeatherManager.h"
 #import "WKMapManager.h"
-#import "WKCityIndexViewController.h"
+#import "WKCityListVC.h"
+
 @interface WKMainPageVC ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) CAGradientLayer *colorLayer;
@@ -77,14 +78,17 @@ static NSString * citysKey = @"citys";
         make.right.equalTo(bottom);
         make.width.equalTo(@60);
     }];
-    [btn setTitle:@"切换城市" forState:UIControlStateNormal];
+    [btn setTitle:@"列表" forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     
     dispatch_queue_t queue = dispatch_queue_create("WKUploadImageStart", DISPATCH_QUEUE_SERIAL);
     dispatch_async(queue, ^{
         [WKWeatherManager getWeatherWithCityNames:temp block:^(NSArray<WKWeatherModel *> * models) {
-            self.models = models;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.models = models;
+            });
         }];
     });
     
@@ -144,8 +148,8 @@ static NSString * citysKey = @"citys";
 - (void)btnClick
 {
     //进入选择页面
-    NSLog(@"进入选择页面");
-    WKCityIndexViewController * vc = [[WKCityIndexViewController alloc] init];
+    WKCityListVC * vc = [[WKCityListVC alloc] init];
+    vc.dataSource = _models;
     [self presentViewController:vc animated:YES completion:nil];
     
 }
@@ -172,11 +176,7 @@ static NSString * citysKey = @"citys";
     _colorLayer.endPoint   = CGPointMake(0, 1);
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
 
-    
-}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
