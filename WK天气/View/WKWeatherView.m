@@ -64,6 +64,7 @@ static NSString * reuseID = @"WKWeatherCell";
     [_tableView registerNib:[UINib nibWithNibName:@"WKWeatherCell" bundle:nil] forCellReuseIdentifier:reuseID];
     
     
+    
 }
 
 - (void)setModel:(WKWeatherModel *)model
@@ -179,6 +180,12 @@ static NSString * reuseID = @"WKWeatherCell";
 //tableview footer
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
+    if (!_model) {
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 250)];
+        view.backgroundColor = [UIColor clearColor];
+        return view;
+    }
+    
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 250)];
     CGFloat startY = 10;
     CGFloat height = 15;

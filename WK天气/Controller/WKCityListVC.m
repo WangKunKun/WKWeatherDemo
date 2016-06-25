@@ -16,8 +16,13 @@
 
 @interface WKCityListVC ()<UITableViewDelegate,UITableViewDataSource,WKNavViewDelegate>
 
+
+@property (nonatomic, strong) NSMutableArray * dataSource;
+
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, assign) BOOL flag;
+
+@property (nonatomic, strong) NSMutableArray * citys;
 @end
 
 @implementation WKCityListVC
@@ -26,6 +31,8 @@
     [super viewDidLoad];
     [self setGradient];
 
+    
+   
     // Do any additional setup after loading the view.
     WKNavView * nav = [WKNavView navViewWithModel:WKNavViewModel_Normal];
     [self.view addSubview:nav];
@@ -45,19 +52,54 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
+}
+
+- (void)dateRefresh
+{
+    _citys = [[[WKUserInfomation shardUsrInfomation].city_models allKeys] mutableCopy];
+    _dataSource = [[[WKUserInfomation shardUsrInfomation].city_models allValues] mutableCopy];
+    [_tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    _citys = [[[WKUserInfomation shardUsrInfomation].city_models allKeys] mutableCopy];
+    _dataSource = [[[WKUserInfomation shardUsrInfomation].city_models allValues] mutableCopy];
+    [_dataSource removeObject:defaultValue inRange:NSMakeRange(0, _dataSource.count)];
+    [_tableView reloadData];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    cell.originS = CGPointMake(cell.originS.x + SCREEN_WIDTH - 20, cell.originS.y);
+    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+    //x和y的最终值为1
+    [UIView animateWithDuration:0.7 animations:^{
+        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+        cell.originS = CGPointMake(0, cell.originS.y);
+
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _dataSource.count;
+    return _citys.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     WKListCityCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WKListCityCell"];
-    cell.model= _dataSource[indexPath.row];
-    cell.flag = _flag;
+    cell.cityName = _citys[indexPath.row];
+    if (_dataSource.count > 0) {
+        if (_dataSource.count > indexPath.row) {
+            cell.model= _dataSource[indexPath.row];
+            cell.flag = _flag;
+        }
+    }
+
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
@@ -79,10 +121,13 @@
     [button setImage:[UIImage imageNamed:@"top-添加"] forState:UIControlStateNormal];
     button.frame = CGRectMake(SCREEN_WIDTH - 25 -10 , (view.heightS - 25) / 2.0f, 25, 25);
     [view addSubview:button];
+    [button addTarget:self action:@selector(gotoCityList) forControlEvents:UIControlEventTouchUpInside];
+    
     
     WKDegreesModelView * dmView = [WKDegreesModelView viewFromNIB];
     dmView.originS = CGPointMake(5, (view.heightS - dmView.heightS) / 2.0f);
     [view addSubview:dmView];
+    
     [dmView setBlock:^(BOOL flag){
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -93,17 +138,22 @@
     return view;
 }
 
+
+- (void)gotoCityList
+{
+    WKCityIndexViewController * vc = [[WKCityIndexViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
 - (void)setFlag:(BOOL)flag
 {
     _flag = flag;
-    [_tableView reloadData];
+    for (WKListCityCell * cell in [_tableView visibleCells]) {
+        cell.flag = flag;
+    }
 }
 
-//- (void)changeModel:(NSNotification *)notification
-//{
-//    NSInteger presentModel = [notification.userInfo[@"model"] integerValue];
-//    presentModel % 2;
-//}
+
 
 
 
@@ -138,6 +188,11 @@
     colorLayer.startPoint = CGPointMake(0, 0);
     // 结束点
     colorLayer.endPoint   = CGPointMake(0, 1);
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 /*
 #pragma mark - Navigation

@@ -10,6 +10,5 @@
 
 @interface WKCityListVC : UIViewController
 
-@property (nonatomic, strong) NSArray * dataSource;
 
 @end

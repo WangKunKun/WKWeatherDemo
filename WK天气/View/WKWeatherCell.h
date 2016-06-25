@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WKWeatherModel.h"
 
 typedef NS_ENUM(NSInteger, WKWeatherType) {
     WKWeatherType_Sunny = 0,

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WKWeatherModel.h"
 
 typedef enum : NSUInteger {
     WKPollutionConditionExcellent = 0,

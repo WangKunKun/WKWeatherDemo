@@ -18,20 +18,21 @@
 @property (nonatomic, strong) UIScrollView * scrollView;
 
 @property (nonatomic, strong) NSMutableArray <WKWeatherView *>* weatherViews;
+
+@property (nonatomic, strong) NSArray * citys;
 @property (nonatomic, strong) NSArray <WKWeatherModel *>* models;
 
 @property (nonatomic, assign) NSUInteger presentIndex;
 @end
 
-static NSString * citysKey = @"citys";
 
 @implementation WKMainPageVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSArray * temp = @[@"成都",@"自贡",@"泸州",@"上海",@"北京",@"昆明"];
-    
+
+    ;
 
 
     
@@ -42,26 +43,11 @@ static NSString * citysKey = @"citys";
     _scrollView.pagingEnabled = YES;
     _scrollView.delegate = self;
     _scrollView.showsHorizontalScrollIndicator = NO;
-    CGFloat startX = 0;
     _weatherViews = [NSMutableArray arrayWithCapacity:3];
     _models = [NSMutableArray array];
 
-    for (NSUInteger i = 0; i < temp.count; i ++) {
-        if (i < 3) {
-            WKWeatherView * view = [[WKWeatherView alloc] initWithFrame:CGRectMake(startX, 0, _scrollView.widthS, _scrollView.heightS)];
-            [_scrollView addSubview:view];
-            [_weatherViews addObject:view];
-            startX += SCREEN_WIDTH;
-        }
-
-    }
     
 
-
-    
-    
-    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, _scrollView.heightS);
-    [_scrollView setContentOffset:CGPointMake(SCREEN_WIDTH, 0)];
     
     UIView * bottom  = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 30, SCREEN_WIDTH, 30)];
     UIView * topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
@@ -82,16 +68,34 @@ static NSString * citysKey = @"citys";
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     
-    dispatch_queue_t queue = dispatch_queue_create("WKUploadImageStart", DISPATCH_QUEUE_SERIAL);
-    dispatch_async(queue, ^{
-        [WKWeatherManager getWeatherWithCityNames:temp block:^(NSArray<WKWeatherModel *> * models) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.models = models;
-            });
-        }];
-    });
+    [self setInterFace];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
+    
+}
+
+- (void)dateRefresh
+{
+    self.models = [[WKUserInfomation shardUsrInfomation].city_models allValues];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self dateRefresh];
+}
+
+- (void)setInterFace
+{
+    static CGFloat startX = 0;
+    
+    for (NSUInteger i = 0; i < 3; i ++) {
+        WKWeatherView * view = [[WKWeatherView alloc] initWithFrame:CGRectMake(startX, 0, _scrollView.widthS, _scrollView.heightS)];
+        [_scrollView addSubview:view];
+        [_weatherViews addObject:view];
+        startX += SCREEN_WIDTH;
+    }
+    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, _scrollView.heightS);
+    [_scrollView setContentOffset:CGPointMake(SCREEN_WIDTH , 0)];
 }
 
 - (void)showCityWeatherWithIndex:(NSUInteger)index
@@ -120,16 +124,16 @@ static NSString * citysKey = @"citys";
 
 - (void)showAlertVCWithCityName:(NSString *)cityName
 {
-    if (cityName.length <= 0 || [cityName isEqualToString:_cityName]) {
-        NSLog(@"出问题了");
-        return;
-    }
+//    if (cityName.length <= 0 || [cityName isEqualToString:_cityName]) {
+//        NSLog(@"出问题了");
+//        return;
+//    }
     
     NSString * msg = [NSString stringWithFormat:@"检测到您现在位于【%@】,是否切换至该城市？",cityName];
     
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * ensureAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        self.cityName = cityName;
+
     }];
     
     UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@"不用" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -149,7 +153,7 @@ static NSString * citysKey = @"citys";
 {
     //进入选择页面
     WKCityListVC * vc = [[WKCityListVC alloc] init];
-    vc.dataSource = _models;
+    
     [self presentViewController:vc animated:YES completion:nil];
     
 }

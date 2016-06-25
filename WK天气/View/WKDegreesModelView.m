@@ -36,7 +36,7 @@
 - (void)changeModel
 {
     //默认摄氏度
-    static NSUInteger i = 0;
+    static NSUInteger i = 1;
     _sLabel.textColor = i % 2 == 0? [UIColor lightTextColor] : [UIColor whiteColor];
     _hLabel.textColor = !(i % 2 == 0) ? [UIColor lightTextColor] : [UIColor whiteColor];
     if (_block) {

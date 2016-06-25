@@ -22,6 +22,8 @@ static NSUInteger presentRow = 0;
 @property (nonatomic, strong) NSArray * provinces;
 @property (nonatomic, strong) NSArray<NSArray *> * citys;
 
+@property (nonatomic, strong) NSMutableArray * selectCitys;
+
 
 @end
 
@@ -31,7 +33,12 @@ static NSUInteger presentRow = 0;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    _selectCitys = [[[WKUserInfomation shardUsrInfomation].city_models allKeys] mutableCopy];
     
+    
+    if (_selectCitys.count <= 0) {
+        _selectCitys = [NSMutableArray array];
+    }
     
     //获得 省市数据
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ProvinecesData" ofType:@"plist"];
@@ -64,6 +71,8 @@ static NSUInteger presentRow = 0;
     WKNavView * navV = [WKNavView navViewWithModel:WKNavViewModel_Normal];
     [navV setTitle:@"选择城市" forNavViewModel:WKNavViewModel_Normal];
     [navV setTitle:@"返回" forNavViewModel:WKNavViewModel_Normal toBtnWithDirection:WKLeft];
+    [navV setTitle:@"完成" forNavViewModel:WKNavViewModel_Normal toBtnWithDirection:WKRight];
+
     [self.view addSubview:navV];
     navV.wkNVDelegate = self;
     
@@ -76,6 +85,7 @@ static NSUInteger presentRow = 0;
 
 
 }
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -124,20 +134,20 @@ static NSUInteger presentRow = 0;
     
     [self pickerViewAnimChangeWithRow:row];
     //和tableview对应 让tableware滚动到 指定行
-    [_tableView
-     scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
-     atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
 }
 #pragma mark 自定义pickview方法
 - (void)pickerViewAnimChangeWithRow:(NSUInteger)row
 {
     //去掉之前选中上的动画
     [(WKEffectLabel *)[_pickerView viewForRow:presentRow forComponent:0] stopAnim];
-    
     WKEffectLabel * label = (WKEffectLabel *)[_pickerView viewForRow:row forComponent:0];
     [label startAnim];
-    
     presentRow = row;
+    //TODO 写在这 统一 这样在pickerview 和scrollview 都滚动的时候 也能正确对应
+    [_tableView
+     scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
+     atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 #pragma mark UIScrollViewDelegate methods
@@ -163,7 +173,6 @@ static NSUInteger presentRow = 0;
     if (decelerate) {
         return;
     }
-    
     [self scrollViewDidEndDecelerating:scrollView];
     
 }
@@ -184,9 +193,27 @@ static NSUInteger presentRow = 0;
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = _citys[indexPath.section][indexPath.row];
+    NSString * title = _citys[indexPath.section][indexPath.row];
+    
+    cell.textLabel.text = title;
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.textLabel.textColor = UIColorFromRGB(0x4595e5);
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    //选中状态
+    for (NSString * temp in _selectCitys) {
+        
+        if ([temp isEqualToString:title]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            break;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
+    }
+    
+    
 
     return cell;
 }
@@ -195,7 +222,20 @@ static NSUInteger presentRow = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if (cell.accessoryType == UITableViewCellAccessoryNone) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.selectCitys addObject:cell.textLabel.text];
+        NSLog(@"%@",_selectCitys);
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [self.selectCitys removeObject:cell.textLabel.text];
+        
+    }
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -240,5 +280,18 @@ static NSUInteger presentRow = 0;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)rightBtnClick:(UIButton *)btn model:(WKNavViewModel)model
+{
+    
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    
+    for (NSString * str in _selectCitys) {
+        id value = [[WKUserInfomation shardUsrInfomation].city_models objectForKey:str];
+        
+        [dict setObject:(value?:defaultValue) forKey:str];
+    }
+    [WKUserInfomation shardUsrInfomation].city_models = dict;
+    [self leftBtnClick:nil model:0];
+}
 
 @end

@@ -16,7 +16,7 @@
 		18D376DD1D1505900060C35B /* WK__Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376DC1D1505900060C35B /* WK__Tests.m */; };
 		18D376E81D1505900060C35B /* WK__UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376E71D1505900060C35B /* WK__UITests.m */; };
 		431C326A1D1D098000BF5C73 /* WKCityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 431C32691D1D098000BF5C73 /* WKCityListVC.m */; };
-		4373B5D81D178E8800BE6009 /* WKUesrInfomation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */; };
+		4373B5D81D178E8800BE6009 /* WKUserInfomation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4373B5D71D178E8800BE6009 /* WKUserInfomation.m */; };
 		43AC309A1D1A212500C4C8CA /* ProvinecesData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43AC30991D1A212500C4C8CA /* ProvinecesData.plist */; };
 		43AC309D1D1A3CA600C4C8CA /* WKNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AC309C1D1A3CA600C4C8CA /* WKNavView.m */; };
 		43AC30AD1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AC30AC1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m */; };
@@ -163,8 +163,8 @@
 		18D376E91D1505900060C35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		431C32681D1D098000BF5C73 /* WKCityListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCityListVC.h; sourceTree = "<group>"; };
 		431C32691D1D098000BF5C73 /* WKCityListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCityListVC.m; sourceTree = "<group>"; };
-		4373B5D61D178E8800BE6009 /* WKUesrInfomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUesrInfomation.h; sourceTree = "<group>"; };
-		4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUesrInfomation.m; sourceTree = "<group>"; };
+		4373B5D61D178E8800BE6009 /* WKUserInfomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUserInfomation.h; sourceTree = "<group>"; };
+		4373B5D71D178E8800BE6009 /* WKUserInfomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUserInfomation.m; sourceTree = "<group>"; };
 		43AC30991D1A212500C4C8CA /* ProvinecesData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProvinecesData.plist; sourceTree = "<group>"; };
 		43AC309B1D1A3CA600C4C8CA /* WKNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKNavView.h; sourceTree = "<group>"; };
 		43AC309C1D1A3CA600C4C8CA /* WKNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKNavView.m; sourceTree = "<group>"; };
@@ -355,8 +355,8 @@
 				43C2D19E1D18D648001F2DC3 /* model */,
 				43C2D1A11D18D648001F2DC3 /* tool */,
 				43C2D1AA1D18D648001F2DC3 /* View */,
-				4373B5D61D178E8800BE6009 /* WKUesrInfomation.h */,
-				4373B5D71D178E8800BE6009 /* WKUesrInfomation.m */,
+				4373B5D61D178E8800BE6009 /* WKUserInfomation.h */,
+				4373B5D71D178E8800BE6009 /* WKUserInfomation.m */,
 				18D376C51D1505900060C35B /* AppDelegate.h */,
 				18D376C61D1505900060C35B /* AppDelegate.m */,
 				43C2D2141D18E12D001F2DC3 /* WKCommonHeader.pch */,
@@ -867,7 +867,7 @@
 				43AC30B31D1A985C00C4C8CA /* NSString+WKNumberToChinese.m in Sources */,
 				43AC30AD1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m in Sources */,
 				18D376C71D1505900060C35B /* AppDelegate.m in Sources */,
-				4373B5D81D178E8800BE6009 /* WKUesrInfomation.m in Sources */,
+				4373B5D81D178E8800BE6009 /* WKUserInfomation.m in Sources */,
 				43C2D2091D18D648001F2DC3 /* WKWeatherManager.m in Sources */,
 				43AD78CD1D1B77940024E586 /* WKMainPageVC.m in Sources */,
 				43ECD8CC1D1D3FD3001474F6 /* WKDegreesModelView.m in Sources */,

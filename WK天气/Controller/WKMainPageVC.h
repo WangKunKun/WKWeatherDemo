@@ -10,6 +10,4 @@
 
 @interface WKMainPageVC : UIViewController
 
-@property (nonatomic, strong) NSString * cityName;
-
 @end

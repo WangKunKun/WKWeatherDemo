@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WKWeatherModel.h"
 
 @interface WKWeatherView : UIScrollView
 

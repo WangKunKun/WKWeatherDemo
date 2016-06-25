@@ -36,6 +36,12 @@
     _temperatureLabel.text = [NSString stringWithFormat:@"%lu°",model.realtimeInfo.temperature];
     _cityNameLabel.text = model.realtimeInfo.cityName;
     
+    [self setDate];
+    
+}
+
+- (void)setDate
+{
     NSDate * date = [NSDate date];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH"];
@@ -47,12 +53,16 @@
     NSString * subStr = [hourStr integerValue] > 12 ? @"下午" :@"上午";
     
     _timeLabel.text = [NSString stringWithFormat:@"%@ %@",subStr,dateStr];
-    
 }
 
 - (void)setFlag:(BOOL)flag
 {
-    NSString * str = flag ? [NSString stringWithFormat:@"%d°",(int)(_model.realtimeInfo.temperature * 33.8f)] : [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
+    NSString * str = flag ? [NSString stringWithFormat:@"%d°",(int)(32 + _model.realtimeInfo.temperature * 1.8f)] : [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
     _temperatureLabel.text = str;
+}
+
+- (void)setCityName:(NSString *)cityName
+{
+    _cityNameLabel.text = cityName;
 }
 @end
