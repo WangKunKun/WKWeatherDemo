@@ -19,10 +19,13 @@
 
 @property (nonatomic, strong) NSMutableArray * dataSource;
 
+
+
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, assign) BOOL flag;
 
 @property (nonatomic, strong) NSMutableArray * citys;
+@property (nonatomic, strong) NSMutableArray * noDataCityIndexPaths;
 @end
 
 @implementation WKCityListVC
@@ -31,7 +34,7 @@
     [super viewDidLoad];
     [self setGradient];
 
-    
+    _noDataCityIndexPaths = [NSMutableArray array];
    
     // Do any additional setup after loading the view.
     WKNavView * nav = [WKNavView navViewWithModel:WKNavViewModel_Normal];
@@ -57,9 +60,16 @@
 
 - (void)dateRefresh
 {
-    _citys = [[[WKUserInfomation shardUsrInfomation].city_models allKeys] mutableCopy];
+    //得到新数据
     _dataSource = [[[WKUserInfomation shardUsrInfomation].city_models allValues] mutableCopy];
-    [_tableView reloadData];
+    //刷新数据
+    for (NSIndexPath * ip in _noDataCityIndexPaths) {
+        WKListCityCell * cell = [_tableView cellForRowAtIndexPath:ip];
+        cell.model = _dataSource[ip.row];
+        cell.flag = _flag;
+    }
+    [_noDataCityIndexPaths removeAllObjects];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -90,16 +100,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSLog(@"%@",NSStringFromSelector(_cmd));
     WKListCityCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WKListCityCell"];
     cell.cityName = _citys[indexPath.row];
-    if (_dataSource.count > 0) {
-        if (_dataSource.count > indexPath.row) {
-            cell.model= _dataSource[indexPath.row];
-            cell.flag = _flag;
-        }
+   
+    if (_dataSource.count > indexPath.row) {
+        cell.model= _dataSource[indexPath.row];
+        cell.flag = _flag;
     }
-
+    else
+    {
+        [_noDataCityIndexPaths addObject:indexPath];
+    }
+    
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }

@@ -81,7 +81,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self dateRefresh];
+//    [self dateRefresh];
 }
 
 - (void)setInterFace

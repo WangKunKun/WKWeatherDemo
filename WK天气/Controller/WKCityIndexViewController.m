@@ -73,6 +73,10 @@ static NSUInteger presentRow = 0;
     [navV setTitle:@"返回" forNavViewModel:WKNavViewModel_Normal toBtnWithDirection:WKLeft];
     [navV setTitle:@"完成" forNavViewModel:WKNavViewModel_Normal toBtnWithDirection:WKRight];
 
+//    [navV setTitle:@"选择城市" forNavViewModel:WKNavViewModel_Transparent];
+//    [navV setTitle:@"返回" forNavViewModel:WKNavViewModel_Transparent toBtnWithDirection:WKLeft];
+//    [navV setTitle:@"完成" forNavViewModel:WKNavViewModel_Transparent toBtnWithDirection:WKRight];
+//    [navV setScrollView:_tableView andMaxValue:100 toDirection:WKHorizontal];
     [self.view addSubview:navV];
     navV.wkNVDelegate = self;
     
@@ -227,7 +231,7 @@ static NSUInteger presentRow = 0;
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [self.selectCitys addObject:cell.textLabel.text];
-        NSLog(@"%@",_selectCitys);
+//        NSLog(@"%@",_selectCitys);
     }
     else
     {
