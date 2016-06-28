@@ -20,6 +20,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.contentView.backgroundColor = [UIColor clearColor];
+    CATransition *transition = [CATransition animation];
+    transition.type = kCATransitionFade;
+    [self.layer addAnimation:transition forKey:nil];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -31,6 +36,10 @@
 - (void)setModel:(WKWeatherModel *)model
 {
     _model = model;
+    if (![_model isKindOfClass:[WKWeatherModel class]]) {
+        _model = nil;
+        return;
+    }
     NSArray * colors = @[UIColorFromRGB(0x11cb60),UIColorFromRGB(0xffc703),UIColorFromRGB(0xff8004),UIColorFromRGB(0xfe3d3d),UIColorFromRGB(0xa50894),UIColorFromRGB(0x45018a)];
     self.contentView.backgroundColor = colors[model.pmInfo.pmLevel - 1];
     _temperatureLabel.text = [NSString stringWithFormat:@"%lu°",model.realtimeInfo.temperature];
@@ -42,6 +51,7 @@
 
 - (void)setDate
 {
+    
     NSDate * date = [NSDate date];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH"];
@@ -57,12 +67,14 @@
 
 - (void)setFlag:(BOOL)flag
 {
+    _flag =flag;
     NSString * str = flag ? [NSString stringWithFormat:@"%d°",(int)(32 + _model.realtimeInfo.temperature * 1.8f)] : [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
     _temperatureLabel.text = str;
 }
 
 - (void)setCityName:(NSString *)cityName
 {
+    _cityName = cityName;
     _cityNameLabel.text = cityName;
 }
 @end

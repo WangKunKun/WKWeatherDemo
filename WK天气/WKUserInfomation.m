@@ -11,6 +11,14 @@
 
 static NSString * citysKey = @"citys";
 
+static NSString * localData = @"WKWeatherLocalData";
+
+@interface WKUserInfomation ()
+
+@property (nonatomic, strong) NSDictionary * city_models;
+
+@end
+
 @implementation WKUserInfomation
 
 + (WKUserInfomation *)shardUsrInfomation
@@ -19,9 +27,13 @@ static NSString * citysKey = @"citys";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         ui = [[WKUserInfomation alloc] init];
+        //获得 存储
+        [ui fetch];
     });
     return ui;
 }
+
+
 
 - (void)setCity_models:(NSDictionary *)city_models
 {
@@ -40,6 +52,8 @@ static NSString * citysKey = @"citys";
             [noModelCitys addObject:key];
         }
     }
+    
+    
     dispatch_queue_t queue = dispatch_queue_create("WKGetData", DISPATCH_QUEUE_SERIAL);
     dispatch_async(queue, ^{
         [WKWeatherManager getWeatherWithCityNames:noModelCitys block:^(NSArray<WKWeatherModel *> *models) {
@@ -55,18 +69,89 @@ static NSString * citysKey = @"citys";
                         //比对
                         if ([subKey isEqualToString:cityName]) {
                             //相等后则将数据存入对应的城市名
-                            [_city_models setValue:temp forKey:key];
+                            [self wkSetObject:temp forKey:key];
                             break;
                         }
                     }
                 }
             }
-            
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
+                [self save];
+                
             });
             
         }];
     });
+}
+
+- (NSArray *)allKeys
+{
+    return [_city_models allKeys];
+}
+
+- (NSArray *)allValues
+{
+    return [_city_models allValues];
+}
+
+- (void)wkSetObject:(id)value forKey:(NSString *)key
+{
+    NSMutableDictionary * dict = _city_models ?[_city_models mutableCopy] : [NSMutableDictionary dictionary];
+    [dict setValue:value forKey:key];
+    self.city_models = [dict copy];
+    [self save];
+}
+
+- (id)wkObjectForKey:(NSString *)key
+{
+    return [_city_models objectForKey:key];
+}
+
+- (void)wkRemoveObjectForKey:(NSString *)key
+{
+    NSMutableDictionary * dict = [_city_models mutableCopy];
+    [dict removeObjectForKey:key];
+    _city_models = [dict copy];
+    [self save];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
+
+}
+
+- (void)save
+{
+
+    NSMutableData *data = [[NSMutableData alloc] init];
+    
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    
+    [archiver encodeObject:_city_models forKey:localData];
+    
+    [archiver finishEncoding];
+    
+    [data writeToFile:[self getFilePath] atomically:YES];
+    
+}
+
+- (void)fetch
+{
+    
+    NSData *data = [[NSData alloc] initWithContentsOfFile:[self getFilePath]];
+    
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    
+    //解档出数据模型Student
+    _city_models = [unarchiver decodeObjectForKey:localData];
+    [unarchiver finishDecoding];
+    
+
+}
+
+- (NSString *)getFilePath
+{
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    path = [path stringByAppendingString:@"/weatherData.archiver"];
+    return path;
 }
 @end

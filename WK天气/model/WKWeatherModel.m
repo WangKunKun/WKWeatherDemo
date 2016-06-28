@@ -22,11 +22,13 @@
              };
 }
 
-
+MJExtensionCodingImplementation
 
 @end
 
 @implementation WKWeatherPmInfo
+
+MJExtensionCodingImplementation
 
 + (NSDictionary *)replacedKeyFromPropertyName{
     
@@ -47,6 +49,8 @@
 @end
 
 @implementation WKWeatherRealTimeInfo
+
+MJExtensionCodingImplementation
 
 + (NSDictionary *)replacedKeyFromPropertyName{
     
@@ -73,6 +77,8 @@
 @end
 
 @implementation WKWeatherIndexInfo
+
+MJExtensionCodingImplementation
 
 + (NSDictionary *)replacedKeyFromPropertyName{
     
@@ -146,6 +152,8 @@
 @end
 
 @implementation WKWeatherModel
+
+MJExtensionCodingImplementation
 
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{

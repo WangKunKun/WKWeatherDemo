@@ -33,7 +33,7 @@ static NSUInteger presentRow = 0;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _selectCitys = [[[WKUserInfomation shardUsrInfomation].city_models allKeys] mutableCopy];
+    _selectCitys = [[[WKUserInfomation shardUsrInfomation] allKeys] mutableCopy];
     
     
     if (_selectCitys.count <= 0) {
@@ -231,7 +231,6 @@ static NSUInteger presentRow = 0;
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [self.selectCitys addObject:cell.textLabel.text];
-//        NSLog(@"%@",_selectCitys);
     }
     else
     {
@@ -239,7 +238,6 @@ static NSUInteger presentRow = 0;
         [self.selectCitys removeObject:cell.textLabel.text];
         
     }
-//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -287,14 +285,12 @@ static NSUInteger presentRow = 0;
 - (void)rightBtnClick:(UIButton *)btn model:(WKNavViewModel)model
 {
     
-    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     
     for (NSString * str in _selectCitys) {
-        id value = [[WKUserInfomation shardUsrInfomation].city_models objectForKey:str];
+        id value = [[WKUserInfomation shardUsrInfomation] wkObjectForKey:str];
         
-        [dict setObject:(value?:defaultValue) forKey:str];
+        [[WKUserInfomation shardUsrInfomation] wkSetObject:(value?:defaultValue) forKey:str];
     }
-    [WKUserInfomation shardUsrInfomation].city_models = dict;
     [self leftBtnClick:nil model:0];
 }
 

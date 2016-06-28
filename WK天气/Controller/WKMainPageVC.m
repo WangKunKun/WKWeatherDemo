@@ -22,7 +22,6 @@
 @property (nonatomic, strong) NSArray * citys;
 @property (nonatomic, strong) NSArray <WKWeatherModel *>* models;
 
-@property (nonatomic, assign) NSUInteger presentIndex;
 @end
 
 
@@ -44,7 +43,6 @@
     _scrollView.delegate = self;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _weatherViews = [NSMutableArray arrayWithCapacity:3];
-    _models = [NSMutableArray array];
 
     
 
@@ -70,18 +68,20 @@
     
     [self setInterFace];
     
+    self.models = [[WKUserInfomation shardUsrInfomation] allValues];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
     
 }
 
 - (void)dateRefresh
 {
-    self.models = [[WKUserInfomation shardUsrInfomation].city_models allValues];
+    self.models = [[WKUserInfomation shardUsrInfomation] allValues];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [self dateRefresh];
+
 }
 
 - (void)setInterFace
@@ -98,27 +98,13 @@
     [_scrollView setContentOffset:CGPointMake(SCREEN_WIDTH , 0)];
 }
 
-- (void)showCityWeatherWithIndex:(NSUInteger)index
-{
-    _presentIndex = index;
-    
-    NSUInteger left = index == 0 ? _models.count - 1 : index - 1;
-    NSUInteger right = index == _models.count - 1 ? 0 : index + 1;
-    NSArray * numbers = @[@(left),@(index),@(right)];
-    for (WKWeatherView * view in _weatherViews) {
-        NSUInteger curIndex = [_weatherViews indexOfObject:view];
-        NSUInteger currIndex = [numbers[curIndex] integerValue];
-        view.model = _models[currIndex];
-    }
-    
-}
 
 - (void)setModels:(NSArray<WKWeatherModel *> *)models
 {
     
     _models = models;
     if (_models.count > 0) {
-        [self showCityWeatherWithIndex:0];
+        self.presentIndex = 0;
     }
 }
 
@@ -207,8 +193,24 @@
     
 
     
-    [self showCityWeatherWithIndex:index];
+    self.presentIndex = index;
     [scrollView setContentOffset:CGPointMake(SCREEN_WIDTH, 0)];
+}
+
+- (void)setPresentIndex:(NSUInteger)presentIndex
+{
+    _presentIndex = presentIndex;
+    if (_models.count > 0) {
+        NSUInteger left = presentIndex == 0 ? _models.count - 1 : presentIndex - 1;
+        NSUInteger right = presentIndex == _models.count - 1 ? 0 : presentIndex + 1;
+        NSArray * numbers = @[@(left),@(presentIndex),@(right)];
+        for (WKWeatherView * view in _weatherViews) {
+            NSUInteger curIndex = [_weatherViews indexOfObject:view];
+            NSUInteger currIndex = [numbers[curIndex] integerValue];
+            view.model = _models[currIndex];
+        }
+    }
+
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate

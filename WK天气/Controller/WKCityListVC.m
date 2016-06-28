@@ -11,8 +11,9 @@
 #import "WKListCityCell.h"
 #import "WKCityIndexViewController.h"
 #import "WKDegreesModelView.h"
+#import "WKMainPageVC.h"
 
-
+static BOOL cellAniFlag = YES;//cell 动画标识
 
 @interface WKCityListVC ()<UITableViewDelegate,UITableViewDataSource,WKNavViewDelegate>
 
@@ -21,11 +22,13 @@
 
 
 
+
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, assign) BOOL flag;
 
 @property (nonatomic, strong) NSMutableArray * citys;
-@property (nonatomic, strong) NSMutableArray * noDataCityIndexPaths;
+
+
 @end
 
 @implementation WKCityListVC
@@ -34,7 +37,6 @@
     [super viewDidLoad];
     [self setGradient];
 
-    _noDataCityIndexPaths = [NSMutableArray array];
    
     // Do any additional setup after loading the view.
     WKNavView * nav = [WKNavView navViewWithModel:WKNavViewModel_Normal];
@@ -61,36 +63,65 @@
 - (void)dateRefresh
 {
     //得到新数据
-    _dataSource = [[[WKUserInfomation shardUsrInfomation].city_models allValues] mutableCopy];
+    _dataSource = [[[WKUserInfomation shardUsrInfomation] allValues] mutableCopy];
+    _citys = [[[WKUserInfomation shardUsrInfomation] allKeys] mutableCopy];
     //刷新数据
-    for (NSIndexPath * ip in _noDataCityIndexPaths) {
-        WKListCityCell * cell = [_tableView cellForRowAtIndexPath:ip];
-        cell.model = _dataSource[ip.row];
-        cell.flag = _flag;
-    }
-    [_noDataCityIndexPaths removeAllObjects];
+    [_tableView reloadData];
+
 
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    _citys = [[[WKUserInfomation shardUsrInfomation].city_models allKeys] mutableCopy];
-    _dataSource = [[[WKUserInfomation shardUsrInfomation].city_models allValues] mutableCopy];
-    [_dataSource removeObject:defaultValue inRange:NSMakeRange(0, _dataSource.count)];
+    
+    _citys = [[[WKUserInfomation shardUsrInfomation] allKeys] mutableCopy];
+    _dataSource = [[[WKUserInfomation shardUsrInfomation] allValues] mutableCopy];
     [_tableView reloadData];
+
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    cellAniFlag = NO;
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    cellAniFlag = YES;
+
+}
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewRowAction * deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        [[WKUserInfomation shardUsrInfomation] wkRemoveObjectForKey:_citys[indexPath.row]];
+        [_citys removeObjectAtIndex:indexPath.row];
+        [_dataSource removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        tableView.editing = NO;
+        
+    }];
+    
+    return @[deleteAction];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    cell.originS = CGPointMake(cell.originS.x + SCREEN_WIDTH - 20, cell.originS.y);
-    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
-    //x和y的最终值为1
-    [UIView animateWithDuration:0.7 animations:^{
-        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
-        cell.originS = CGPointMake(0, cell.originS.y);
+    
+//    if (cellAniFlag) {
+        cell.originS = CGPointMake(cell.originS.x + SCREEN_WIDTH - 20, cell.originS.y);
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+        //x和y的最终值为1
+        [UIView animateWithDuration:0.7 animations:^{
+            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+            cell.originS = CGPointMake(0, cell.originS.y);
+            
+        }];
+//    }
 
-    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -100,18 +131,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
     WKListCityCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WKListCityCell"];
     cell.cityName = _citys[indexPath.row];
-   
-    if (_dataSource.count > indexPath.row) {
-        cell.model= _dataSource[indexPath.row];
-        cell.flag = _flag;
-    }
-    else
-    {
-        [_noDataCityIndexPaths addObject:indexPath];
-    }
+    cell.model= _dataSource[indexPath.row];
+    cell.flag = _flag;
     
     cell.backgroundColor = [UIColor clearColor];
     return cell;
@@ -151,6 +174,11 @@
     return view;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ((WKMainPageVC *)self.presentingViewController).presentIndex = indexPath.row ;
+    [self leftBtnClick:nil model:0];
+}
 
 - (void)gotoCityList
 {

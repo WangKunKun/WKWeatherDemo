@@ -70,10 +70,14 @@ static NSString * reuseID = @"WKWeatherCell";
 - (void)setModel:(WKWeatherModel *)model
 {
     _model = model;
+    if (![_model isKindOfClass:[WKWeatherModel class]]) {
+        _model = nil;
+        return;
+    }
     //重置初始化位置
     self.contentOffset = CGPointMake(0, 0);
     
-    _todayWeatherInfo = [NSString stringWithFormat:@"空气质量:  %@\n健康小贴士: %@",_model.pmInfo.pmQuality,_model.pmInfo.pmDes];
+    _todayWeatherInfo = !model ? @"" : [NSString stringWithFormat:@"空气质量:  %@\n健康小贴士: %@",_model.pmInfo.pmQuality,_model.pmInfo.pmDes];
     
     [_tableView reloadData];
     
@@ -87,15 +91,15 @@ static NSString * reuseID = @"WKWeatherCell";
         [dateStr appendString:[NSString numberToChinese:dateArr[i]]];
         [dateStr appendString:tempArr[i]];
     }
-    _topView.date = [NSString stringWithFormat:@"国 %@",dateStr];
-    _topView.chineseDate = [NSString stringWithFormat:@"阴 %@",_model.weatherDayInfos[0].presentChineseData];
-    _topView.week =  [NSString stringWithFormat:@"星期%@",[NSString numberToChinese:@(_model.realtimeInfo.week)]];
+    _topView.date =  !model ? @"" : [NSString stringWithFormat:@"国 %@",dateStr];
+    _topView.chineseDate =  !model ? @"" : [NSString stringWithFormat:@"阴 %@",_model.weatherDayInfos[0].presentChineseData];
+    _topView.week =   !model ? @"" : [NSString stringWithFormat:@"星期%@",[NSString numberToChinese:@(_model.realtimeInfo.week)]];
     
-    _topView.weather = _model.realtimeInfo.weatherInfo;
-    _topView.temperature = [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
-    _topView.dayTemperature = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].day[WKWeatherTemperature]];
-    _topView.nightTemperature = [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].night[WKWeatherTemperature]];
-    _topView.cityName = _model.realtimeInfo.cityName;
+    _topView.weather =  !model ? @"" : _model.realtimeInfo.weatherInfo;
+    _topView.temperature =  !model ? @"" : [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
+    _topView.dayTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].day[WKWeatherTemperature]];
+    _topView.nightTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].night[WKWeatherTemperature]];
+    _topView.cityName =  !model ? @"" : _model.realtimeInfo.cityName;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _tableView.heightS = _tableView.contentSize.height;

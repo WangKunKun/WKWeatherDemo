@@ -25,7 +25,7 @@
     // Initialization code
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor clearColor];
-    self.contentView.backgroundColor = [UIColor clearColor];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

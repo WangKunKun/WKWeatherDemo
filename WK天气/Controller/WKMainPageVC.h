@@ -10,4 +10,6 @@
 
 @interface WKMainPageVC : UIViewController
 
+@property (nonatomic, assign) NSUInteger presentIndex;
+
 @end

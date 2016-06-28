@@ -13,7 +13,13 @@ static NSString * defaultValue = @"WKWeather";
 @interface WKUserInfomation : NSObject
 
 
-@property (nonatomic, strong) NSDictionary * city_models;
 + (WKUserInfomation *)shardUsrInfomation;
 
+- (NSArray *)allKeys;
+- (NSArray *)allValues;
+
+
+- (void)wkSetObject:(id)value forKey:(NSString *)key;
+- (id)wkObjectForKey:(NSString *)key;
+- (void)wkRemoveObjectForKey:(NSString *)key;
 @end
