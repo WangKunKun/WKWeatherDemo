@@ -72,7 +72,6 @@ static NSString * reuseID = @"WKWeatherCell";
     _model = model;
     if (![_model isKindOfClass:[WKWeatherModel class]]) {
         _model = nil;
-        return;
     }
     //重置初始化位置
     self.contentOffset = CGPointMake(0, 0);
@@ -95,8 +94,8 @@ static NSString * reuseID = @"WKWeatherCell";
     _topView.chineseDate =  !model ? @"" : [NSString stringWithFormat:@"阴 %@",_model.weatherDayInfos[0].presentChineseData];
     _topView.week =   !model ? @"" : [NSString stringWithFormat:@"星期%@",[NSString numberToChinese:@(_model.realtimeInfo.week)]];
     
-    _topView.weather =  !model ? @"" : _model.realtimeInfo.weatherInfo;
-    _topView.temperature =  !model ? @"" : [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
+    _topView.weather =  !model ? @"--" : _model.realtimeInfo.weatherInfo;
+    _topView.temperature =  !model ? @"--" : [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
     _topView.dayTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].day[WKWeatherTemperature]];
     _topView.nightTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].night[WKWeatherTemperature]];
     _topView.cityName =  !model ? @"" : _model.realtimeInfo.cityName;

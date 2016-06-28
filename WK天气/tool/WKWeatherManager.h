@@ -16,8 +16,8 @@ typedef enum : NSUInteger {
     WKPollutionConditionSerious
 } WKPollutionCondition;
 
-typedef void(^WKWeatherBlock)(WKWeatherModel *);
-typedef void(^WKWeathersBlock)(NSArray <WKWeatherModel *>*);
+typedef void(^WKWeatherBlock)(WKWeatherModel *,NSString *);
+typedef void(^WKWeathersBlock)(NSArray <WKWeatherModel *>*, NSArray <NSString *>*);
 
 
 

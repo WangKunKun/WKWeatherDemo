@@ -106,6 +106,12 @@
     if (_models.count > 0) {
         self.presentIndex = 0;
     }
+    else
+    {
+        for (WKWeatherView * view in _weatherViews) {
+            view.model = nil;
+        }
+    }
 }
 
 - (void)showAlertVCWithCityName:(NSString *)cityName

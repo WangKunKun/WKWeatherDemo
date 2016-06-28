@@ -65,9 +65,15 @@ static BOOL cellAniFlag = YES;//cell 动画标识
     //得到新数据
     _dataSource = [[[WKUserInfomation shardUsrInfomation] allValues] mutableCopy];
     _citys = [[[WKUserInfomation shardUsrInfomation] allKeys] mutableCopy];
+    cellAniFlag = NO;
     //刷新数据
     [_tableView reloadData];
-
+    
+    //需要改回来
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        cellAniFlag = YES;
+    });
+    
 
 }
 
@@ -76,20 +82,18 @@ static BOOL cellAniFlag = YES;//cell 动画标识
     
     _citys = [[[WKUserInfomation shardUsrInfomation] allKeys] mutableCopy];
     _dataSource = [[[WKUserInfomation shardUsrInfomation] allValues] mutableCopy];
+    cellAniFlag = YES;
     [_tableView reloadData];
-
 
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    cellAniFlag = NO;
 
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    cellAniFlag = YES;
 
 }
 
@@ -99,7 +103,7 @@ static BOOL cellAniFlag = YES;//cell 动画标识
         [[WKUserInfomation shardUsrInfomation] wkRemoveObjectForKey:_citys[indexPath.row]];
         [_citys removeObjectAtIndex:indexPath.row];
         [_dataSource removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         tableView.editing = NO;
         
     }];
@@ -109,18 +113,18 @@ static BOOL cellAniFlag = YES;//cell 动画标识
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (!cellAniFlag) {
+        return;
+    }
     
-    
-//    if (cellAniFlag) {
-        cell.originS = CGPointMake(cell.originS.x + SCREEN_WIDTH - 20, cell.originS.y);
-        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
-        //x和y的最终值为1
-        [UIView animateWithDuration:0.7 animations:^{
-            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
-            cell.originS = CGPointMake(0, cell.originS.y);
-            
-        }];
-//    }
+    cell.originS = CGPointMake(cell.originS.x + SCREEN_WIDTH - 20, cell.originS.y);
+    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+    //x和y的最终值为1
+    [UIView animateWithDuration:0.7 animations:^{
+        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+        cell.originS = CGPointMake(0, cell.originS.y);
+        
+    }];
 
 }
 

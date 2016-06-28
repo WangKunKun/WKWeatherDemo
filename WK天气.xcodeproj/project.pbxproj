@@ -127,6 +127,7 @@
 		43ECD8CC1D1D3FD3001474F6 /* WKDegreesModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ECD8CB1D1D3FD3001474F6 /* WKDegreesModelView.m */; };
 		43ECD8CE1D1D3FDF001474F6 /* WKDegreesModelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43ECD8CD1D1D3FDF001474F6 /* WKDegreesModelView.xib */; };
 		43ECD8D11D1D45CA001474F6 /* WKNoticeCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ECD8D01D1D45CA001474F6 /* WKNoticeCenter.m */; };
+		43F1BE2D1D2274A900DD60C6 /* WKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F1BE2C1D2274A900DD60C6 /* WKAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -293,6 +294,9 @@
 		43ECD8CD1D1D3FDF001474F6 /* WKDegreesModelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKDegreesModelView.xib; sourceTree = "<group>"; };
 		43ECD8CF1D1D45CA001474F6 /* WKNoticeCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKNoticeCenter.h; sourceTree = "<group>"; };
 		43ECD8D01D1D45CA001474F6 /* WKNoticeCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKNoticeCenter.m; sourceTree = "<group>"; };
+		43F1BE2B1D2274A900DD60C6 /* WKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKAlertView.h; sourceTree = "<group>"; };
+		43F1BE2C1D2274A900DD60C6 /* WKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKAlertView.m; sourceTree = "<group>"; };
+		43F1BE2E1D2275FD00DD60C6 /* Enum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enum.h; sourceTree = "<group>"; };
 		8EBE3C7D899E2F93186C9F14 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA550F750B0E33263F8E474C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F1863BEA34405BB032D75D28 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -519,6 +523,7 @@
 		43C2D1A11D18D648001F2DC3 /* tool */ = {
 			isa = PBXGroup;
 			children = (
+				43F1BE2E1D2275FD00DD60C6 /* Enum.h */,
 				43C2D1A21D18D648001F2DC3 /* UIViewExt.h */,
 				43C2D1A31D18D648001F2DC3 /* UIViewExt.m */,
 				43C2D1A41D18D648001F2DC3 /* WKMapManager.h */,
@@ -540,6 +545,8 @@
 		43C2D1AA1D18D648001F2DC3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				43F1BE2B1D2274A900DD60C6 /* WKAlertView.h */,
+				43F1BE2C1D2274A900DD60C6 /* WKAlertView.m */,
 				43AC309B1D1A3CA600C4C8CA /* WKNavView.h */,
 				43AC309C1D1A3CA600C4C8CA /* WKNavView.m */,
 				43C2D1AB1D18D648001F2DC3 /* WKWeatherCell.h */,
@@ -867,6 +874,7 @@
 				43AC30B31D1A985C00C4C8CA /* NSString+WKNumberToChinese.m in Sources */,
 				43AC30AD1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m in Sources */,
 				18D376C71D1505900060C35B /* AppDelegate.m in Sources */,
+				43F1BE2D1D2274A900DD60C6 /* WKAlertView.m in Sources */,
 				4373B5D81D178E8800BE6009 /* WKUserInfomation.m in Sources */,
 				43C2D2091D18D648001F2DC3 /* WKWeatherManager.m in Sources */,
 				43AD78CD1D1B77940024E586 /* WKMainPageVC.m in Sources */,

@@ -19,7 +19,11 @@ static NSString * defaultValue = @"WKWeather";
 - (NSArray *)allValues;
 
 
+//单个调用这里
 - (void)wkSetObject:(id)value forKey:(NSString *)key;
+//多个调用这里 防止 数据请求多次
+- (void)setCityModels:(NSDictionary *)dict;
+
 - (id)wkObjectForKey:(NSString *)key;
 - (void)wkRemoveObjectForKey:(NSString *)key;
 @end

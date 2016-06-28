@@ -86,7 +86,17 @@ static NSUInteger presentRow = 0;
     _pickerView.delegate = self;
     _pickerView.showsSelectionIndicator = NO;
     [self.view addSubview:_pickerView];
-
+    
+    
+    
+    CALayer * layer = [CALayer layer];
+    layer.frame = CGRectMake(0, 0, _pickerView.widthS, _pickerView.heightS);
+//    layer.frame = _pickerView.frame;
+    layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    layer.opacity = 0.1;
+    layer.cornerRadius = 10;
+    [_pickerView.layer addSublayer:layer];
+//    [self.view.layer addSublayer:layer];
 
 }
 
@@ -284,13 +294,14 @@ static NSUInteger presentRow = 0;
 
 - (void)rightBtnClick:(UIButton *)btn model:(WKNavViewModel)model
 {
-    
+    //不能直接设置 会造成调用多次网络请求
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     
     for (NSString * str in _selectCitys) {
         id value = [[WKUserInfomation shardUsrInfomation] wkObjectForKey:str];
-        
-        [[WKUserInfomation shardUsrInfomation] wkSetObject:(value?:defaultValue) forKey:str];
+        [dict setValue:value?:defaultValue forKey:str];
     }
+    [[WKUserInfomation shardUsrInfomation] setCityModels:[dict copy]];
     [self leftBtnClick:nil model:0];
 }
 

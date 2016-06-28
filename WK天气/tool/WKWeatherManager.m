@@ -58,21 +58,21 @@
         if ([result isKindOfClass:[NSDictionary class]]) {
             if (block ) {
                 WKWeatherModel * model = [WKWeatherModel createWeatherModelWithDict:responseObject[@"result"][@"data"]];
-                block(model);
+                block(model,cityName);
             }
         }
         else
         {
             NSLog(@"对不起，暂无此城市的数据~");
             if (block ) {
-                block(nil);
+                block(nil,cityName);
             }
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error.localizedDescription);
         if (block ) {
-            block(nil);
+            block(nil,cityName);
         }
     }];
 }
@@ -85,13 +85,18 @@
     dispatch_group_t queueGroup = dispatch_group_create();
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __block NSMutableArray * models = [NSMutableArray array];
-    
+    __block NSMutableArray * invaildCitys = [NSMutableArray array];
+
     for (NSUInteger i = 0; i < cns.count; i ++) {
         
        dispatch_group_async(queueGroup, dispatch_get_global_queue(0,0), ^{
-            [wm getWeatherWithCityName:cns[i] block:^(WKWeatherModel * model) {
+            [wm getWeatherWithCityName:cns[i] block:^(WKWeatherModel * model,NSString * cityname) {
                 if (model != nil) {
                     [models addObject:model];
+                }
+                else
+                {
+                    [invaildCitys addObject:cityname];
                 }
                 dispatch_semaphore_signal(semaphore);
             }];
@@ -103,10 +108,21 @@
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     }
     
+    NSString * hint = @"";
+    for (NSString * str in invaildCitys) {
+        hint = [hint stringByAppendingString:str];
+        hint = [hint stringByAppendingString:@"," ];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        WKAlertView * av = [WKAlertView showAlertViewWithStyle:WKAlertViewStyleWaring title:@"下列城市占无数据" detail:hint canleButtonTitle:nil okButtonTitle:@"确定" delegate:nil];
+        [av show];
+    });
+
     NSLog(@"数据请求完毕");
 
     if (block) {
-        block([models copy]);
+        block([models copy],invaildCitys);
     }
 }
 

@@ -15,6 +15,7 @@
 #import "UIViewExt.h"
 #import "WKWeatherModel.h"
 #import "WKUserInfomation.h"
+#import "WKAlertView.h"
 #import <Masonry/Masonry.h>
 #import <AFNetworking/AFNetworking.h>
 
