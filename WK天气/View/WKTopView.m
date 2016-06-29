@@ -7,6 +7,7 @@
 //
 
 #import "WKTopView.h"
+#import "NSString+WKNumberToChinese.h"
 
 @interface WKTopView ()
 @property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
@@ -73,5 +74,28 @@
 - (void)setTemperature:(NSString *)temperature
 {
     _temperatureLabel.text = temperature;
+}
+
+
+- (void)setInterFaceWithModel:(WKWeatherModel *)model
+{
+    //2016-6-22 转为 六月二十二日
+    NSMutableArray * dateArr = [[model.weatherDayInfos[0].presentDate componentsSeparatedByString:@"-"] mutableCopy];
+    [dateArr removeObjectAtIndex:0];//去掉年份
+    NSMutableString * dateStr = [NSMutableString string];
+    NSArray * tempArr = @[@"月",@"日"];
+    for (NSUInteger i = 0; i < dateArr.count ; i++) {
+        [dateStr appendString:[NSString numberToChinese:dateArr[i]]];
+        [dateStr appendString:tempArr[i]];
+    }
+    self.date =  !model ? @"" : [NSString stringWithFormat:@"国 %@",dateStr];
+    self.chineseDate =  !model ? @"" : [NSString stringWithFormat:@"阴 %@",model.weatherDayInfos[0].presentChineseData];
+    self.week =   !model ? @"" : [NSString stringWithFormat:@"星期%@",[NSString numberToChinese:@(model.realtimeInfo.week)]];
+    
+    self.weather =  !model ? @"--" : model.realtimeInfo.weatherInfo;
+    self.temperature =  !model ? @"--" : [NSString stringWithFormat:@"%lu°",(unsigned long)model.realtimeInfo.temperature];
+    self.dayTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",model.weatherDayInfos[0].day[WKWeatherTemperature]];
+    self.nightTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",model.weatherDayInfos[0].night[WKWeatherTemperature]];
+    self.cityName =  !model ? @"" : model.realtimeInfo.cityName;
 }
 @end

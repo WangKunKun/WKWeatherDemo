@@ -189,4 +189,10 @@ CGRect CGRectMoveToCenter(CGRect rect, CGPoint center)
 	
 	self.frame = newframe;	
 }
+
+
+- (void)setAnchorPointTo:(CGPoint)point{
+    self.frame = CGRectOffset(self.frame, (point.x - self.layer.anchorPoint.x) * self.frame.size.width, (point.y - self.layer.anchorPoint.y) * self.frame.size.height);
+    self.layer.anchorPoint = point;
+}
 @end

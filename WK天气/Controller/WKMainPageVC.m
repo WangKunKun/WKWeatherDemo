@@ -11,6 +11,8 @@
 #import "WKWeatherManager.h"
 #import "WKMapManager.h"
 #import "WKCityListVC.h"
+#import "WKAnimatorManager.h"
+#import "WKBriefWeatherVC.h"
 
 @interface WKMainPageVC ()<UIScrollViewDelegate>
 
@@ -22,6 +24,8 @@
 @property (nonatomic, strong) NSArray * citys;
 @property (nonatomic, strong) NSArray <WKWeatherModel *>* models;
 
+
+@property (nonatomic, strong) WKAnimatorManager * am;
 @end
 
 
@@ -31,7 +35,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    ;
 
 
     
@@ -84,6 +87,11 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self showAlertVCWithCityName:@"成都市"];
+}
+
 - (void)setInterFace
 {
     static CGFloat startX = 0;
@@ -114,27 +122,49 @@
     }
 }
 
+
+//需要写到appdelegate里
 - (void)showAlertVCWithCityName:(NSString *)cityName
 {
-//    if (cityName.length <= 0 || [cityName isEqualToString:_cityName]) {
-//        NSLog(@"出问题了");
-//        return;
-//    }
-    
-    NSString * msg = [NSString stringWithFormat:@"检测到您现在位于【%@】,是否切换至该城市？",cityName];
-    
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * ensureAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
 
+    
+    
+    
+    NSArray * citys = [[WKUserInfomation shardUsrInfomation] allKeys];
+    
+    BOOL flag = NO;
+    NSUInteger index = 0;
+    for (NSString * str in citys) {
+        if ([str isEqualToString:cityName]) {
+            flag = YES;
+            index = [citys indexOfObject:str];
+            break;
+        }
+    }
+    
+    NSString * title = [NSString stringWithFormat:@"您现在正位于【%@】",cityName];
+    
+    WKAlertView * av =  [WKAlertView showAlertViewWithStyle:WKAlertViewStyleWaring noticStyle:WKAlertViewNoticStyleFace title:title detail:@"是否需要查看该城市天气？" canleButtonTitle:@"不用" okButtonTitle:@"好的" callBlock:^(MyWindowClick buttonIndex) {
+        if (buttonIndex == 0) {
+            if (!flag) {
+                //新界面
+                WKBriefWeatherVC * vc = [[WKBriefWeatherVC alloc] init];
+                _am = [[WKAnimatorManager alloc] init];
+                _am.style = WKAnimatorStyle_WindowedModel;
+                _am.toViewHeight = 280;
+                vc.cityName = cityName;
+                vc.transitioningDelegate = _am;
+                vc.modalPresentationStyle = UIModalPresentationCustom;
+                [self presentViewController:vc animated:YES completion:nil];
+            }
+            else
+            {
+                self.presentIndex = index;
+            }
+        }
     }];
     
-    UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@"不用" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    
-    [alert addAction:ensureAction];
-    [alert addAction:cancleAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    [av show];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -145,7 +175,11 @@
 {
     //进入选择页面
     WKCityListVC * vc = [[WKCityListVC alloc] init];
-    
+    _am = [[WKAnimatorManager alloc] init];
+    _am.style = WKAnimatorStyle_FilpToon;
+    vc.transitioningDelegate = _am;
+    vc.modalPresentationStyle = UIModalPresentationCustom;
+
     [self presentViewController:vc animated:YES completion:nil];
     
 }

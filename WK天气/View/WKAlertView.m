@@ -36,7 +36,7 @@
 
 
 //Logo半径（画布）
-NSInteger const Logo_View_Size = 100;
+NSInteger const Logo_View_Size = 150;
 
 
 NSInteger const Logo_Size = Logo_View_Size /6.0;
@@ -45,7 +45,8 @@ NSInteger const Button_Font = Logo_View_Size / 13;
 NSInteger const Title_Font = Logo_View_Size / 12;
 NSInteger const Detial_Font = Button_Font;
 
-NSUInteger const Button_Size_Width = Logo_View_Size / 2.0;
+NSUInteger const Button_Space = 6;
+NSUInteger const Button_Size_Width = (Logo_View_Size - Button_Space * 2) / 2;
 NSUInteger const Button_Size_Height = Button_Size_Width / 3.0;
 
 @interface WKAlertView ()
@@ -442,18 +443,18 @@ NSUInteger const Button_Size_Height = Button_Size_Width / 3.0;
     [_detailLabel setFont:[UIFont systemFontOfSize:Detial_Font]];
     [_detailLabel setTextAlignment:NSTextAlignmentCenter];
 
-    CGFloat centerY = _detailLabel.center.y + 20;
+    CGFloat centerY = _detailLabel.bottomS + Button_Size_Height / 2.0 + Button_Space *3;
     
     _OkButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _OkButton.layer.cornerRadius = 5;
     _OkButton.titleLabel.font = [UIFont systemFontOfSize:Button_Font];
-    _OkButton.center = CGPointMake(_detailLabel.center.x + 50, centerY);
+    _OkButton.center = CGPointMake(_detailLabel.center.x + Button_Space / 2.0 + Button_Size_Width /2.0, centerY);
     _OkButton.bounds = CGRectMake(0, 0, Button_Size_Width, Button_Size_Height);
     _OkButton.backgroundColor = OKBUTTON_BGCOLOR;
 
     
     _canleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _canleButton.center = CGPointMake(_detailLabel.center.x - 50, centerY);
+    _canleButton.center = CGPointMake(_detailLabel.center.x - (Button_Space / 2.0 + Button_Size_Width /2.0), centerY);
     _canleButton.bounds = CGRectMake(0, 0, Button_Size_Width, Button_Size_Height);
     _canleButton.backgroundColor = CANCELBUTTON_BGCOLOR;
     _canleButton.layer.cornerRadius = 5;
@@ -514,7 +515,7 @@ NSUInteger const Button_Size_Height = Button_Size_Width / 3.0;
         flag = YES;
     }
     
-    CGFloat centerY = _detailLabel.bottomS + Button_Size_Height / 2.0 + 5;
+    CGFloat centerY = _detailLabel.bottomS + Button_Size_Height / 2.0 + Button_Space *3;
 
     if (flag) {
         _OkButton.center = CGPointMake(_detailLabel.center.x, centerY);
@@ -525,7 +526,7 @@ NSUInteger const Button_Size_Height = Button_Size_Width / 3.0;
     else{
         _canleButton.hidden = NO;
         [_canleButton setTitle:cancle forState:UIControlStateNormal];
-        _OkButton.center = CGPointMake(_detailLabel.center.x + 50, centerY);
+        _OkButton.center = CGPointMake(_detailLabel.center.x + (3 + Button_Size_Width /2.0), centerY);
         _OkButton.bounds = CGRectMake(0, 0, Button_Size_Width, Button_Size_Height);
     }
     _OkButton.hidden = NO;

@@ -12,6 +12,7 @@
 #import "WKCityIndexViewController.h"
 #import "WKDegreesModelView.h"
 #import "WKMainPageVC.h"
+#import "WKAnimatorManager.h"
 
 static BOOL cellAniFlag = YES;//cell 动画标识
 
@@ -28,6 +29,7 @@ static BOOL cellAniFlag = YES;//cell 动画标识
 
 @property (nonatomic, strong) NSMutableArray * citys;
 
+@property (nonatomic, strong) WKAnimatorManager * am;
 
 @end
 
@@ -161,7 +163,7 @@ static BOOL cellAniFlag = YES;//cell 动画标识
     [button setImage:[UIImage imageNamed:@"top-添加"] forState:UIControlStateNormal];
     button.frame = CGRectMake(SCREEN_WIDTH - 25 -10 , (view.heightS - 25) / 2.0f, 25, 25);
     [view addSubview:button];
-    [button addTarget:self action:@selector(gotoCityList) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(gotoCityList:) forControlEvents:UIControlEventTouchUpInside];
     
     
     WKDegreesModelView * dmView = [WKDegreesModelView viewFromNIB];
@@ -184,9 +186,16 @@ static BOOL cellAniFlag = YES;//cell 动画标识
     [self leftBtnClick:nil model:0];
 }
 
-- (void)gotoCityList
+- (void)gotoCityList:(UIButton *)btn
 {
+    UIView * sv = [btn superview];
+    
     WKCityIndexViewController * vc = [[WKCityIndexViewController alloc] init];
+    _am = [[WKAnimatorManager alloc] init];
+    _am.style = WKAnimatorStyle_CircleSpread;
+    _am.circleFrame = CGRectMake(sv.widthS - btn.widthS, sv.originS.y + _tableView.topS, btn.widthS, btn.heightS);
+    vc.transitioningDelegate = _am;
+    vc.modalPresentationStyle = UIModalPresentationCustom;
     [self presentViewController:vc animated:YES completion:nil];
 }
 

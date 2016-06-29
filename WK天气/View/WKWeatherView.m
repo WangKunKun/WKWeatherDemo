@@ -9,7 +9,6 @@
 #import "WKWeatherView.h"
 #import "WKTopView.h"
 #import "WKWeatherCell.h"
-#import "NSString+WKNumberToChinese.h"
 
 static NSString * reuseID = @"WKWeatherCell";
 
@@ -81,24 +80,7 @@ static NSString * reuseID = @"WKWeatherCell";
     [_tableView reloadData];
     
     
-    //2016-6-22 转为 六月二十二日
-    NSMutableArray * dateArr = [[_model.weatherDayInfos[0].presentDate componentsSeparatedByString:@"-"] mutableCopy];
-    [dateArr removeObjectAtIndex:0];//去掉年份
-    NSMutableString * dateStr = [NSMutableString string];
-    NSArray * tempArr = @[@"月",@"日"];
-    for (NSUInteger i = 0; i < dateArr.count ; i++) {
-        [dateStr appendString:[NSString numberToChinese:dateArr[i]]];
-        [dateStr appendString:tempArr[i]];
-    }
-    _topView.date =  !model ? @"" : [NSString stringWithFormat:@"国 %@",dateStr];
-    _topView.chineseDate =  !model ? @"" : [NSString stringWithFormat:@"阴 %@",_model.weatherDayInfos[0].presentChineseData];
-    _topView.week =   !model ? @"" : [NSString stringWithFormat:@"星期%@",[NSString numberToChinese:@(_model.realtimeInfo.week)]];
-    
-    _topView.weather =  !model ? @"--" : _model.realtimeInfo.weatherInfo;
-    _topView.temperature =  !model ? @"--" : [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
-    _topView.dayTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].day[WKWeatherTemperature]];
-    _topView.nightTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",_model.weatherDayInfos[0].night[WKWeatherTemperature]];
-    _topView.cityName =  !model ? @"" : _model.realtimeInfo.cityName;
+    [_topView setInterFaceWithModel:model];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _tableView.heightS = _tableView.contentSize.height;

@@ -20,4 +20,6 @@
 @property (nonatomic, strong) NSString * nightTemperature;
 + (instancetype)viewFromNIB;
 
+- (void)setInterFaceWithModel:(WKWeatherModel *)model;
+
 @end

@@ -16,6 +16,12 @@
 		18D376DD1D1505900060C35B /* WK__Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376DC1D1505900060C35B /* WK__Tests.m */; };
 		18D376E81D1505900060C35B /* WK__UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376E71D1505900060C35B /* WK__UITests.m */; };
 		431C326A1D1D098000BF5C73 /* WKCityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 431C32691D1D098000BF5C73 /* WKCityListVC.m */; };
+		4334522E1D23CC9D0091BCBD /* WKBriefWeatherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4334522D1D23CC9D0091BCBD /* WKBriefWeatherVC.m */; };
+		433452321D23CD870091BCBD /* WKBaseAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 433452311D23CD870091BCBD /* WKBaseAnimator.m */; };
+		433452351D23CD980091BCBD /* WKAnimatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 433452341D23CD980091BCBD /* WKAnimatorManager.m */; };
+		433452381D23CE260091BCBD /* WKFilpToonAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 433452371D23CE260091BCBD /* WKFilpToonAnimator.m */; };
+		4334523B1D23D1C80091BCBD /* WKCircleSpreadAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4334523A1D23D1C80091BCBD /* WKCircleSpreadAnimator.m */; };
+		4334523E1D23D2F10091BCBD /* WKWindowedModelAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4334523D1D23D2F10091BCBD /* WKWindowedModelAnimator.m */; };
 		4373B5D81D178E8800BE6009 /* WKUserInfomation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4373B5D71D178E8800BE6009 /* WKUserInfomation.m */; };
 		43AC309A1D1A212500C4C8CA /* ProvinecesData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43AC30991D1A212500C4C8CA /* ProvinecesData.plist */; };
 		43AC309D1D1A3CA600C4C8CA /* WKNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AC309C1D1A3CA600C4C8CA /* WKNavView.m */; };
@@ -163,6 +169,18 @@
 		18D376E91D1505900060C35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		431C32681D1D098000BF5C73 /* WKCityListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCityListVC.h; sourceTree = "<group>"; };
 		431C32691D1D098000BF5C73 /* WKCityListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCityListVC.m; sourceTree = "<group>"; };
+		4334522C1D23CC9D0091BCBD /* WKBriefWeatherVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKBriefWeatherVC.h; sourceTree = "<group>"; };
+		4334522D1D23CC9D0091BCBD /* WKBriefWeatherVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKBriefWeatherVC.m; sourceTree = "<group>"; };
+		433452301D23CD870091BCBD /* WKBaseAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKBaseAnimator.h; sourceTree = "<group>"; };
+		433452311D23CD870091BCBD /* WKBaseAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKBaseAnimator.m; sourceTree = "<group>"; };
+		433452331D23CD980091BCBD /* WKAnimatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKAnimatorManager.h; sourceTree = "<group>"; };
+		433452341D23CD980091BCBD /* WKAnimatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKAnimatorManager.m; sourceTree = "<group>"; };
+		433452361D23CE260091BCBD /* WKFilpToonAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFilpToonAnimator.h; sourceTree = "<group>"; };
+		433452371D23CE260091BCBD /* WKFilpToonAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFilpToonAnimator.m; sourceTree = "<group>"; };
+		433452391D23D1C80091BCBD /* WKCircleSpreadAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCircleSpreadAnimator.h; sourceTree = "<group>"; };
+		4334523A1D23D1C80091BCBD /* WKCircleSpreadAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCircleSpreadAnimator.m; sourceTree = "<group>"; };
+		4334523C1D23D2F10091BCBD /* WKWindowedModelAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWindowedModelAnimator.h; sourceTree = "<group>"; };
+		4334523D1D23D2F10091BCBD /* WKWindowedModelAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWindowedModelAnimator.m; sourceTree = "<group>"; };
 		4373B5D61D178E8800BE6009 /* WKUserInfomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUserInfomation.h; sourceTree = "<group>"; };
 		4373B5D71D178E8800BE6009 /* WKUserInfomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUserInfomation.m; sourceTree = "<group>"; };
 		43AC30991D1A212500C4C8CA /* ProvinecesData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProvinecesData.plist; sourceTree = "<group>"; };
@@ -350,6 +368,7 @@
 		18D376C11D1505900060C35B /* WK天气 */ = {
 			isa = PBXGroup;
 			children = (
+				4334522F1D23CD750091BCBD /* animator */,
 				43AC30981D1A212500C4C8CA /* File */,
 				43C2D20C1D18D656001F2DC3 /* Controller */,
 				43C2D1461D18D648001F2DC3 /* images */,
@@ -403,6 +422,23 @@
 				EA550F750B0E33263F8E474C /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		4334522F1D23CD750091BCBD /* animator */ = {
+			isa = PBXGroup;
+			children = (
+				433452301D23CD870091BCBD /* WKBaseAnimator.h */,
+				433452311D23CD870091BCBD /* WKBaseAnimator.m */,
+				433452361D23CE260091BCBD /* WKFilpToonAnimator.h */,
+				433452371D23CE260091BCBD /* WKFilpToonAnimator.m */,
+				433452391D23D1C80091BCBD /* WKCircleSpreadAnimator.h */,
+				4334523A1D23D1C80091BCBD /* WKCircleSpreadAnimator.m */,
+				4334523C1D23D2F10091BCBD /* WKWindowedModelAnimator.h */,
+				4334523D1D23D2F10091BCBD /* WKWindowedModelAnimator.m */,
+				433452331D23CD980091BCBD /* WKAnimatorManager.h */,
+				433452341D23CD980091BCBD /* WKAnimatorManager.m */,
+			);
+			path = animator;
 			sourceTree = "<group>";
 		};
 		43AC30981D1A212500C4C8CA /* File */ = {
@@ -573,6 +609,8 @@
 				43AD78CC1D1B77940024E586 /* WKMainPageVC.m */,
 				431C32681D1D098000BF5C73 /* WKCityListVC.h */,
 				431C32691D1D098000BF5C73 /* WKCityListVC.m */,
+				4334522C1D23CC9D0091BCBD /* WKBriefWeatherVC.h */,
+				4334522D1D23CC9D0091BCBD /* WKBriefWeatherVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -865,13 +903,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				43AC309D1D1A3CA600C4C8CA /* WKNavView.m in Sources */,
+				4334523E1D23D2F10091BCBD /* WKWindowedModelAnimator.m in Sources */,
 				431C326A1D1D098000BF5C73 /* WKCityListVC.m in Sources */,
+				433452381D23CE260091BCBD /* WKFilpToonAnimator.m in Sources */,
 				43AC30B31D1A985C00C4C8CA /* NSString+WKNumberToChinese.m in Sources */,
 				43AC30AD1D1A772400C4C8CA /* UIPickerView+WKHideSelectedLine.m in Sources */,
 				18D376C71D1505900060C35B /* AppDelegate.m in Sources */,
 				43F1BE2D1D2274A900DD60C6 /* WKAlertView.m in Sources */,
 				4373B5D81D178E8800BE6009 /* WKUserInfomation.m in Sources */,
 				43C2D2091D18D648001F2DC3 /* WKWeatherManager.m in Sources */,
+				4334522E1D23CC9D0091BCBD /* WKBriefWeatherVC.m in Sources */,
 				43AD78CD1D1B77940024E586 /* WKMainPageVC.m in Sources */,
 				43ECD8CC1D1D3FD3001474F6 /* WKDegreesModelView.m in Sources */,
 				43AD78C51D1B689A0024E586 /* WKTopView.m in Sources */,
@@ -881,10 +922,13 @@
 				43C2D2061D18D648001F2DC3 /* UIViewExt.m in Sources */,
 				43C2D2051D18D648001F2DC3 /* WKWeatherModel.m in Sources */,
 				43AC30B01D1A8C5400C4C8CA /* WKEffectLabel.m in Sources */,
+				4334523B1D23D1C80091BCBD /* WKCircleSpreadAnimator.m in Sources */,
 				43C2D2071D18D648001F2DC3 /* WKMapManager.m in Sources */,
 				43ECD8C61D1D252F001474F6 /* WKListCityCell.m in Sources */,
 				18D376C41D1505900060C35B /* main.m in Sources */,
 				43AD78CA1D1B713E0024E586 /* WKWeatherView.m in Sources */,
+				433452351D23CD980091BCBD /* WKAnimatorManager.m in Sources */,
+				433452321D23CD870091BCBD /* WKBaseAnimator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
