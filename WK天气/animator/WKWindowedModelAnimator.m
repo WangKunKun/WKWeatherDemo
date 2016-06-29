@@ -20,7 +20,7 @@
 
     [self.containerView addSubview:tempView];
     [self.containerView addSubview:self.toViewController.view];
-    //设置vc2的frame，因为这里vc2present出来不是全屏，且初始的时候在底部，如果不设置frame的话默认就是整个屏幕咯，这里self.containerView的frame就是整个屏幕
+    
     self.toViewController.view.frame = CGRectMake(0, self.containerView.heightS, self.containerView.widthS, _toViewHeight);
     self.toViewController.view.layer.cornerRadius = 10;
     self.toViewController.view.layer.masksToBounds = YES;

@@ -73,10 +73,7 @@ static NSUInteger presentRow = 0;
     [navV setTitle:@"返回" forNavViewModel:WKNavViewModel_Normal toBtnWithDirection:WKLeft];
     [navV setTitle:@"完成" forNavViewModel:WKNavViewModel_Normal toBtnWithDirection:WKRight];
 
-//    [navV setTitle:@"选择城市" forNavViewModel:WKNavViewModel_Transparent];
-//    [navV setTitle:@"返回" forNavViewModel:WKNavViewModel_Transparent toBtnWithDirection:WKLeft];
-//    [navV setTitle:@"完成" forNavViewModel:WKNavViewModel_Transparent toBtnWithDirection:WKRight];
-//    [navV setScrollView:_tableView andMaxValue:100 toDirection:WKHorizontal];
+
     [self.view addSubview:navV];
     navV.wkNVDelegate = self;
     
@@ -87,16 +84,17 @@ static NSUInteger presentRow = 0;
     _pickerView.showsSelectionIndicator = NO;
     [self.view addSubview:_pickerView];
     
-    
-    
-    CALayer * layer = [CALayer layer];
+
+    //添加渐变图层和pickerview的字体渐隐对应
+    CAGradientLayer * layer = [CAGradientLayer layer];
     layer.frame = CGRectMake(0, 0, _pickerView.widthS, _pickerView.heightS);
-//    layer.frame = _pickerView.frame;
     layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    layer.colors = @[(__bridge id)[UIColor whiteColor].CGColor,(__bridge id)[UIColor lightGrayColor].CGColor,(__bridge id)[UIColor whiteColor].CGColor];
+    layer.startPoint = CGPointMake(1, 0);
+    layer.endPoint = CGPointMake(1, 1);
     layer.opacity = 0.1;
     layer.cornerRadius = 10;
     [_pickerView.layer addSublayer:layer];
-//    [self.view.layer addSublayer:layer];
 
 }
 
