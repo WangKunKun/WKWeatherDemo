@@ -103,7 +103,7 @@ static NSUInteger presentRow = 0;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self pickerViewAnimChangeWithRow:0];
+    [self pickerViewAnimChangeWithRow:0 flag:YES];
 }
 
 #pragma mark UIPickerViewDelegate methods
@@ -146,22 +146,38 @@ static NSUInteger presentRow = 0;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     
-    [self pickerViewAnimChangeWithRow:row];
+    [self pickerViewAnimChangeWithRow:row flag:YES];
     //和tableview对应 让tableware滚动到 指定行
     
 }
 #pragma mark 自定义pickview方法
-- (void)pickerViewAnimChangeWithRow:(NSUInteger)row
+/**
+ *  滚动视图 和 pickerview 滚动关联
+ *
+ *  @param row  传入的跳转行
+ *  @param flag scrollview 滚动 还是 pickerview滚动
+ */
+- (void)pickerViewAnimChangeWithRow:(NSUInteger)row flag:(BOOL)flag
 {
+    NSLog(@"%d %@",flag,NSStringFromSelector(_cmd));
+    
     //去掉之前选中上的动画
     [(WKEffectLabel *)[_pickerView viewForRow:presentRow forComponent:0] stopAnim];
     WKEffectLabel * label = (WKEffectLabel *)[_pickerView viewForRow:row forComponent:0];
     [label startAnim];
     presentRow = row;
     //TODO 写在这 统一 这样在pickerview 和scrollview 都滚动的时候 也能正确对应
-    [_tableView
-     scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
-     atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    if (flag) {
+        [_tableView
+         scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
+         atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    else
+    {
+        [_pickerView selectRow:row inComponent:0 animated:YES];
+
+    }
+
 }
 
 #pragma mark UIScrollViewDelegate methods
@@ -176,7 +192,7 @@ static NSUInteger presentRow = 0;
     NSIndexPath * indexPath = [_tableView indexPathForRowAtPoint:offset];
     [_pickerView selectRow:indexPath.section inComponent:0 animated:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self pickerViewAnimChangeWithRow:indexPath.section];
+        [self pickerViewAnimChangeWithRow:indexPath.section flag:NO];
     });
 
 }

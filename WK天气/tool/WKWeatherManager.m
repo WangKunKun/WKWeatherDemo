@@ -114,10 +114,17 @@
         hint = [hint stringByAppendingString:@"," ];
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        WKAlertView * av = [WKAlertView showAlertViewWithStyle:WKAlertViewStyleWaring title:@"下列城市占无数据" detail:hint canleButtonTitle:nil okButtonTitle:@"确定" delegate:nil];
-        [av show];
-    });
+    if (hint.length > 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            WKAlertView * av = [WKAlertView showAlertViewWithStyle:WKAlertViewStyleWaring noticStyle:1 title:@"对不起,下列城市占无数据" detail:[hint substringToIndex:hint.length - 1] canleButtonTitle:nil okButtonTitle:@"确定" callBlock:^(MyWindowClick buttonIndex) {
+                //点击效果
+                
+            }];
+            [av show];
+
+        });
+    }
+
 
     NSLog(@"数据请求完毕");
 
