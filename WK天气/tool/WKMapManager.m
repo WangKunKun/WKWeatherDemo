@@ -42,8 +42,10 @@
 
     [_locatiobManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
         if (block) {
-            NSString * cityName = !error ? regeocode.city : @"成都";
-            block(cityName);
+            NSString * cityName = !error ? regeocode.city : @"成都市";
+            if (cityName.length > 0) {
+                block(cityName);
+            }
         }
     }];
 }

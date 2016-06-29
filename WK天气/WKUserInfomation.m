@@ -13,6 +13,8 @@ static NSString * citysKey = @"citys";
 
 static NSString * localData = @"WKWeatherLocalData";
 
+static NSString * presentCityName = @"WKPresentCityName";
+
 @interface WKUserInfomation ()
 
 @property (nonatomic, strong) NSDictionary * city_models;
@@ -155,7 +157,9 @@ static NSString * localData = @"WKWeatherLocalData";
     [archiver finishEncoding];
     
     [data writeToFile:[self getFilePath] atomically:YES];
-    
+    //存储当前定位城市
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 
 - (void)fetch
@@ -178,4 +182,16 @@ static NSString * localData = @"WKWeatherLocalData";
     path = [path stringByAppendingString:@"/weatherData.archiver"];
     return path;
 }
+
++ (NSString *)getCityName
+{
+    id str = [[NSUserDefaults standardUserDefaults] objectForKey:presentCityName];
+    return  str ? : @"";
+}
+
++ (void)setCityName:(NSString *)sn
+{
+    [[NSUserDefaults standardUserDefaults] setObject:sn forKey:presentCityName];
+}
+
 @end

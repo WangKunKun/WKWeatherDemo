@@ -6,8 +6,7 @@
 //  Copyright © 2016年 王琨. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface WKCityIndexViewController : UIViewController
+#import "WKModelBaseVC.h"
+@interface WKCityIndexViewController : WKModelBaseVC
 
 @end

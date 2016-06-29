@@ -12,7 +12,6 @@
 #import "WKCityIndexViewController.h"
 #import "WKDegreesModelView.h"
 #import "WKMainPageVC.h"
-#import "WKAnimatorManager.h"
 
 static BOOL cellAniFlag = YES;//cell 动画标识
 
@@ -29,7 +28,6 @@ static BOOL cellAniFlag = YES;//cell 动画标识
 
 @property (nonatomic, strong) NSMutableArray * citys;
 
-@property (nonatomic, strong) WKAnimatorManager * am;
 
 @end
 
@@ -191,10 +189,11 @@ static BOOL cellAniFlag = YES;//cell 动画标识
     UIView * sv = [btn superview];
     
     WKCityIndexViewController * vc = [[WKCityIndexViewController alloc] init];
-    _am = [[WKAnimatorManager alloc] init];
-    _am.style = WKAnimatorStyle_CircleSpread;
-    _am.circleFrame = CGRectMake(sv.widthS - btn.widthS, sv.originS.y + _tableView.topS, btn.widthS, btn.heightS);
-    vc.transitioningDelegate = _am;
+    
+    self.am = [[WKAnimatorManager alloc] init];
+    self.am.style = WKAnimatorStyle_CircleSpread;
+    self.am.circleFrame = CGRectMake(sv.widthS - btn.widthS, sv.originS.y + _tableView.topS, btn.widthS, btn.heightS);
+    vc.transitioningDelegate = self.am;
     vc.modalPresentationStyle = UIModalPresentationCustom;
     [self presentViewController:vc animated:YES completion:nil];
 }

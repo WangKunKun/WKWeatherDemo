@@ -26,4 +26,11 @@ static NSString * defaultValue = @"WKWeather";
 
 - (id)wkObjectForKey:(NSString *)key;
 - (void)wkRemoveObjectForKey:(NSString *)key;
+
+
+//单独的数据 上次定位地点
+
++ (NSString *)getCityName;
++ (void)setCityName:(NSString *)cn;
+
 @end

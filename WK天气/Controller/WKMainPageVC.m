@@ -11,7 +11,6 @@
 #import "WKWeatherManager.h"
 #import "WKMapManager.h"
 #import "WKCityListVC.h"
-#import "WKAnimatorManager.h"
 #import "WKBriefWeatherVC.h"
 
 @interface WKMainPageVC ()<UIScrollViewDelegate>
@@ -25,7 +24,6 @@
 @property (nonatomic, strong) NSArray <WKWeatherModel *>* models;
 
 
-@property (nonatomic, strong) WKAnimatorManager * am;
 @end
 
 
@@ -87,10 +85,6 @@
 
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [self showAlertVCWithCityName:@"成都市"];
-}
 
 - (void)setInterFace
 {
@@ -105,6 +99,7 @@
     _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, _scrollView.heightS);
     [_scrollView setContentOffset:CGPointMake(SCREEN_WIDTH , 0)];
 }
+
 
 
 - (void)setModels:(NSArray<WKWeatherModel *> *)models
@@ -123,49 +118,7 @@
 }
 
 
-//需要写到appdelegate里
-- (void)showAlertVCWithCityName:(NSString *)cityName
-{
 
-    
-    
-    
-    NSArray * citys = [[WKUserInfomation shardUsrInfomation] allKeys];
-    
-    BOOL flag = NO;
-    NSUInteger index = 0;
-    for (NSString * str in citys) {
-        if ([str isEqualToString:cityName]) {
-            flag = YES;
-            index = [citys indexOfObject:str];
-            break;
-        }
-    }
-    
-    NSString * title = [NSString stringWithFormat:@"您现在正位于【%@】",cityName];
-    
-    WKAlertView * av =  [WKAlertView showAlertViewWithStyle:WKAlertViewStyleWaring noticStyle:WKAlertViewNoticStyleFace title:title detail:@"是否需要查看该城市天气？" canleButtonTitle:@"不用" okButtonTitle:@"好的" callBlock:^(MyWindowClick buttonIndex) {
-        if (buttonIndex == 0) {
-            if (!flag) {
-                //新界面
-                WKBriefWeatherVC * vc = [[WKBriefWeatherVC alloc] init];
-                _am = [[WKAnimatorManager alloc] init];
-                _am.style = WKAnimatorStyle_WindowedModel;
-                _am.toViewHeight = 280;
-                vc.cityName = cityName;
-                vc.transitioningDelegate = _am;
-                vc.modalPresentationStyle = UIModalPresentationCustom;
-                [self presentViewController:vc animated:YES completion:nil];
-            }
-            else
-            {
-                self.presentIndex = index;
-            }
-        }
-    }];
-    
-    [av show];
-}
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -175,9 +128,9 @@
 {
     //进入选择页面
     WKCityListVC * vc = [[WKCityListVC alloc] init];
-    _am = [[WKAnimatorManager alloc] init];
-    _am.style = WKAnimatorStyle_FilpToon;
-    vc.transitioningDelegate = _am;
+    self.am = [[WKAnimatorManager alloc] init];
+    self.am.style = WKAnimatorStyle_FilpToon;
+    vc.transitioningDelegate = self.am;
     vc.modalPresentationStyle = UIModalPresentationCustom;
 
     [self presentViewController:vc animated:YES completion:nil];

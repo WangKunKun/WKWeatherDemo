@@ -6,9 +6,9 @@
 //  Copyright © 2016年 王琨. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "WKModelBaseVC.h"
 
-@interface WKMainPageVC : UIViewController
+@interface WKMainPageVC : WKModelBaseVC
 
 @property (nonatomic, assign) NSUInteger presentIndex;
 
