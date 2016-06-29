@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		027C50146EB4EDC8FD1AA0EE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBE3C7D899E2F93186C9F14 /* libPods.a */; };
+		1875E8C31D24150A00FD6502 /* WKWeatherBriefView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1875E8C21D24150A00FD6502 /* WKWeatherBriefView.m */; };
+		1875E8C51D24152700FD6502 /* WKWeatherBriefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1875E8C41D24152700FD6502 /* WKWeatherBriefView.xib */; };
 		18D376C41D1505900060C35B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376C31D1505900060C35B /* main.m */; };
 		18D376C71D1505900060C35B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D376C61D1505900060C35B /* AppDelegate.m */; };
 		18D376CD1D1505900060C35B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D376CB1D1505900060C35B /* Main.storyboard */; };
@@ -154,6 +156,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1875E8C11D24150A00FD6502 /* WKWeatherBriefView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWeatherBriefView.h; sourceTree = "<group>"; };
+		1875E8C21D24150A00FD6502 /* WKWeatherBriefView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWeatherBriefView.m; sourceTree = "<group>"; };
+		1875E8C41D24152700FD6502 /* WKWeatherBriefView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKWeatherBriefView.xib; sourceTree = "<group>"; };
 		18D376BF1D1505900060C35B /* WK天气.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WK天气.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D376C31D1505900060C35B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18D376C51D1505900060C35B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -599,6 +604,9 @@
 				43ECD8CA1D1D3FD3001474F6 /* WKDegreesModelView.h */,
 				43ECD8CB1D1D3FD3001474F6 /* WKDegreesModelView.m */,
 				43ECD8CD1D1D3FDF001474F6 /* WKDegreesModelView.xib */,
+				1875E8C11D24150A00FD6502 /* WKWeatherBriefView.h */,
+				1875E8C21D24150A00FD6502 /* WKWeatherBriefView.m */,
+				1875E8C41D24152700FD6502 /* WKWeatherBriefView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -819,6 +827,7 @@
 				43C2D1BB1D18D648001F2DC3 /* weather_code_day_13.png in Resources */,
 				43C2D1D91D18D648001F2DC3 /* weather_code_day_8@2x.png in Resources */,
 				43C2D1B01D18D648001F2DC3 /* weather_code_day_0@3x.png in Resources */,
+				1875E8C51D24152700FD6502 /* WKWeatherBriefView.xib in Resources */,
 				43C2D1FB1D18D648001F2DC3 /* weather_code_night_6@3x.png in Resources */,
 				43C2D1D51D18D648001F2DC3 /* weather_code_day_7.png in Resources */,
 				43ECD8C71D1D252F001474F6 /* WKListCityCell.xib in Resources */,
@@ -925,6 +934,7 @@
 				43C2D2121D18E032001F2DC3 /* WKCityIndexViewController.m in Sources */,
 				43C2D2081D18D648001F2DC3 /* WKTimerHolder.m in Sources */,
 				43C2D2061D18D648001F2DC3 /* UIViewExt.m in Sources */,
+				1875E8C31D24150A00FD6502 /* WKWeatherBriefView.m in Sources */,
 				43C2D2051D18D648001F2DC3 /* WKWeatherModel.m in Sources */,
 				43AC30B01D1A8C5400C4C8CA /* WKEffectLabel.m in Sources */,
 				4334523B1D23D1C80091BCBD /* WKCircleSpreadAnimator.m in Sources */,

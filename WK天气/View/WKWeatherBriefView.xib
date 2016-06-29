@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="26°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KjO-uj-oI7">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="7EK-rN-JTd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="60"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阴" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QtV-vH-eum">
+                    <rect key="frame" x="0.0" y="72" width="375" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="iBN-Rw-z4J"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="QtV-vH-eum" firstAttribute="top" secondItem="KjO-uj-oI7" secondAttribute="bottom" id="Abs-Ga-puL"/>
+                <constraint firstItem="QtV-vH-eum" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BKA-PR-9q0"/>
+                <constraint firstAttribute="trailing" secondItem="KjO-uj-oI7" secondAttribute="trailing" id="Rw9-j4-tbB"/>
+                <constraint firstItem="KjO-uj-oI7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SMf-KP-4YR"/>
+                <constraint firstItem="KjO-uj-oI7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Tq6-yz-res"/>
+                <constraint firstAttribute="trailing" secondItem="QtV-vH-eum" secondAttribute="trailing" id="uBf-lR-PmE"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>
