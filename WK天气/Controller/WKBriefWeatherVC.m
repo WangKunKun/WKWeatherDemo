@@ -9,10 +9,13 @@
 #import "WKBriefWeatherVC.h"
 #import "WKTopView.h"
 #import "WKWeatherManager.h"
+#import "WKWeatherBriefView.h"
 
 @interface WKBriefWeatherVC ()
 
-@property (nonatomic, strong)  WKTopView * topView;
+@property (nonatomic, assign) BOOL isSave;
+
+@property (nonatomic, strong)  WKWeatherBriefView * briefView;
 
 @end
 
@@ -21,22 +24,64 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _topView = [WKTopView viewFromNIB];
-    _topView.originS = CGPointMake(0, 0);
-    [self.view addSubview:_topView];
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
-    [self.view addGestureRecognizer:tap];
-    self.topView.backgroundColor = [UIColor brownColor] ;
+    _briefView = [WKWeatherBriefView viewFromNIB];
+    _briefView.originS = CGPointMake(0, 0);
+    [self.view addSubview:_briefView];
+    
+//    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
+//    [self.view addGestureRecognizer:tap];
+    
+    self.view.backgroundColor = [UIColor brownColor] ;
     [WKWeatherManager getWeatherWithCityName:_cityName block:^(WKWeatherModel * model, NSString * cn) {
         if (model) {
-            [_topView setInterFaceWithModel:model];
+            _briefView.model = model;
         }
     }];
     
+    
+    UIButton * closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeBtn.frame = CGRectMake(0, 0, 60, 60);
+    [closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
+    [self.view addSubview:closeBtn];
+    closeBtn.tag = 100;
+    
+    UIButton * collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    collectBtn.frame = CGRectMake(SCREEN_WIDTH - 60, 0, 60, 60);
+    [collectBtn setTitle:@"收藏" forState:UIControlStateNormal];
+    [collectBtn setTitle:@"已收藏" forState:UIControlStateSelected];
+
+    [self.view addSubview:collectBtn];
+    collectBtn.tag = 101;
+    [closeBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [collectBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)btnClick:(UIButton *)btn
+{
+    switch (btn.tag - 100) {
+        case 0:
+            //关闭
+            [self tapClick];
+            break;
+        case 1:
+            //收藏
+            btn.selected = !btn.selected;
+            _isSave = btn.selected;
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)tapClick
 {
+    
+    if (_isSave) {
+        [WKUserInfomation setCityName:_cityName];
+        //存储
+        [[WKUserInfomation shardUsrInfomation] wkSetObject:_briefView.model forKey:_cityName];
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

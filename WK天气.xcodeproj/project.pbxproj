@@ -35,6 +35,9 @@
 		43AD78C71D1B68CA0024E586 /* WKTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AD78C61D1B68CA0024E586 /* WKTopView.xib */; };
 		43AD78CA1D1B713E0024E586 /* WKWeatherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AD78C91D1B713E0024E586 /* WKWeatherView.m */; };
 		43AD78CD1D1B77940024E586 /* WKMainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AD78CC1D1B77940024E586 /* WKMainPageVC.m */; };
+		43B1B3B61D24A53C004F0D9C /* WKBriefCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B1B3B41D24A53C004F0D9C /* WKBriefCell.m */; };
+		43B1B3B71D24A53C004F0D9C /* WKBriefCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43B1B3B51D24A53C004F0D9C /* WKBriefCell.xib */; };
+		43B1B3C61D2507E8004F0D9C /* UIImage+WKScreenshots.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B1B3C51D2507E8004F0D9C /* UIImage+WKScreenshots.m */; };
 		43C2D1AE1D18D648001F2DC3 /* weather_code_day_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C2D1471D18D648001F2DC3 /* weather_code_day_0.png */; };
 		43C2D1AF1D18D648001F2DC3 /* weather_code_day_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C2D1481D18D648001F2DC3 /* weather_code_day_0@2x.png */; };
 		43C2D1B01D18D648001F2DC3 /* weather_code_day_0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C2D1491D18D648001F2DC3 /* weather_code_day_0@3x.png */; };
@@ -207,6 +210,11 @@
 		43AD78C91D1B713E0024E586 /* WKWeatherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWeatherView.m; sourceTree = "<group>"; };
 		43AD78CB1D1B77940024E586 /* WKMainPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKMainPageVC.h; sourceTree = "<group>"; };
 		43AD78CC1D1B77940024E586 /* WKMainPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKMainPageVC.m; sourceTree = "<group>"; };
+		43B1B3B31D24A53C004F0D9C /* WKBriefCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKBriefCell.h; sourceTree = "<group>"; };
+		43B1B3B41D24A53C004F0D9C /* WKBriefCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKBriefCell.m; sourceTree = "<group>"; };
+		43B1B3B51D24A53C004F0D9C /* WKBriefCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKBriefCell.xib; sourceTree = "<group>"; };
+		43B1B3C41D2507E8004F0D9C /* UIImage+WKScreenshots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WKScreenshots.h"; sourceTree = "<group>"; };
+		43B1B3C51D2507E8004F0D9C /* UIImage+WKScreenshots.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WKScreenshots.m"; sourceTree = "<group>"; };
 		43C2D1471D18D648001F2DC3 /* weather_code_day_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weather_code_day_0.png; sourceTree = "<group>"; };
 		43C2D1481D18D648001F2DC3 /* weather_code_day_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather_code_day_0@2x.png"; sourceTree = "<group>"; };
 		43C2D1491D18D648001F2DC3 /* weather_code_day_0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather_code_day_0@3x.png"; sourceTree = "<group>"; };
@@ -564,6 +572,8 @@
 		43C2D1A11D18D648001F2DC3 /* tool */ = {
 			isa = PBXGroup;
 			children = (
+				43B1B3C41D2507E8004F0D9C /* UIImage+WKScreenshots.h */,
+				43B1B3C51D2507E8004F0D9C /* UIImage+WKScreenshots.m */,
 				43F1BE2E1D2275FD00DD60C6 /* Enum.h */,
 				43C2D1A21D18D648001F2DC3 /* UIViewExt.h */,
 				43C2D1A31D18D648001F2DC3 /* UIViewExt.m */,
@@ -607,6 +617,9 @@
 				1875E8C11D24150A00FD6502 /* WKWeatherBriefView.h */,
 				1875E8C21D24150A00FD6502 /* WKWeatherBriefView.m */,
 				1875E8C41D24152700FD6502 /* WKWeatherBriefView.xib */,
+				43B1B3B31D24A53C004F0D9C /* WKBriefCell.h */,
+				43B1B3B41D24A53C004F0D9C /* WKBriefCell.m */,
+				43B1B3B51D24A53C004F0D9C /* WKBriefCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -813,6 +826,7 @@
 				43C2D1B21D18D648001F2DC3 /* weather_code_day_10.png in Resources */,
 				43C2D1D41D18D648001F2DC3 /* weather_code_day_6@3x.png in Resources */,
 				43C2D1C21D18D648001F2DC3 /* weather_code_day_15@2x.png in Resources */,
+				43B1B3B71D24A53C004F0D9C /* WKBriefCell.xib in Resources */,
 				43C2D1D61D18D648001F2DC3 /* weather_code_day_7@2x.png in Resources */,
 				43C2D1B11D18D648001F2DC3 /* weather_code_day_1.png in Resources */,
 				43C2D1AF1D18D648001F2DC3 /* weather_code_day_0@2x.png in Resources */,
@@ -930,10 +944,12 @@
 				43AD78CD1D1B77940024E586 /* WKMainPageVC.m in Sources */,
 				43ECD8CC1D1D3FD3001474F6 /* WKDegreesModelView.m in Sources */,
 				43AD78C51D1B689A0024E586 /* WKTopView.m in Sources */,
+				43B1B3C61D2507E8004F0D9C /* UIImage+WKScreenshots.m in Sources */,
 				43C2D20A1D18D648001F2DC3 /* WKWeatherCell.m in Sources */,
 				43C2D2121D18E032001F2DC3 /* WKCityIndexViewController.m in Sources */,
 				43C2D2081D18D648001F2DC3 /* WKTimerHolder.m in Sources */,
 				43C2D2061D18D648001F2DC3 /* UIViewExt.m in Sources */,
+				43B1B3B61D24A53C004F0D9C /* WKBriefCell.m in Sources */,
 				1875E8C31D24150A00FD6502 /* WKWeatherBriefView.m in Sources */,
 				43C2D2051D18D648001F2DC3 /* WKWeatherModel.m in Sources */,
 				43AC30B01D1A8C5400C4C8CA /* WKEffectLabel.m in Sources */,

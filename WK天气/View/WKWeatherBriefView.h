@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WKWeatherBriefView : UIView
++ (instancetype)viewFromNIB;
+@property (nonatomic, strong) WKWeatherModel * model;
 
 @end

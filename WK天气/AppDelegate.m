@@ -26,6 +26,8 @@
         [[WKMapManager shardMapManager] startLocationWithBlock:^(NSString *name) {
             [self showBriefWeather:name];
         }];
+//        [self showBriefWeather:@"成都"];
+
     });
 
     
@@ -75,7 +77,6 @@
         return;
     }
     
-    [WKUserInfomation setCityName:cityName];
     NSArray * citys = [[WKUserInfomation shardUsrInfomation] allKeys];
     
     BOOL flag = NO;

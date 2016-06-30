@@ -18,7 +18,7 @@
 #import "WKAlertView.h"
 #import <Masonry/Masonry.h>
 #import <AFNetworking/AFNetworking.h>
-
+#import "UIImage+WKScreenshots.h"
 //宽高
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
@@ -37,5 +37,6 @@
 #endif
 
 #define KEYWINDOW [UIApplication sharedApplication].keyWindow
+#define WEAKSELF typeof(self) __weak weakSelf = self;
 
 #endif /* WKCommonHeader_pch */
