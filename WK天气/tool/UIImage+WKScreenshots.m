@@ -135,14 +135,14 @@
     return image;
 }
 
-+ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cor
 {
     
     UIGraphicsBeginImageContext(size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [color CGColor]);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
-    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:size.width * 0.5];
+    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cor];
     CGContextAddPath(context, path.CGPath);
     CGContextFillPath(context);
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();

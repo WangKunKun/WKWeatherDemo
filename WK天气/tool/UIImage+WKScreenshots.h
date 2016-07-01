@@ -20,6 +20,6 @@
 //uikit截图
 + (UIImage *)getTargetViewScreenShotImageWith:(UIView *)TargetView;
 //获得纯色图片
-+ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cor;
 
 @end

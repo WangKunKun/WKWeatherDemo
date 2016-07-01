@@ -13,6 +13,8 @@
 #import "WKCityListVC.h"
 #import "WKBriefWeatherVC.h"
 
+
+
 @interface WKMainPageVC ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) CAGradientLayer *colorLayer;
@@ -23,7 +25,7 @@
 @property (nonatomic, strong) NSArray * citys;
 @property (nonatomic, strong) NSArray <WKWeatherModel *>* models;
 
-
+@property (nonatomic, strong) CAEmitterLayer * emitterLayer;
 @end
 
 
@@ -74,8 +76,7 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
     
-    [self my];
-    
+//    [self.view.layer addSublayer:[WKParticleManager createParticleEffectWithStyle:WKParticleStyle_Sunshine]];
 }
 
 - (void)dateRefresh
@@ -114,6 +115,7 @@
     }
     else
     {
+        [_emitterLayer removeFromSuperlayer];
         for (WKWeatherView * view in _weatherViews) {
             view.model = nil;
         }
@@ -201,6 +203,9 @@
     }
     
     _presentIndex = presentIndex;
+    //之前的天气类型
+    NSUInteger presentWeatherType = _weatherViews[1].model.realtimeInfo.weatherType;
+    
     if (_models.count > 0) {
         NSUInteger left = presentIndex == 0 ? _models.count - 1 : presentIndex - 1;
         NSUInteger right = presentIndex == _models.count - 1 ? 0 : presentIndex + 1;
@@ -209,6 +214,16 @@
             NSUInteger curIndex = [_weatherViews indexOfObject:view];
             NSUInteger currIndex = [numbers[curIndex] integerValue];
             view.model = _models[currIndex];
+        }
+        //现在的天气类型
+        NSUInteger weatherType = _models[presentIndex].realtimeInfo.weatherType;
+        //不相等 则更换粒子效果展示
+        if((weatherType != presentWeatherType))
+        {
+            [_emitterLayer removeFromSuperlayer];
+            WKParticleStyle style = [WKParticleManager weatherTypeToParticleStyle:weatherType];
+            _emitterLayer = [WKParticleManager createParticleEffectWithStyle:style];
+            [self.view.layer addSublayer:_emitterLayer];
         }
     }
 
@@ -222,43 +237,5 @@
     [self scrollViewDidEndDecelerating:scrollView];
 }
 
-- (void)my
-{
-    CGRect frame = self.view.frame;
-    
-    CAEmitterLayer * layer = [CAEmitterLayer layer];
-    layer.frame = frame;
-    layer.emitterShape = kCAEmitterLayerLine;
-//    layer.backgroundColor = [UIColor blackColor].CGColor;
-    layer.emitterPosition = CGPointMake(frame.size.width / 2.0, -50);
-    layer.emitterSize = frame.size;
-    layer.emitterMode = kCAEmitterLayerSurface;
-    CAEmitterCell * cell =  [CAEmitterCell new];
-    //cell 内容
-    cell.contents = (id)[UIImage imageWithColor:[UIColor lightTextColor] size:CGSizeMake(1, 5)].CGImage;
-    //
-    cell.birthRate = 3000;
-    cell.lifetime =3;//存活时间 = cell.lifetime * layer.lifeTime;
-    cell.lifetimeRange = 10.0;
-    cell.yAcceleration = 200.0;  //给Y方向一个加速度
-    //    cell.xAcceleration = 20.0; //x方向一个加速度
-    cell.velocity = 200; //初始速度
-    //    cell.emissionLongitude = M_PI_2; //向左
-    //    cell.velocityRange = 200.0;   //随机速度 -200+20 --- 200+20
-    //    cell.emissionRange = M_PI_2; //随机方向 -pi/2 --- pi/2
-    //    cell.color = [UIColor redColor].CGColor; //指定颜色
-    cell.redRange = 0.3;
-    cell.greenRange = 0.3;
-    cell.blueRange = 0.3 ; //三个随机颜色
-    //    cell.scale =
-    //    cell.scaleRange = 0.8 ; //0 - 1.6
-    //    cell.scaleSpeed = -0.15 ; //逐渐变小
-    cell.alphaRange = 0.2;   //随机透明度
-    cell.alphaSpeed = -0.15;
-    
-    
-    layer.emitterCells = @[cell];
-    [self.view.layer addSublayer:layer];
-}
 
 @end

@@ -66,6 +66,7 @@ MJExtensionCodingImplementation
              @"humidity":@"weather.humidity",
              @"weatherInfo":@"weather.info",
              @"temperature":@"weather.temperature",
+             @"weatherType":@"weather.img",
              
              @"windDirect":@"wind.direct",
              @"windOffset":@"wind.offset",

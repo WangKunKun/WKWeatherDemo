@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Enum.h"
+
 
 /**
  *  @Author wang kun
