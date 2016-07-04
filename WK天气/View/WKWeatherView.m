@@ -63,7 +63,10 @@ static NSString * reuseID = @"WKWeatherCell";
     [_tableView registerNib:[UINib nibWithNibName:@"WKWeatherCell" bundle:nil] forCellReuseIdentifier:reuseID];
     
     
-    
+    self.showsHorizontalScrollIndicator = NO;
+    self.showsVerticalScrollIndicator = NO;
+
+
 }
 
 - (void)setModel:(WKWeatherModel *)model

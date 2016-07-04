@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-
+@property (strong, nonatomic) CAEmitterLayer * eLayer;
 @end
 
 @implementation WKListCityCell
@@ -22,6 +22,9 @@
     // Initialization code
     self.contentView.backgroundColor = [UIColor clearColor];
     
+    _eLayer = [WKParticleManager createParticleEffectWithStyle:WKParticleStyle_Fireworks];
+    _eLayer.frame = self.contentView.frame;
+    [self.contentView.layer addSublayer:_eLayer];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -76,6 +79,23 @@
     _cityNameLabel.text = cityName;
 }
 
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint touchPoint = [touch locationInView:self.contentView];
+    
+    //添加粒子效果动画
+    CABasicAnimation *burst = [CABasicAnimation animationWithKeyPath:@"emitterCells.ring.birthRate"];
+    burst.fromValue			= [NSNumber numberWithFloat: 20.0];
+    burst.toValue			= [NSNumber numberWithFloat: 0.0];
+    burst.duration			= 0.5;
+    burst.timingFunction	= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    [self.eLayer addAnimation:burst forKey:@"burst"];
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions: YES];
+    self.eLayer.emitterPosition	= touchPoint;
+    [CATransaction commit];
+}
 
 @end

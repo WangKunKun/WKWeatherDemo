@@ -82,7 +82,7 @@ static NSUInteger tableViewWidth = 250;
     _temperatureLabel.text = [NSString stringWithFormat:@"%lu°",(unsigned long)model.realtimeInfo.temperature];
     _weatherLabel.text =  model.realtimeInfo.weatherInfo;
     
-    _indexLabel.text = model.indexInfo.dressIndex[0];
+    _indexLabel.text =  [NSString stringWithFormat:@"体感 - %@",model.indexInfo.dressIndex[0]];
     [self creatDataSource];
 
 }

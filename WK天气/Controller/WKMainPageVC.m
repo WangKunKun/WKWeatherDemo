@@ -71,12 +71,12 @@
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     
     [self setInterFace];
-    
+
     self.models = [[WKUserInfomation shardUsrInfomation] allValues];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
     
-//    [self.view.layer addSublayer:[WKParticleManager createParticleEffectWithStyle:WKParticleStyle_Sunshine]];
+    [self.view.layer addSublayer:[WKParticleManager createParticleEffectWithStyle:WKParticleStyle_Waiting + 1]];
 }
 
 - (void)dateRefresh
@@ -206,6 +206,7 @@
     //之前的天气类型
     NSUInteger presentWeatherType = _weatherViews[1].model.realtimeInfo.weatherType;
     
+    //重新计算当前需要显示的城市数据  滚动轮播需要
     if (_models.count > 0) {
         NSUInteger left = presentIndex == 0 ? _models.count - 1 : presentIndex - 1;
         NSUInteger right = presentIndex == _models.count - 1 ? 0 : presentIndex + 1;
@@ -226,6 +227,7 @@
             [self.view.layer addSublayer:_emitterLayer];
         }
     }
+    
 
 }
 

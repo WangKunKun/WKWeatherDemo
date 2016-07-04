@@ -28,6 +28,9 @@ static BOOL cellAniFlag = YES;//cell 动画标识
 
 @property (nonatomic, strong) NSMutableArray * citys;
 
+@property (strong, nonatomic) CAEmitterLayer * eLayer;
+
+
 
 @end
 
@@ -58,6 +61,11 @@ static BOOL cellAniFlag = YES;//cell 动画标识
     self.view.backgroundColor = [UIColor whiteColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
+    
+//    
+//    _eLayer = [WKParticleManager createParticleEffectWithStyle:WKParticleStyle_Waiting + 1];
+//    _eLayer.birthRate = 0.f;
+//    [self.view.layer addSublayer:_eLayer];
 }
 
 - (void)dateRefresh
@@ -246,6 +254,29 @@ static BOOL cellAniFlag = YES;//cell 动画标识
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint touchPoint = [touch locationInView:self.view];
+    
+    
+    
+        CABasicAnimation *burst = [CABasicAnimation animationWithKeyPath:@"emitterCells.ring.birthRate"];
+        burst.fromValue			= [NSNumber numberWithFloat: 125.0];	// short but intense burst
+        burst.toValue			= [NSNumber numberWithFloat: 0.0];		// each birth creates 20 aditional cells!
+        burst.duration			= 0.5;
+        burst.timingFunction	= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    
+        [self.eLayer addAnimation:burst forKey:@"burst"];
+    
+        // Move to touch point
+        [CATransaction begin];
+        [CATransaction setDisableActions: YES];
+        self.eLayer.emitterPosition	= touchPoint;
+        [CATransaction commit];
 }
 /*
 #pragma mark - Navigation

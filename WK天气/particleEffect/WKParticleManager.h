@@ -13,7 +13,9 @@ typedef NS_ENUM(NSInteger, WKParticleStyle)
     WKParticleStyle_Rain ,//雨
     WKParticleStyle_Snow,//雪
     WKParticleStyle_Cloud,
-    WKParticleStyle_Sunshine//晴
+    WKParticleStyle_Sunshine,//晴
+    WKParticleStyle_Waiting,
+    WKParticleStyle_Fireworks
 };
  
 

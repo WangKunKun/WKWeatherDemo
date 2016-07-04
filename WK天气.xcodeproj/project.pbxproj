@@ -151,6 +151,7 @@
 		43ECD8CC1D1D3FD3001474F6 /* WKDegreesModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ECD8CB1D1D3FD3001474F6 /* WKDegreesModelView.m */; };
 		43ECD8CE1D1D3FDF001474F6 /* WKDegreesModelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43ECD8CD1D1D3FDF001474F6 /* WKDegreesModelView.xib */; };
 		43F1BE2D1D2274A900DD60C6 /* WKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F1BE2C1D2274A900DD60C6 /* WKAlertView.m */; };
+		43F3D89E1D2A12E500E548AF /* WKLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F3D89D1D2A12E500E548AF /* WKLoadingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -353,6 +354,8 @@
 		43F1BE2B1D2274A900DD60C6 /* WKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKAlertView.h; sourceTree = "<group>"; };
 		43F1BE2C1D2274A900DD60C6 /* WKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKAlertView.m; sourceTree = "<group>"; };
 		43F1BE2E1D2275FD00DD60C6 /* Enum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enum.h; sourceTree = "<group>"; };
+		43F3D89C1D2A12E500E548AF /* WKLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKLoadingView.h; sourceTree = "<group>"; };
+		43F3D89D1D2A12E500E548AF /* WKLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKLoadingView.m; sourceTree = "<group>"; };
 		8EBE3C7D899E2F93186C9F14 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA550F750B0E33263F8E474C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F1863BEA34405BB032D75D28 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -616,6 +619,7 @@
 		43C2D1461D18D648001F2DC3 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				43F3D89F1D2A414100E548AF /* other */,
 				436AA86F1D263DF900F89C96 /* particle */,
 				436AA8731D263DF900F89C96 /* weather */,
 			);
@@ -682,6 +686,8 @@
 				43B1B3B31D24A53C004F0D9C /* WKBriefCell.h */,
 				43B1B3B41D24A53C004F0D9C /* WKBriefCell.m */,
 				43B1B3B51D24A53C004F0D9C /* WKBriefCell.xib */,
+				43F3D89C1D2A12E500E548AF /* WKLoadingView.h */,
+				43F3D89D1D2A12E500E548AF /* WKLoadingView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -701,6 +707,13 @@
 				433452401D23E5300091BCBD /* WKModelBaseVC.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		43F3D89F1D2A414100E548AF /* other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = other;
 			sourceTree = "<group>";
 		};
 		EF50783472895581386A0BD5 /* Frameworks */ = {
@@ -1017,6 +1030,7 @@
 				43AD78CD1D1B77940024E586 /* WKMainPageVC.m in Sources */,
 				43ECD8CC1D1D3FD3001474F6 /* WKDegreesModelView.m in Sources */,
 				43AD78C51D1B689A0024E586 /* WKTopView.m in Sources */,
+				43F3D89E1D2A12E500E548AF /* WKLoadingView.m in Sources */,
 				43B1B3C61D2507E8004F0D9C /* UIImage+WKScreenshots.m in Sources */,
 				43C2D20A1D18D648001F2DC3 /* WKWeatherCell.m in Sources */,
 				43C2D2121D18E032001F2DC3 /* WKCityIndexViewController.m in Sources */,

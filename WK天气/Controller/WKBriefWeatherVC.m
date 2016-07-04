@@ -10,6 +10,7 @@
 #import "WKTopView.h"
 #import "WKWeatherManager.h"
 #import "WKWeatherBriefView.h"
+#import "WKLoadingView.h"
 
 @interface WKBriefWeatherVC ()
 
@@ -32,7 +33,13 @@
 //    [self.view addGestureRecognizer:tap];
     
     self.view.backgroundColor = [UIColor brownColor] ;
+    
+    WKModelBaseVC * vc =  (WKModelBaseVC *)self.presentingViewController;
+    
+    
+    [WKLoadingView showWithView:self.view center:CGPointMake(self.view.widthS / 2.0, vc.am.toViewHeight / 2.0)];
     [WKWeatherManager getWeatherWithCityName:_cityName block:^(WKWeatherModel * model, NSString * cn) {
+        [WKLoadingView hideWithView:self.view];
         if (model) {
             _briefView.model = model;
         }
@@ -49,6 +56,7 @@
     collectBtn.frame = CGRectMake(SCREEN_WIDTH - 60, 0, 60, 60);
     [collectBtn setTitle:@"收藏" forState:UIControlStateNormal];
     [collectBtn setTitle:@"已收藏" forState:UIControlStateSelected];
+
 
     [self.view addSubview:collectBtn];
     collectBtn.tag = 101;
