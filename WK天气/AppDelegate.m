@@ -56,7 +56,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
+//前提全为模态推送的问题~
 - (WKModelBaseVC *)correctVC
 {
     WKModelBaseVC * vc = self.window.rootViewController;

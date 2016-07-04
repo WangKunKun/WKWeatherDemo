@@ -305,8 +305,8 @@
 		436AA92E1D2641EA00F89C96 /* ele_sunnyCloud2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ele_sunnyCloud2.png; sourceTree = "<group>"; };
 		436AA9311D26508200F89C96 /* ele_sunnySun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ele_sunnySun.png; sourceTree = "<group>"; };
 		436AA9321D26508200F89C96 /* ele_sunnySunshine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ele_sunnySunshine.png; sourceTree = "<group>"; };
-		4373B5D61D178E8800BE6009 /* WKUserInfomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUserInfomation.h; sourceTree = "<group>"; };
-		4373B5D71D178E8800BE6009 /* WKUserInfomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUserInfomation.m; sourceTree = "<group>"; };
+		4373B5D61D178E8800BE6009 /* WKUserInfomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WKUserInfomation.h; path = ../WKUserInfomation.h; sourceTree = "<group>"; };
+		4373B5D71D178E8800BE6009 /* WKUserInfomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WKUserInfomation.m; path = ../WKUserInfomation.m; sourceTree = "<group>"; };
 		43AC30991D1A212500C4C8CA /* ProvinecesData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProvinecesData.plist; sourceTree = "<group>"; };
 		43AC309B1D1A3CA600C4C8CA /* WKNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKNavView.h; sourceTree = "<group>"; };
 		43AC309C1D1A3CA600C4C8CA /* WKNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKNavView.m; sourceTree = "<group>"; };
@@ -420,8 +420,6 @@
 				43C2D19E1D18D648001F2DC3 /* model */,
 				43C2D1A11D18D648001F2DC3 /* tool */,
 				43C2D1AA1D18D648001F2DC3 /* View */,
-				4373B5D61D178E8800BE6009 /* WKUserInfomation.h */,
-				4373B5D71D178E8800BE6009 /* WKUserInfomation.m */,
 				18D376C51D1505900060C35B /* AppDelegate.h */,
 				18D376C61D1505900060C35B /* AppDelegate.m */,
 				43C2D2141D18E12D001F2DC3 /* WKCommonHeader.pch */,
@@ -629,6 +627,8 @@
 		43C2D19E1D18D648001F2DC3 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				4373B5D61D178E8800BE6009 /* WKUserInfomation.h */,
+				4373B5D71D178E8800BE6009 /* WKUserInfomation.m */,
 				43C2D19F1D18D648001F2DC3 /* WKWeatherModel.h */,
 				43C2D1A01D18D648001F2DC3 /* WKWeatherModel.m */,
 			);
