@@ -21,7 +21,8 @@
     [super awakeFromNib];
     // Initialization code
     self.contentView.backgroundColor = [UIColor clearColor];
-    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    //添加点击效果
     _eLayer = [WKParticleManager createParticleEffectWithStyle:WKParticleStyle_Fireworks];
     _eLayer.frame = self.contentView.frame;
     [self.contentView.layer addSublayer:_eLayer];
@@ -81,6 +82,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchPoint = [touch locationInView:self.contentView];
     
@@ -96,6 +98,9 @@
     [CATransaction setDisableActions: YES];
     self.eLayer.emitterPosition	= touchPoint;
     [CATransaction commit];
+    
+    [super touchesBegan:touches withEvent:event];
+
 }
 
 @end
