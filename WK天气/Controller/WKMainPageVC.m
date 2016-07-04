@@ -76,7 +76,6 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
     
-    [self.view.layer addSublayer:[WKParticleManager createParticleEffectWithStyle:WKParticleStyle_Waiting + 1]];
 }
 
 - (void)dateRefresh
@@ -110,11 +109,25 @@
 {
     
     _models = models;
+    
+
+    
     if (_models.count > 0) {
+        
+        //特殊处理 如果为1 则所有数据更改为同一个model
+        if (_models.count == 1) {
+            for (WKWeatherView * view in _weatherViews) {
+                view.model = _models[0];
+            }
+        }
+        
         self.presentIndex = 0;
+        
+        
     }
     else
     {
+        
         [_emitterLayer removeFromSuperlayer];
         for (WKWeatherView * view in _weatherViews) {
             view.model = nil;
@@ -211,6 +224,8 @@
         NSUInteger left = presentIndex == 0 ? _models.count - 1 : presentIndex - 1;
         NSUInteger right = presentIndex == _models.count - 1 ? 0 : presentIndex + 1;
         NSArray * numbers = @[@(left),@(presentIndex),@(right)];
+        
+        
         for (WKWeatherView * view in _weatherViews) {
             NSUInteger curIndex = [_weatherViews indexOfObject:view];
             NSUInteger currIndex = [numbers[curIndex] integerValue];
