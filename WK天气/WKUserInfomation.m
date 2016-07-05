@@ -17,7 +17,7 @@ static NSString * presentCityName = @"WKPresentCityName";
 
 @interface WKUserInfomation ()
 
-@property (nonatomic, strong) NSDictionary * city_models;
+@property (nonatomic, strong) NSMutableArray<NSDictionary *> * city_models;
 
 @end
 
@@ -40,27 +40,35 @@ static NSString * presentCityName = @"WKPresentCityName";
 
 
 
-- (void)setCity_models:(NSDictionary *)city_models
+- (void)setCity_models:( NSMutableArray<NSDictionary *> *)city_models
 {
-    _city_models = city_models;
+    _city_models = city_models;    
     [self checkModel];
     
-    NSLog(@"%@",NSStringFromSelector(_cmd));
 }
 
-- (void)setCityModels:(NSDictionary *)dict
+- (void)setCityModels:( NSMutableArray<NSDictionary *> *)dict
 {
+    
+    
     self.city_models = dict;
 }
 
 - (void)checkModel
 {
     NSMutableArray * noModelCitys = [NSMutableArray array];
-    NSLog(@"%@",NSStringFromSelector(_cmd));
 
+    NSMutableDictionary * dicts = [NSMutableDictionary dictionary];
+    //城市名 转换为纯字典 因为不需要绝对顺序
+    for (NSDictionary * dict in _city_models) {
+        NSString * key = [dict allKeys][0];
+        NSString * value = [dict allValues][0];
+        [dicts setObject:value forKey:key];
+    }
+    
     //得到没有数据的城市名字
-    for (NSString * key in [_city_models allKeys]) {
-        id value = [_city_models objectForKey:key];
+    for (NSString * key in [dicts allKeys]) {
+        id value = [dicts objectForKey:key];
         if ([value isEqual:defaultValue]) {
             [noModelCitys addObject:key];
         }
@@ -74,7 +82,7 @@ static NSString * presentCityName = @"WKPresentCityName";
             {
                 //取得数据的n城市名
                 NSString * cityName = temp.realtimeInfo.cityName;
-                for (NSString * key in [_city_models allKeys])//遍历存储的城市名
+                for (NSString * key in [dicts allKeys])//遍历存储的城市名
                 {
                     //因为存储的城市名可能字符要多一些
                     if (key.length >= cityName.length) {
@@ -91,9 +99,8 @@ static NSString * presentCityName = @"WKPresentCityName";
             }
             //没有数据的城市
             for (NSString * key in invaildCitys) {
-                [self wkRemoveObjectForKey:key];
+                [self wkInnerRemoveObjectForKey:key];
             }
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
             });
@@ -104,45 +111,84 @@ static NSString * presentCityName = @"WKPresentCityName";
 
 - (NSArray *)allKeys
 {
-    return [_city_models allKeys];
+    
+    NSMutableArray * keys = [NSMutableArray array];
+    for (NSDictionary * dict in _city_models) {
+        [keys addObjectsFromArray:[dict allKeys]];
+    }
+    
+    return keys;
 }
 
 - (NSArray *)allValues
 {
-    return [_city_models allValues];
+    
+    NSMutableArray * values = [NSMutableArray array];
+    for (NSDictionary * dict in _city_models) {
+        [values addObjectsFromArray:[dict allValues]];
+    }
+    return values;
 }
 
 //两个一样的功能 刷新数据
 - (void)wkSetObject:(id)value forKey:(NSString *)key
 {
-    NSMutableDictionary * dict = _city_models ?[_city_models mutableCopy] : [NSMutableDictionary dictionary];
-    [dict setValue:value forKey:key];
-    self.city_models = [dict copy];
+    [self wkInnerSetObject:value forKey:key];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
+    });
 }
 //不刷新数据  优化
 - (void)wkInnerSetObject:(id)value forKey:(NSString *)key
 {
-    NSMutableDictionary * dict = _city_models ?[_city_models mutableCopy] : [NSMutableDictionary dictionary];
-    [dict setValue:value forKey:key];
-    _city_models = [dict copy];
+    [self wkInnerRemoveObjectForKey:key];
+    NSDictionary * dict = @{key:value};
+    [self.city_models addObject:dict];
 }
 
 
-- (id)wkObjectForKey:(NSString *)key
+
+
+- (NSDictionary *)wkInnerRemoveObjectForKey:(NSString *)key
 {
-    return [_city_models objectForKey:key];
+    NSDictionary * newDict = nil;
+    for (NSDictionary * dict in _city_models) {
+        if ([[dict allKeys] containsObject:key]) {
+            newDict = dict;
+            break;
+        }
+    }
+    if (newDict) {
+        [_city_models removeObject:newDict];
+    }
+    return newDict;
 }
+
 
 - (void)wkRemoveObjectForKey:(NSString *)key
 {
-    NSMutableDictionary * dict = [_city_models mutableCopy];
-    [dict removeObjectForKey:key];
-    _city_models = [dict copy];
+    NSDictionary * newDict = [self wkInnerRemoveObjectForKey:key];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
-    });
+    if (newDict) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
+        });
+    }
+}
 
+- (id)wkObjectForKey:(NSString *)key
+{
+    
+    NSMutableDictionary * dicts = [NSMutableDictionary dictionary];
+    //城市名 转换为纯字典 因为不需要绝对顺序
+    for (NSDictionary * dict in _city_models) {
+        NSString * key = [dict allKeys][0];
+        NSString * value = [dict allValues][0];
+        [dicts setObject:value forKey:key];
+    }
+    
+    
+    return [dicts objectForKey:key];
 }
 
 - (void)save

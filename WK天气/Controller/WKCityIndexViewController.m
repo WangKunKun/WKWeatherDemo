@@ -309,13 +309,14 @@ static NSUInteger presentRow = 0;
 - (void)rightBtnClick:(UIButton *)btn model:(WKNavViewModel)model
 {
     //不能直接设置 会造成调用多次网络请求
-    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    NSMutableArray * arr = [NSMutableArray array];
     
     for (NSString * str in _selectCitys) {
         id value = [[WKUserInfomation shardUsrInfomation] wkObjectForKey:str];
-        [dict setValue:value?:defaultValue forKey:str];
+        NSDictionary * dict = @{str:value?:defaultValue};
+        [arr addObject:dict];
     }
-    [[WKUserInfomation shardUsrInfomation] setCityModels:[dict copy]];
+    [[WKUserInfomation shardUsrInfomation] setCityModels:arr];
     [self leftBtnClick:nil model:0];
 }
 

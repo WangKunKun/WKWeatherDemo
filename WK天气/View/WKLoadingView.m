@@ -61,6 +61,9 @@
 
 + (void)showWithView:(UIView *)view center:(CGPoint)center
 {
+    
+    
+    
     WKLoadingView * lv = [[WKLoadingView alloc] init];
     lv.center = center;
     lv.bounds = CGRectMake(0, 0, 50, 50);
@@ -82,6 +85,7 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     if (flag) {
+        self.eLayer.birthRate = 0;
         [self removeFromSuperview];
     }
 }

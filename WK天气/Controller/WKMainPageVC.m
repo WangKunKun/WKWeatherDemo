@@ -15,6 +15,8 @@
 
 
 
+
+
 @interface WKMainPageVC ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) CAGradientLayer *colorLayer;
@@ -75,6 +77,8 @@
     self.models = [[WKUserInfomation shardUsrInfomation] allValues];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
+    
+
     
 }
 

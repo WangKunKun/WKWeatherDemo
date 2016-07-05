@@ -25,6 +25,8 @@
 		4334523B1D23D1C80091BCBD /* WKCircleSpreadAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4334523A1D23D1C80091BCBD /* WKCircleSpreadAnimator.m */; };
 		4334523E1D23D2F10091BCBD /* WKWindowedModelAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4334523D1D23D2F10091BCBD /* WKWindowedModelAnimator.m */; };
 		433452411D23E5300091BCBD /* WKModelBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 433452401D23E5300091BCBD /* WKModelBaseVC.m */; };
+		4359B9791D2BA0AE00F0F181 /* WKLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4359B9781D2BA0AE00F0F181 /* WKLine.m */; };
+		4359B97C1D2BB77A00F0F181 /* WKPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4359B97B1D2BB77A00F0F181 /* WKPageControl.m */; };
 		436AA86E1D2613F300F89C96 /* WKParticleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 436AA86D1D2613F300F89C96 /* WKParticleManager.m */; };
 		436AA8CB1D263DF900F89C96 /* ele_rainLine1.png in Resources */ = {isa = PBXBuildFile; fileRef = 436AA8701D263DF900F89C96 /* ele_rainLine1.png */; };
 		436AA8CC1D263DF900F89C96 /* ele_rainLine2.png in Resources */ = {isa = PBXBuildFile; fileRef = 436AA8711D263DF900F89C96 /* ele_rainLine2.png */; };
@@ -205,6 +207,10 @@
 		4334523D1D23D2F10091BCBD /* WKWindowedModelAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWindowedModelAnimator.m; sourceTree = "<group>"; };
 		4334523F1D23E5300091BCBD /* WKModelBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKModelBaseVC.h; sourceTree = "<group>"; };
 		433452401D23E5300091BCBD /* WKModelBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKModelBaseVC.m; sourceTree = "<group>"; };
+		4359B9771D2BA0AE00F0F181 /* WKLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKLine.h; sourceTree = "<group>"; };
+		4359B9781D2BA0AE00F0F181 /* WKLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKLine.m; sourceTree = "<group>"; };
+		4359B97A1D2BB77A00F0F181 /* WKPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKPageControl.h; sourceTree = "<group>"; };
+		4359B97B1D2BB77A00F0F181 /* WKPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKPageControl.m; sourceTree = "<group>"; };
 		436AA86C1D2613F300F89C96 /* WKParticleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKParticleManager.h; sourceTree = "<group>"; };
 		436AA86D1D2613F300F89C96 /* WKParticleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKParticleManager.m; sourceTree = "<group>"; };
 		436AA8701D263DF900F89C96 /* ele_rainLine1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ele_rainLine1.png; sourceTree = "<group>"; };
@@ -688,6 +694,10 @@
 				43B1B3B51D24A53C004F0D9C /* WKBriefCell.xib */,
 				43F3D89C1D2A12E500E548AF /* WKLoadingView.h */,
 				43F3D89D1D2A12E500E548AF /* WKLoadingView.m */,
+				4359B9771D2BA0AE00F0F181 /* WKLine.h */,
+				4359B9781D2BA0AE00F0F181 /* WKLine.m */,
+				4359B97A1D2BB77A00F0F181 /* WKPageControl.h */,
+				4359B97B1D2BB77A00F0F181 /* WKPageControl.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1018,6 +1028,7 @@
 			files = (
 				43AC309D1D1A3CA600C4C8CA /* WKNavView.m in Sources */,
 				4334523E1D23D2F10091BCBD /* WKWindowedModelAnimator.m in Sources */,
+				4359B97C1D2BB77A00F0F181 /* WKPageControl.m in Sources */,
 				431C326A1D1D098000BF5C73 /* WKCityListVC.m in Sources */,
 				433452381D23CE260091BCBD /* WKFilpToonAnimator.m in Sources */,
 				43AC30B31D1A985C00C4C8CA /* NSString+WKNumberToChinese.m in Sources */,
@@ -1043,6 +1054,7 @@
 				4334523B1D23D1C80091BCBD /* WKCircleSpreadAnimator.m in Sources */,
 				43C2D2071D18D648001F2DC3 /* WKMapManager.m in Sources */,
 				43ECD8C61D1D252F001474F6 /* WKListCityCell.m in Sources */,
+				4359B9791D2BA0AE00F0F181 /* WKLine.m in Sources */,
 				18D376C41D1505900060C35B /* main.m in Sources */,
 				43AD78CA1D1B713E0024E586 /* WKWeatherView.m in Sources */,
 				433452411D23E5300091BCBD /* WKModelBaseVC.m in Sources */,
