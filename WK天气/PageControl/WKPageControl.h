@@ -21,8 +21,10 @@
 @property(nonatomic, strong) UIColor *selectedColor;
 
 
-- (void)animateToIndex:(NSInteger)index;
+@property(nonatomic, readonly) WKLine *pageControlLine;
 
-//回调
-@property(nonatomic, copy) void (^didSelectIndexBlock)(NSInteger index);
+//- (void)animateToIndex:(NSInteger)index;
+//
+////回调
+//@property(nonatomic, copy) void (^didSelectIndexBlock)(NSInteger index);
 @end

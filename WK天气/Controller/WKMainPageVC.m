@@ -12,7 +12,7 @@
 #import "WKMapManager.h"
 #import "WKCityListVC.h"
 #import "WKBriefWeatherVC.h"
-
+#import "WKPageControl.h"
 
 
 
@@ -28,6 +28,8 @@
 @property (nonatomic, strong) NSArray <WKWeatherModel *>* models;
 
 @property (nonatomic, strong) CAEmitterLayer * emitterLayer;
+
+@property (nonatomic, strong) WKPageControl * pc;
 @end
 
 
@@ -72,13 +74,25 @@
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    
     [self setInterFace];
 
     self.models = [[WKUserInfomation shardUsrInfomation] allValues];
 
+    
+    _pc = [[WKPageControl alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    _pc.center = CGPointMake(SCREEN_WIDTH/2.0, bottom.heightS / 2.0);
+    _pc.pageCount = 6;
+    _pc.selectedPage = 0;
+    _pc.pageControlLine.ballDiameter = 6;
+    _pc.pageControlLine.lineHeight = 1.5f;
+//    _pc.backgroundColor = [UIColor redColor];
+    [bottom addSubview:_pc];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
     
-
+    
     
 }
 
@@ -113,9 +127,6 @@
 {
     
     _models = models;
-    
-
-    
     if (_models.count > 0) {
         
         //特殊处理 如果为1 则所有数据更改为同一个model
@@ -124,10 +135,7 @@
                 view.model = _models[0];
             }
         }
-        
         self.presentIndex = 0;
-        
-        
     }
     else
     {
@@ -148,14 +156,25 @@
 }
 - (void)btnClick
 {
-    //进入选择页面
-    WKCityListVC * vc = [[WKCityListVC alloc] init];
-    self.am = [[WKAnimatorManager alloc] init];
-    self.am.style = WKAnimatorStyle_FilpToon;
-    vc.transitioningDelegate = self.am;
-    vc.modalPresentationStyle = UIModalPresentationCustom;
+//    //进入选择页面
+//    WKCityListVC * vc = [[WKCityListVC alloc] init];
+//    self.am = [[WKAnimatorManager alloc] init];
+//    self.am.style = WKAnimatorStyle_FilpToon;
+//    vc.transitioningDelegate = self.am;
+//    vc.modalPresentationStyle = UIModalPresentationCustom;
+//
+//    [self presentViewController:vc animated:YES completion:nil];
+    
+    if (self.pc.selectedPage < self.pc.pageCount - 1) {
+        self.pc.selectedPage += 1;
+    }
+    else
+    {
+        self.pc.selectedPage = 0;
 
-    [self presentViewController:vc animated:YES completion:nil];
+    }
+    
+//    self.pc.selectedPage += (self.pc.selectedPage < self.pc.pageCount ? 1 : -1);
     
 }
 

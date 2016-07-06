@@ -16,5 +16,9 @@
 @property (nonatomic, strong) UIColor * unSelectedColor;
 @property (nonatomic, assign) NSUInteger pageCount;
 @property (nonatomic, assign) NSUInteger selectedPage;
+//选中的长度 做动画使用
+@property(nonatomic, assign) CGFloat selectedLineLength;
+
+- (void)animateSelectedLineToNewIndex:(NSInteger)newIndex;
 
 @end
