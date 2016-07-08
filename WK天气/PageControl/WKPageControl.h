@@ -23,6 +23,8 @@
 
 @property(nonatomic, readonly) WKLine *pageControlLine;
 
+@property(nonatomic, assign) CGFloat indicatorSize;
+
 //- (void)animateToIndex:(NSInteger)index;
 //
 ////回调

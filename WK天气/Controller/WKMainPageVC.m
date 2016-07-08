@@ -92,8 +92,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
     
+
     
-    
+//    [self.view.layer addSublayer:[WKParticleManager createParticleEffectWithStyle:WKParticleStyle_Sunshine]];
 }
 
 - (void)dateRefresh

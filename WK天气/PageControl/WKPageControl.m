@@ -62,7 +62,7 @@
         _circle.indicatorColor = self.selectedColor;
         _circle.frame =
         CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-//        _circle.indicatorSize = self.indicatorSize;
+        _circle.indicatorSize = self.indicatorSize;
         _circle.contentsScale = [UIScreen mainScreen].scale;
     }
     

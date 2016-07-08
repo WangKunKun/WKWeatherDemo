@@ -24,4 +24,5 @@ typedef NS_ENUM(NSInteger, WKParticleStyle)
 + (CAEmitterLayer *)createParticleEffectWithStyle:(WKParticleStyle)style;
 
 + (WKParticleStyle)weatherTypeToParticleStyle:(WKWeatherType)type;
+
 @end
