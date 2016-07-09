@@ -208,6 +208,7 @@ static NSString * presentCityName = @"WKPresentCityName";
 
 }
 
+//获得数据
 - (void)fetch
 {
     
@@ -221,13 +222,14 @@ static NSString * presentCityName = @"WKPresentCityName";
     
 
 }
-
+//获得路径
 - (NSString *)getFilePath
 {
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     path = [path stringByAppendingString:@"/weatherData.archiver"];
     return path;
 }
+
 
 + (NSString *)getCityName
 {

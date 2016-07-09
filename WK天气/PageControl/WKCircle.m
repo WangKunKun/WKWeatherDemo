@@ -42,7 +42,7 @@
         self.indicatorSize = layer.indicatorSize;
         self.indicatorColor = layer.indicatorColor;
         self.currentRect = layer.currentRect;
-        self.lastContentOffset = layer.lastContentOffset;
+        self.selectedPage = layer.selectedPage;
         self.scrollDirection = layer.scrollDirection;
         self.factor = layer.factor;
     }
@@ -106,42 +106,38 @@
 }
 
 #pragma mark-- override superclass method
-- (void)animateIndicatorWithScrollView:(UIScrollView *)scrollView
-                          andIndicator:(WKPageControl *)pgctl {
-    if ((scrollView.contentOffset.x - self.lastContentOffset) >= 0 &&
-        (scrollView.contentOffset.x - self.lastContentOffset) <=
-        (scrollView.frame.size.width) / 2) {
+- (void)animateIndicatorWithPage:(NSUInteger)page
+                    andIndicator:(WKPageControl *)pgctl;{
+    if (page < _selectedPage) {
         self.scrollDirection = ScrollDirectionLeft;
-    } else if ((scrollView.contentOffset.x - self.lastContentOffset) <= 0 &&
-               (scrollView.contentOffset.x - self.lastContentOffset) >=
-               -(scrollView.frame.size.width) / 2) {
+    } else if (page > _selectedPage) {
         self.scrollDirection = ScrollDirectionRight;
     }
     
     if (!beginGooeyAnim) {
         //这个是啥？？
         _factor = MIN(
-                      1, MAX(0, (ABS(scrollView.contentOffset.x - self.lastContentOffset) /
-                                 scrollView.frame.size.width)));
+                      1, MAX(0, (ABS(page - _selectedPage) /
+                                 pgctl.pageCount - 1)));
     }
-    
-    CGFloat originX = (scrollView.contentOffset.x / scrollView.frame.size.width) * (pgctl.frame.size.width / (pgctl.pageCount - 1));
-    if (originX - self.indicatorSize / 2 <= 0) {
-        self.currentRect =
-        CGRectMake(0, self.frame.size.height / 2 - self.indicatorSize / 2,
-                   self.indicatorSize, self.indicatorSize);
-    } else if ((originX - self.indicatorSize / 2) >=
-               self.frame.size.width - self.indicatorSize) {
-        self.currentRect =
-        CGRectMake(self.frame.size.width - self.indicatorSize,
-                   self.frame.size.height / 2 - self.indicatorSize / 2,
-                   self.indicatorSize, self.indicatorSize);
-    } else {
-        self.currentRect =
-        CGRectMake(originX - self.indicatorSize / 2,
-                   self.frame.size.height / 2 - self.indicatorSize / 2,
-                   self.indicatorSize, self.indicatorSize);
-    }
+    //算法 不一样 这个值是做啥的？ 得弄清楚
+//    CGFloat originX = (scrollView.contentOffset.x / scrollView.frame.size.width) * (pgctl.frame.size.width / (pgctl.pageCount - 1));
+//    if (originX - self.indicatorSize / 2 <= 0) {
+//        self.currentRect =
+//        CGRectMake(0, self.frame.size.height / 2 - self.indicatorSize / 2,
+//                   self.indicatorSize, self.indicatorSize);
+//    } else if ((originX - self.indicatorSize / 2) >=
+//               self.frame.size.width - self.indicatorSize) {
+//        self.currentRect =
+//        CGRectMake(self.frame.size.width - self.indicatorSize,
+//                   self.frame.size.height / 2 - self.indicatorSize / 2,
+//                   self.indicatorSize, self.indicatorSize);
+//    } else {
+//        self.currentRect =
+//        CGRectMake(originX - self.indicatorSize / 2,
+//                   self.frame.size.height / 2 - self.indicatorSize / 2,
+//                   self.indicatorSize, self.indicatorSize);
+//    }
     [self setNeedsDisplay];
 }
 

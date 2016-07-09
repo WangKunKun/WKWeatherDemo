@@ -25,6 +25,9 @@
 
 @property(nonatomic, assign) CGFloat indicatorSize;
 
+//绑定的滚动视图
+@property(nonatomic, strong) UIScrollView *bindScrollView;
+
 //- (void)animateToIndex:(NSInteger)index;
 //
 ////回调

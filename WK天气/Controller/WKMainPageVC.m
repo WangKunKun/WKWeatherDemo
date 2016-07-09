@@ -81,14 +81,18 @@
     self.models = [[WKUserInfomation shardUsrInfomation] allValues];
 
     
-    _pc = [[WKPageControl alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    _pc.center = CGPointMake(SCREEN_WIDTH/2.0, bottom.heightS / 2.0);
-    _pc.pageCount = 6;
-    _pc.selectedPage = 0;
-    _pc.pageControlLine.ballDiameter = 6;
-    _pc.pageControlLine.lineHeight = 1.5f;
-//    _pc.backgroundColor = [UIColor redColor];
-    [bottom addSubview:_pc];
+//    _pc = [[WKPageControl alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+//    _pc.center = CGPointMake(SCREEN_WIDTH/2.0, bottom.heightS / 2.0);
+//    _pc.pageCount = 6;
+//    _pc.selectedPage = 0;
+//    _pc.pageControlLine.ballDiameter = 6;
+//    _pc.pageControlLine.lineHeight = 1.5f;
+//    _pc.bindScrollView = _scrollView;
+//    _pc.indicatorSize = 10;
+////    _pc.selectedColor = [UIColor blackColor];
+////    _pc.unSelectedColor = [UIColor redColor];
+////    _pc.backgroundColor = [UIColor redColor];
+//    [bottom addSubview:_pc];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateRefresh) name:notificationName object:nil];
     
@@ -158,22 +162,22 @@
 - (void)btnClick
 {
 //    //进入选择页面
-//    WKCityListVC * vc = [[WKCityListVC alloc] init];
-//    self.am = [[WKAnimatorManager alloc] init];
-//    self.am.style = WKAnimatorStyle_FilpToon;
-//    vc.transitioningDelegate = self.am;
-//    vc.modalPresentationStyle = UIModalPresentationCustom;
-//
-//    [self presentViewController:vc animated:YES completion:nil];
-    
-    if (self.pc.selectedPage < self.pc.pageCount - 1) {
-        self.pc.selectedPage += 1;
-    }
-    else
-    {
-        self.pc.selectedPage = 0;
+    WKCityListVC * vc = [[WKCityListVC alloc] init];
+    self.am = [[WKAnimatorManager alloc] init];
+    self.am.style = WKAnimatorStyle_FilpToon;
+    vc.transitioningDelegate = self.am;
+    vc.modalPresentationStyle = UIModalPresentationCustom;
 
-    }
+    [self presentViewController:vc animated:YES completion:nil];
+    
+//    if (self.pc.selectedPage < self.pc.pageCount - 1) {
+//        self.pc.selectedPage += 1;
+//    }
+//    else
+//    {
+//        self.pc.selectedPage = 0;
+//
+//    }
     
 //    self.pc.selectedPage += (self.pc.selectedPage < self.pc.pageCount ? 1 : -1);
     

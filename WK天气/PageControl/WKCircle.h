@@ -25,10 +25,10 @@ typedef enum ScrollDirection {
 @property(nonatomic, assign) CGFloat indicatorSize;
 @property(nonatomic, strong) UIColor *indicatorColor;
 @property(nonatomic, assign) CGRect currentRect;
-@property(nonatomic, assign) CGFloat lastContentOffset;
+@property(nonatomic, assign) NSUInteger selectedPage;
 @property(nonatomic, assign) ScrollDirection scrollDirection;
 
-- (void)animateIndicatorWithScrollView:(UIScrollView *)scrollView
+- (void)animateIndicatorWithPage:(NSUInteger)page
                           andIndicator:(WKPageControl *)pgctl;
 - (void)restoreAnimation:(id)howmanydistance;
 

@@ -74,10 +74,16 @@ static BOOL cellAniFlag = YES;//cell 动画标识
     _dataSource = [[[WKUserInfomation shardUsrInfomation] allValues] mutableCopy];
     _citys = [[[WKUserInfomation shardUsrInfomation] allKeys] mutableCopy];
     cellAniFlag = NO;
-    //刷新数据
-    [_tableView reloadData];
+//    //刷新数据
+    //延时执行 是因为主线程 可能正在执行返回当前界面的动画，此时刷新数据 会对动画造成卡帧的影响，影响用户体验
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_tableView reloadData];
+    });
+
     
-    //需要改回来
+//
+//    //需要改回来
+    //延时执行 是因为在刷新数据时不需要动画 但是在其他时候需要动画
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         cellAniFlag = YES;
     });

@@ -38,6 +38,8 @@
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
     [self.layer addSublayer:self.line];
+    [self.layer insertSublayer:self.circle above:self.line];
+
     [self.line setNeedsDisplay];
 }
 
@@ -48,8 +50,8 @@
         CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         _line.pageCount = self.pageCount;
         _line.selectedPage = 0;
-        _line.unSelectedColor = self.unSelectedColor;
-        _line.selectedColor = self.selectedColor;
+        _line.unSelectedColor = [UIColor grayColor];
+        _line.selectedColor =[UIColor redColor];
         _line.contentsScale = [UIScreen mainScreen].scale;
     }
     
@@ -65,7 +67,8 @@
         _circle.indicatorSize = self.indicatorSize;
         _circle.contentsScale = [UIScreen mainScreen].scale;
     }
-    
+//    [_circle animateIndicatorWithScrollView:self.bindScrollView
+//                                  andIndicator:self];
     return _circle;
 }
 
@@ -74,6 +77,7 @@
     _selectedPage = selectedPage;
     [self.line animateSelectedLineToNewIndex:selectedPage];
 }
+
 
 - (WKLine *)pageControlLine {
     return self.line;

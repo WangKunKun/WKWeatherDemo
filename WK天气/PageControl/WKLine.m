@@ -142,6 +142,8 @@
     //    createBasicAnima:@"selectedLineLength" duration:0.2
     //    fromValue:@(self.selectedLineLength) toValue:@(newLineLength)];
     
+    NSLog(@"new = %f  old = %f",newLineLength,self.selectedLineLength);
+    
     self.selectedLineLength = newLineLength;
     anim.delegate = self;
     anim.removedOnCompletion = YES;

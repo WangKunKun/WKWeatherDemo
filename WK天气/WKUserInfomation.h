@@ -6,6 +6,10 @@
 //  Copyright © 2016年 王琨. All rights reserved.
 //
 
+
+/**
+ *  数据类 数据的更新 存储均在这里面
+ */
 #import <Foundation/Foundation.h>
 static NSString * notificationName = @"WKWeatherDataRefresh";
 static NSString * defaultValue = @"WKWeather";
