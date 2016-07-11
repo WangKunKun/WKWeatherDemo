@@ -95,4 +95,10 @@ typedef NS_ENUM(NSInteger, WKWeatherType) {
     WKWeatherType_Haze = 53//霾
 };
 
+typedef NS_ENUM(NSInteger, WKWeather3DTouchType) {
+    WKWeather3DTouchType_
+};
+
+
+
 #endif
