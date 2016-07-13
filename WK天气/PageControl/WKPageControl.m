@@ -67,8 +67,7 @@
         _circle.indicatorSize = self.indicatorSize;
         _circle.contentsScale = [UIScreen mainScreen].scale;
     }
-//    [_circle animateIndicatorWithScrollView:self.bindScrollView
-//                                  andIndicator:self];
+    [_circle animateIndicatorWithPage:self.selectedPage andIndicator:self];
     return _circle;
 }
 
@@ -76,6 +75,10 @@
 {
     _selectedPage = selectedPage;
     [self.line animateSelectedLineToNewIndex:selectedPage];
+
+    
+    [_circle animateIndicatorWithPage:selectedPage andIndicator:self];
+
 }
 
 

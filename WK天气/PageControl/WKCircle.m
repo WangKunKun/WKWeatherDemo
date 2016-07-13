@@ -107,21 +107,32 @@
 
 #pragma mark-- override superclass method
 - (void)animateIndicatorWithPage:(NSUInteger)page
-                    andIndicator:(WKPageControl *)pgctl;{
-    if (page < _selectedPage) {
-        self.scrollDirection = ScrollDirectionLeft;
-    } else if (page > _selectedPage) {
-        self.scrollDirection = ScrollDirectionRight;
-    }
-    
-    if (!beginGooeyAnim) {
-        //这个是啥？？
-        _factor = MIN(
-                      1, MAX(0, (ABS(page - _selectedPage) /
-                                 pgctl.pageCount - 1)));
-    }
-    //算法 不一样 这个值是做啥的？ 得弄清楚
-//    CGFloat originX = (scrollView.contentOffset.x / scrollView.frame.size.width) * (pgctl.frame.size.width / (pgctl.pageCount - 1));
+                    andIndicator:(WKPageControl *)pgctl
+{
+//    if (page < _selectedPage) {
+//        self.scrollDirection = ScrollDirectionLeft;
+//    } else if (page > _selectedPage) {
+//        self.scrollDirection = ScrollDirectionRight;
+//    }
+//    
+//    if (!beginGooeyAnim) {
+//        //这个是啥？？
+//        _factor = MIN(
+//                      1, MAX(0, (ABS(page ) /
+//                                 (pgctl.pageCount- 1))));
+//        _factor = 0;
+//    }
+//    
+//
+//    
+////    NSLog(@"%lf",(page ) /
+////          (pgctl.pageCount- 1));
+//    NSLog(@"%u",_selectedPage);
+//    NSLog(@"%u",pgctl.pageCount);
+//
+//    //算法 不一样 这个值是做啥的？ 得弄清楚
+//    //第几页 * 一个pagecontrol中每个page圆的间距 得出
+//    CGFloat originX = page * (pgctl.frame.size.width / (pgctl.pageCount - 1));
 //    if (originX - self.indicatorSize / 2 <= 0) {
 //        self.currentRect =
 //        CGRectMake(0, self.frame.size.height / 2 - self.indicatorSize / 2,
@@ -138,7 +149,10 @@
 //                   self.frame.size.height / 2 - self.indicatorSize / 2,
 //                   self.indicatorSize, self.indicatorSize);
 //    }
-    [self setNeedsDisplay];
+//    _selectedPage=page;
+//    [self setNeedsDisplay];
+    
+    
 }
 
 - (void)restoreAnimation:(id)howmanydistance {

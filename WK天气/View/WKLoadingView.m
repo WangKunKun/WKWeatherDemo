@@ -51,6 +51,8 @@
     groupAnimation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.3 :0.3 :0 :0];
     [self.layer addAnimation:groupAnimation forKey:@"groupAnimation"];
     
+    groupAnimation.removedOnCompletion = NO;
+    
     groupAnimation.delegate = self;
 }
 
