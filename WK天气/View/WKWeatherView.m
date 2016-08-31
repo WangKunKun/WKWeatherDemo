@@ -190,8 +190,19 @@ static NSString * reuseID = @"WKWeatherCell";
         [content addObject:_model.weatherDayInfos[0].day[WKWeatherTime]];
         [content addObject:_model.weatherDayInfos[0].night[WKWeatherTime]];
         
+        
+        
         [content addObject:_model.realtimeInfo.windDirect];
-        [content addObject:_model.realtimeInfo.windSpeed];
+        
+        if (_model.realtimeInfo.windSpeed != nil)
+        {
+            [content addObject:_model.realtimeInfo.windSpeed];
+        }
+        else
+        {
+            [content addObject:@"无风"];
+
+        }
         
         
         [content addObject:_model.indexInfo.dressIndex[0]];
@@ -267,6 +278,13 @@ static NSString * reuseID = @"WKWeatherCell";
     
     return labelsize;
     
+}
+
+#pragma mark scrollview delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"%@",scrollView)
 }
 
 @end
