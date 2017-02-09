@@ -29,6 +29,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeModel)];
     [self addGestureRecognizer:tap];
 }

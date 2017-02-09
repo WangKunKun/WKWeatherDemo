@@ -55,6 +55,7 @@
     _sessionTask=[_httpManager POST:@"http://op.juhe.cn/onebox/weather/query" parameters:params success:^(NSURLSessionTask*taskOperation ,id responseObject){
       
         id result = responseObject[@"result"];
+        NSLog(@"%@",result);
         if ([result isKindOfClass:[NSDictionary class]]) {
             if (block ) {
                 WKWeatherModel * model = [WKWeatherModel createWeatherModelWithDict:responseObject[@"result"][@"data"]];

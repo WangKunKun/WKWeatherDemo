@@ -208,7 +208,7 @@ static NSString * reuseID = @"WKWeatherCell";
         [content addObject:_model.indexInfo.dressIndex[0]];
         [content addObject:_model.indexInfo.coldIndex[0]];
         [content addObject:_model.indexInfo.airConIndex[0]];
-        [content addObject:_model.indexInfo.polluteIndex[0]];
+        [content addObject:_model.indexInfo.polluteIndex[0] != nil ? _model.indexInfo.polluteIndex[0] : @"未知"];
         [content addObject:_model.indexInfo.dustIndex[0]];
         [content addObject:_model.indexInfo.sportIndex[0]];
         [content addObject:_model.indexInfo.rayIndex[0]];
@@ -284,7 +284,7 @@ static NSString * reuseID = @"WKWeatherCell";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"%@",scrollView)
+//    NSLog(@"%@",scrollView)
 }
 
 @end

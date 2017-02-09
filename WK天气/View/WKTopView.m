@@ -93,7 +93,7 @@
     self.week =   !model ? @"" : [NSString stringWithFormat:@"星期%@",[NSString numberToChinese:@(model.realtimeInfo.week)]];
     
     self.weather =  !model ? @"--" : model.realtimeInfo.weatherInfo;
-    self.temperature =  !model ? @"--" : [NSString stringWithFormat:@"%lu°",(unsigned long)model.realtimeInfo.temperature];
+    self.temperature =  !model ? @"--" : [NSString stringWithFormat:@"%ld°",model.realtimeInfo.temperature];
     self.dayTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",model.weatherDayInfos[0].day[WKWeatherTemperature]];
     self.nightTemperature =  !model ? @"" : [NSString stringWithFormat:@"%@",model.weatherDayInfos[0].night[WKWeatherTemperature]];
     self.cityName =  !model ? @"" : model.realtimeInfo.cityName;

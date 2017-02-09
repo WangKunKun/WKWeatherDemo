@@ -239,6 +239,14 @@
 - (void)setPresentIndex:(NSUInteger)presentIndex
 {
     
+    if(_emitterLayer == nil && _models[presentIndex] != nil)
+    {
+        NSUInteger weatherType = _models[presentIndex].realtimeInfo.weatherType;
+        WKParticleStyle style = [WKParticleManager weatherTypeToParticleStyle:weatherType];
+        _emitterLayer = [WKParticleManager createParticleEffectWithStyle:style];
+        [self.view.layer addSublayer:_emitterLayer];
+    }
+    
     if (_presentIndex == presentIndex) {
         return;
     }

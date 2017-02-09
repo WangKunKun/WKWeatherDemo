@@ -52,8 +52,8 @@
 
 
 @property (nonatomic, strong) NSString * weatherInfo;//天气信息
-@property (nonatomic, assign) NSUInteger temperature;//温度
-@property (nonatomic, assign) NSUInteger humidity;//湿度
+@property (nonatomic, assign) NSInteger temperature;//温度
+@property (nonatomic, assign) NSInteger humidity;//湿度
 @property (nonatomic, assign) NSUInteger weatherType;//天气类型
 
 

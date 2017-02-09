@@ -44,7 +44,7 @@
     NSArray * colors = @[UIColorFromRGB(0x11cb60),UIColorFromRGB(0xffc703),UIColorFromRGB(0xff8004),UIColorFromRGB(0xfe3d3d),UIColorFromRGB(0xa50894),UIColorFromRGB(0x45018a)];
     self.contentView.backgroundColor = colors[model.pmInfo.pmLevel - 1];
 
-    _temperatureLabel.text = [NSString stringWithFormat:@"%lu°",model.realtimeInfo.temperature];
+    _temperatureLabel.text = [NSString stringWithFormat:@"%ld°",model.realtimeInfo.temperature];
     _cityNameLabel.text = model.realtimeInfo.cityName;
     
     [self setDate];
@@ -70,7 +70,8 @@
 - (void)setFlag:(BOOL)flag
 {
     _flag =flag;
-    NSString * str = flag ? [NSString stringWithFormat:@"%d°",(int)(32 + _model.realtimeInfo.temperature * 1.8f)] : [NSString stringWithFormat:@"%lu°",(unsigned long)_model.realtimeInfo.temperature];
+//    NSLog(@"%@",[NSString stringWithFormat:@"%.1f°",(32 + _model.realtimeInfo.temperature * 1.8f)]);
+    NSString * str = flag ? [NSString stringWithFormat:@"%.1f°",(32 + _model.realtimeInfo.temperature * 1.8f)] : [NSString stringWithFormat:@"%ld°",_model.realtimeInfo.temperature];
     _temperatureLabel.text = str;
 }
 

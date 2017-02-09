@@ -31,7 +31,6 @@ MJExtensionCodingImplementation
 MJExtensionCodingImplementation
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    
     return @{
              @"cityName":@"cityName",
              @"dateTime":@"dateTime",

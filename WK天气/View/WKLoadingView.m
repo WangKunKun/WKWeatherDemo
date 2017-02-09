@@ -42,18 +42,17 @@
     scaleAnimation.toValue = @.2f;
     scaleAnimation.duration = 1.0;
     
-    
+    WEAKSELF
     //动画组
     CAAnimationGroup *groupAnimation = [CAAnimationGroup animation];
     groupAnimation.animations = @[opacityAnimOut, scaleAnimation];
     groupAnimation.duration = 1.0;
-    groupAnimation.delegate = self;
+    groupAnimation.delegate = weakSelf;
     groupAnimation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.3 :0.3 :0 :0];
     [self.layer addAnimation:groupAnimation forKey:@"groupAnimation"];
     
     groupAnimation.removedOnCompletion = NO;
     
-    groupAnimation.delegate = self;
 }
 
 + (void)showWithView:(UIView *)view
@@ -63,9 +62,6 @@
 
 + (void)showWithView:(UIView *)view center:(CGPoint)center
 {
-    
-    
-    
     WKLoadingView * lv = [[WKLoadingView alloc] init];
     lv.center = center;
     lv.bounds = CGRectMake(0, 0, 50, 50);
